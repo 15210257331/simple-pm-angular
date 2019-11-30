@@ -1,0 +1,19 @@
+<li class="task-list-item">
+  <div class="task-list-item-option">
+    <p class="task-list-item-title">{{item.name}}</p>
+    <nz-dropdown [nzPlacement]="'bottomCenter'" [nzTrigger]="'click'">
+      <a nz-dropdown><i style="font-size: 20px;" nz-icon nzType="ellipsis" nzTheme="outline"></i></a>
+      <ul nz-menu>
+        <li *ngIf="item.status === 1" nz-menu-item (click)="changeStatus(item._id, 2)">置为进行中</li>
+        <li *ngIf="item.status === 1 || item.status === 2" nz-menu-item (click)="changeStatus(item._id, 3)">置为已完成</li>
+        <li *ngIf="item.status !== 4" nz-menu-item (click)="changeStatus(item._id, 4)">作废此项</li>
+        <li *ngIf="item.status === 4" nz-menu-item (click)="changeStatus(item._id, 1)">重新开启</li>
+        <li nz-menu-item (click)="delete(item._id)">删除任务</li>
+      </ul>
+    </nz-dropdown>
+  </div>
+  <p class="task-list-item-content">{{item.content}}</p>
+  <div class="task-list-item-tag">
+    <nz-tag [nzColor]="'#f50'">截止时间{{item.endTime | formatDate}}</nz-tag>
+  </div>
+</li>

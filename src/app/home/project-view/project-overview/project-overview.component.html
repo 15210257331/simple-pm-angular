@@ -1,0 +1,42 @@
+<div class="overview">
+  <app-task-option></app-task-option>
+  <div class="overview-content">
+    <div class="overview-part">
+      <p class="title">
+        <i nz-icon nzType="bars" nzTheme="outline"></i>
+        <span>项目信息</span>
+      </p>
+      <div>
+        <p>
+          <label for="">项目名称:</label>
+          <span>{{projectDetail.name}}</span>
+        </p>
+        <p>
+          <label for="">项目描述:</label>
+          <span>{{projectDetail.content}}</span>
+        </p>
+        <p>
+          <label for="">项目创建人:</label>
+          <span>{{projectDetail.creater.nickname}}</span>
+        </p>
+        <p>
+          <label for="">项目创建时间:</label>
+          <span>{{projectDetail.createDate}}</span>
+        </p>
+        <p>
+          <label for="">项目成员:</label>
+          <span *ngFor="let item of projectDetail.member">{{item.nickname}}、</span>
+        </p>
+      </div>
+    </div>
+    <div class="overview-part" style="margin: 0 0 0 10px;">
+      <p class="title">
+        <i nz-icon nzType="bar-chart" nzTheme="outline"></i>
+        <span>任务分布</span>
+      </p>
+      <div>
+        <div echarts [options]="chartOption" style="height: 250px; width: 100%;"></div>
+      </div>
+    </div>
+  </div>
+</div>

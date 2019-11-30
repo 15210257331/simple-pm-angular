@@ -1,0 +1,49 @@
+.task-detail {
+  padding: 10px;
+
+  .task-detail-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 60px;
+    margin: 10px 0;
+
+    .task-detail-item {
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+
+      &>div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 0;
+        text-align: left;
+        margin-left: 8px;
+
+        h3,
+        h5 {
+          margin-bottom: 0;
+          width: 100%;
+          color: rgba(0, 0, 0, 0.65)
+        }
+      }
+
+      label {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .footer {
+    text-align: center;
+
+    button {
+      margin: 0 20px;
+    }
+  }
+}
+:host ::ng-deep .ant-comment-inner {
+  padding-bottom: 0px;
+}

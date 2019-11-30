@@ -1,0 +1,11 @@
+<div>
+  <nz-avatar  nzIcon="user" [nzSrc]="userInfo.avatar"></nz-avatar>
+  <nz-dropdown [nzPlacement]="'bottomCenter'" [nzTrigger]="'click'">
+    <a style="margin-left: 5px;" nz-dropdown>{{userInfo.nickname}}</a>
+    <ul nz-menu nzSelectable>
+      <li nz-menu-item (click)="updateInfo()">账号设置</li>
+      <li nz-menu-item (click)="updatePreference()">偏好设置</li>
+      <li nz-menu-item (click)="logout()">退出登录</li>
+    </ul>
+  </nz-dropdown>
+</div>

@@ -1,0 +1,21 @@
+.header {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  margin-bottom: 0;
+  border-bottom: 1px solid #dbdbdb;
+
+  p {
+    height: 50px;
+    line-height: 50px;
+    margin: 0 20px;
+    font-size: 17px;
+
+    span {
+      margin-left: 10px;
+    }
+  }
+}

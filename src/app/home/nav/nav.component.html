@@ -1,0 +1,32 @@
+<nav>
+  <h3 class="title">
+    <span>项目</span>
+    <i nz-icon nzType="plus-square" (click)="projectAdd()" nzTheme="twotone"></i>
+  </h3>
+  <div>
+    <nz-input-group class="search" [nzSuffix]="suffixIconSearch">
+      <input type="text" nz-input placeholder="搜索项目" [(ngModel)]="name" (keyup.enter)="searchProject()" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch><i nz-icon type="search" (click)="searchProject()"></i></ng-template>
+  </div>
+  <ul nz-menu [nzMode]="'inline'">
+    <li nz-submenu [nzOpen]="true">
+      <span title><i nz-icon nzType="folder" nzTheme="twotone"></i><span>我的项目</span></span>
+      <ul>
+        <li class="project-item" nz-menu-item [nzSelected]="item.isSelected" (click)="selectProject(item._id)"
+          *ngFor="let item of projectList;">
+          <span>{{item.name}}</span>
+          <nz-dropdown [nzPlacement]="'bottomCenter'" [nzTrigger]="'click'">
+            <a nz-dropdown><i style="font-size: 20px;" nz-icon nzType="ellipsis" nzTheme="outline"></i></a>
+            <ul nz-menu>
+              <li nz-menu-item (click)="delete(item._id, item.name)">删除项目</li>
+            </ul>
+          </nz-dropdown>
+        </li>
+      </ul>
+    </li>
+    <li nz-menu-item *ngFor="let item of navList;" [nzSelected]="item.selected" (click)="selectOther(item.url)">
+      <span title><i nz-icon [nzType]="item.icon" nzTheme="twotone"></i><span>{{item.name}}</span></span>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,39 @@
+<form nz-form [formGroup]="form" class="login-form">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">任务名称</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="name" id="name" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="content">任务描述</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="content" id="content" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="startTime">开始时间</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <nz-date-picker nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" formControlName="startTime"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="endTime">结束时间</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <nz-date-picker nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" formControlName="endTime"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="participant">添加成员</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <nz-select nzMode="multiple" nzPlaceHolder="选择成员" formControlName="participant">
+        <nz-option *ngFor="let item of memberList" [nzLabel]="item.nickname" [nzValue]="item._id"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <div class="footer">
+    <button nz-button class="login-form-button" nzType="primary" [disabled]="!form.valid"
+      (click)="submitForm()">提交</button>
+    <button nz-button class="login-form-button" (click)="cancel()" nzType="default">取消</button>
+  </div>
+</form>

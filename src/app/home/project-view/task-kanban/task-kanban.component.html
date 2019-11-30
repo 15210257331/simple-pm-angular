@@ -1,0 +1,18 @@
+<div class="kanban">
+  <app-task-option (new)="addTask(1)"></app-task-option>
+  <div class="kanban-content" cdkDropListGroup>
+    <div class="task-sort" *ngFor="let item of taskSort;">
+      <h3 class="task-sort-header" [ngStyle]="{'color': item.color}">
+        <span>{{item.name}}({{item.taskList.length}})</span>
+        <i nz-icon nzType="plus" (click)="addTask(item.status)" nzTheme="outline"></i>
+      </h3>
+      <nz-progress class="progress" nzSize="small" [nzShowInfo]="false" [nzPercent]="0"></nz-progress>
+      <ul class="task-sort-content" cdkDropList [cdkDropListData]="item.taskList" (cdkDropListEntered)="enter($event)"
+        (cdkDropListDropped)="drop($event)">
+        <app-task-kanban-item cdkDrag *ngFor="let sonItem of item.taskList;" (click)="taskDetail(sonItem._id)"
+          [item]="sonItem"></app-task-kanban-item>
+      </ul>
+      <nz-empty *ngIf="item.taskList.length === 0"></nz-empty>
+    </div>
+  </div>
+</div>

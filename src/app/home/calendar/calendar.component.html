@@ -1,0 +1,36 @@
+<div class="calendar">
+  <app-header [icon]="'calendar'" [title]="'日历'"></app-header>
+  <div class="calendar-content">
+    <nz-calendar [nzDateFullCell]="dateCellTpl" [(ngModel)]="selectedDate" (nzSelectChange)="selectChange($event)">
+    </nz-calendar>
+  </div>
+  <ng-template #dateCellTpl let-date>
+    <div class="calendar-cell" (dblclick)="addSchedule(date)">
+      <p>{{date.toLocaleDateString()}}</p>
+      <ul>
+        <ng-container *ngFor="let item of schedulekList;">
+          <li *ngIf="item.showStartTime === date.toLocaleDateString()" nz-popover [nzTitle]="'日程详情'"
+            [nzContent]="scheduleContent" nzTrigger="hover">
+            <nz-badge nzStatus="error"></nz-badge>
+            <span>{{item.name}}</span>
+            <ng-template #scheduleContent>
+              <p style="max-width: 300px;">{{item.content}}</p>
+              <p>开始时间: {{item.startTime}}</p>
+              <p>结束时间: {{item.endTime}}</p>
+              <p>发起人: {{item.organizer.nickname}}</p>
+              <p>
+                <span>参与人:</span>
+                <span *ngFor="let sonItem of item.participant">{{sonItem.nickname}}、</span>
+              </p>
+              <nz-divider></nz-divider>
+              <p style="text-align: right;">
+                <button nz-button nzSize="small" (click)="deleteSchedule(item._id)" nzType="danger" nzGhost>删除日程</button>
+              </p>
+            </ng-template>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </ng-template>
+
+</div>

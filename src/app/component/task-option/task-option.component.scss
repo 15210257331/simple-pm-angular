@@ -1,0 +1,26 @@
+.option {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 1px 8px 0 rgba(0,0,0,.1);
+
+  p {
+    margin-right: 25px;
+    margin-bottom: 0;
+    i {
+        font-size: 16px;
+        vertical-align: text-bottom;
+    }
+    span {
+      cursor: pointer;
+      margin: 0 5px 0 5px;
+      line-height: 30px;
+    }
+    span:hover {
+        color: #1890ff;
+    }
+  }
+}

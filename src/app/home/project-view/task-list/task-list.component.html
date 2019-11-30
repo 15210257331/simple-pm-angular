@@ -1,0 +1,52 @@
+<div class="list">
+  <app-task-option (new)="addTask(1)"></app-task-option>
+  <div class="list-content">
+    <table>
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>状态</th>
+          <th>内容详情</th>
+          <th>截止时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of taskList;" (click)="taskDetail(item._id)" >
+          <td>{{ item.name }}</td>
+          <td>
+            <span [ngSwitch]="item.status">
+              <span *ngSwitchCase="1">
+                <nz-tag [nzColor]="'#2db7f5'">未开始</nz-tag>
+              </span>
+              <span *ngSwitchCase="2">
+                <nz-tag [nzColor]="'#22d7bb'">进行中</nz-tag>
+              </span>
+              <span *ngSwitchCase="3">
+                <nz-tag [nzColor]="'#87d068'">已完成</nz-tag>
+              </span>
+              <span *ngSwitchCase="4">
+                <nz-tag [nzColor]="'#f50'">已作废</nz-tag>
+              </span>
+            </span>
+          </td>
+          <td>{{ item.content }}</td>
+          <td>{{ item.endTime | formatDate }}</td>
+          <td>
+            <nz-dropdown [nzPlacement]="'bottomCenter'" [nzTrigger]="'click'">
+              <a nz-dropdown><i style="font-size: 20px;" nz-icon nzType="setting" nzTheme="outline"></i></a>
+              <ul nz-menu>
+                <li *ngIf="item.status === 1" nz-menu-item (click)="changeStatus(item._id, 2)">置为进行中</li>
+                <li *ngIf="item.status === 1 || item.status === 2" nz-menu-item (click)="changeStatus(item._id, 3)">
+                  置为已完成</li>
+                <li *ngIf="item.status !== 4" nz-menu-item (click)="changeStatus(item._id, 4)">作废此项</li>
+                <li *ngIf="item.status === 4" nz-menu-item (click)="changeStatus(item._id, 1)">重新开启</li>
+                <li nz-menu-item (click)="delete(item._id)">删除任务</li>
+              </ul>
+            </nz-dropdown>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
