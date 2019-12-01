@@ -26,7 +26,7 @@ export class ProjectViewComponent implements OnInit {
 
   componentRef: ComponentRef<any>;
 
-  @ViewChild('viewDetail', { read: ViewContainerRef }) commentContainer: ViewContainerRef;
+  @ViewChild('viewDetail', { read: ViewContainerRef, static: true }) commentContainer: ViewContainerRef;
 
   viewList: any[] = [
     {
