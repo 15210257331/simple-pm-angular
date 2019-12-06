@@ -7,7 +7,8 @@
     <nz-input-group class="search" [nzSuffix]="suffixIconSearch">
       <input type="text" nz-input placeholder="搜索项目" [(ngModel)]="name" (keyup.enter)="searchProject()" />
     </nz-input-group>
-    <ng-template #suffixIconSearch><i nz-icon type="search" (click)="searchProject()"></i></ng-template>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search" nzTheme='outline' (click)="searchProject()"></i></ng-template>
   </div>
   <ul nz-menu [nzMode]="'inline'">
     <li nz-submenu [nzOpen]="true">
@@ -16,12 +17,13 @@
         <li class="project-item" nz-menu-item [nzSelected]="item.isSelected" (click)="selectProject(item._id)"
           *ngFor="let item of projectList;">
           <span>{{item.name}}</span>
-          <nz-dropdown [nzPlacement]="'bottomCenter'" [nzTrigger]="'click'">
-            <a nz-dropdown><i style="font-size: 20px;" nz-icon nzType="ellipsis" nzTheme="outline"></i></a>
-            <ul nz-menu>
+          <a nz-dropdown [nzPlacement]="'bottomCenter'" [nzTrigger]="'click'" [nzDropdownMenu]="menu"><i
+              style="font-size: 20px;" nz-icon nzType="ellipsis" nzTheme="outline"></i></a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
               <li nz-menu-item (click)="delete(item._id, item.name)">删除项目</li>
             </ul>
-          </nz-dropdown>
+          </nz-dropdown-menu>
         </li>
       </ul>
     </li>

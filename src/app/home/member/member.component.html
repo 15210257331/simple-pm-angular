@@ -23,13 +23,14 @@
           <td>{{ item.sex === 1 ? '男' : '女' }}</td>
           <td>{{ item.email }}</td>
           <td>
-            <nz-dropdown [nzPlacement]="'bottomCenter'" [nzTrigger]="'click'">
-              <a nz-dropdown><i style="font-size: 20px;" nz-icon nzType="setting" nzTheme="outline"></i></a>
-              <ul nz-menu>
+            <a nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomCenter'" [nzTrigger]="'click'"><i
+                style="font-size: 20px;" nz-icon nzType="setting" nzTheme="outline"></i></a>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu nzSelectable>
                 <li *ngIf="item.status !== 4" nz-menu-item>修改权限</li>
                 <li nz-menu-item>删除成员</li>
               </ul>
-            </nz-dropdown>
+            </nz-dropdown-menu>
           </td>
         </tr>
       </tbody>
