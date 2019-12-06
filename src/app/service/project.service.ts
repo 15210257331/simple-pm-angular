@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { config } from '../shared/config';
+import { environment } from '../../environments/environment';
 
-const API = config.api;
+const API: string = environment.API;
 
 @Injectable()
 export class ProjectService {

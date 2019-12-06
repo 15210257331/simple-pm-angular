@@ -1,7 +1,7 @@
 <div>
   <nz-avatar nzIcon="user" [nzSrc]="userInfo.avatar"></nz-avatar>
-  <a style="margin-left: 5px;" nz-dropdown [nzPlacement]="'bottomCenter'"
-    [nzTrigger]="'click'">{{userInfo.nickname}}</a>
+  <span style="margin-left: 5px;" nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomCenter'"
+    [nzTrigger]="'click'">{{userInfo.nickname}}</span>
   <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu nzSelectable>
       <li nz-menu-item (click)="updateInfo()">账号设置</li>

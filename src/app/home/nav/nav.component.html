@@ -17,8 +17,8 @@
         <li class="project-item" nz-menu-item [nzSelected]="item.isSelected" (click)="selectProject(item._id)"
           *ngFor="let item of projectList;">
           <span>{{item.name}}</span>
-          <a nz-dropdown [nzPlacement]="'bottomCenter'" [nzTrigger]="'click'" [nzDropdownMenu]="menu"><i
-              style="font-size: 20px;" nz-icon nzType="ellipsis" nzTheme="outline"></i></a>
+          <i nz-dropdown [nzPlacement]="'bottomCenter'" [nzTrigger]="'click'" [nzDropdownMenu]="menu"
+            style="font-size: 20px;" nz-icon nzType="ellipsis" nzTheme="outline"></i>
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu nzSelectable>
               <li nz-menu-item (click)="delete(item._id, item.name)">删除项目</li>

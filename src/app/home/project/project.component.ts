@@ -5,16 +5,16 @@ import { Store } from '@ngrx/store';
 import { Appstate, LoadProjectDetail } from '../../store';
 import { TaskKanbanComponent } from './task-kanban/task-kanban.component';
 import { TaskListComponent } from './task-list/task-list.component';
-import { TaskCalendarComponent } from './task-calendar/task-calendar.component';
 import { map } from 'rxjs/operators';
 import { ProjectOverviewComponent } from './project-overview/project-overview.component';
 
+
 @Component({
-  selector: 'app-project-view',
-  templateUrl: './project-view.component.html',
-  styleUrls: ['./project-view.component.scss']
+  selector: 'app-project',
+  templateUrl: './project.component.html',
+  styleUrls: ['./project.component.scss']
 })
-export class ProjectViewComponent implements OnInit {
+export class ProjectComponent implements OnInit {
 
   projectId: string;
 
@@ -38,11 +38,6 @@ export class ProjectViewComponent implements OnInit {
       title: '列表',
       value: 2,
       component: TaskListComponent
-    },
-    {
-      title: '日历',
-      value: 3,
-      component: TaskCalendarComponent
     },
     {
       title: '概览',
@@ -86,5 +81,6 @@ export class ProjectViewComponent implements OnInit {
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(component);
     this.componentRef = this.commentContainer.createComponent(factory);
   }
+
 
 }

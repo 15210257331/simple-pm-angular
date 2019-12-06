@@ -6,9 +6,9 @@ import { ProjectService } from '../../service/project.service';
 import { UserService } from '../../service/user.service';
 import { Store } from '@ngrx/store';
 import { Appstate, UpdateUserInfoSuccess } from '../../store';
-import { config } from '../../shared/config';
+import { environment } from '../../../environments/environment';
 
-const API = config.api;
+const API: string = environment.API;
 
 @Component({
   selector: 'app-update-info',

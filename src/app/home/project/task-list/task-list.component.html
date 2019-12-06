@@ -33,8 +33,8 @@
           <td>{{ item.content }}</td>
           <td>{{ item.endTime | formatDate }}</td>
           <td>
-            <a nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomCenter'" [nzTrigger]="'click'"><i
-                style="font-size: 20px;" nz-icon nzType="setting" nzTheme="outline"></i></a>
+            <i nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomCenter'" [nzTrigger]="'click'"
+              style="font-size: 20px;" nz-icon nzType="setting" nzTheme="outline"></i>
             <nz-dropdown-menu #menu="nzDropdownMenu">
               <ul nz-menu nzSelectable>
                 <li *ngIf="item.status === 1" nz-menu-item (click)="changeStatus(item._id, 2)">置为进行中</li>

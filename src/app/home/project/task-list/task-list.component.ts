@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Appstate, DeleteTask, ChangeTaskStatus } from '../../../store';
 import { map } from 'rxjs/operators';
-import { TaskAddComponent } from '../task-add/task-add.component';
+import { TaskAddComponent } from '../../project/task-add/task-add.component';
 import { NzNotificationService, NzModalService } from 'ng-zorro-antd';
 import { TaskService } from '../../../service/task.service';
-import { TaskDetailComponent } from '../task-detail/task-detail.component';
+import { TaskDetailComponent } from '../../project/task-detail/task-detail.component';
 
 @Component({
   selector: 'app-task-list',
