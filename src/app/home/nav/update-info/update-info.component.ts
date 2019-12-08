@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzNotificationService, NzModalRef } from 'ng-zorro-antd';
-import { ProjectService } from '../../service/project.service';
-import { UserService } from '../../service/user.service';
+import { ProjectService } from '../../../service/project.service';
+import { UserService } from '../../../service/user.service';
 import { Store } from '@ngrx/store';
-import { Appstate, UpdateUserInfoSuccess } from '../../store';
-import { environment } from '../../../environments/environment';
+import { Appstate, UpdateUserInfoSuccess } from '../../../store';
+import { environment } from '../../../../environments/environment';
 
 const API: string = environment.API;
 

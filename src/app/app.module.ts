@@ -23,6 +23,7 @@ import { reducers, effects } from './store';
 import { ScheduleService } from './service/schedule.service';
 import { SocketService } from './service/socket.service';
 import { ShareModule } from './share.module';
+import { NavModule } from './home/nav/nav.module';
 
 
 registerLocaleData(zh);
@@ -33,7 +34,6 @@ registerLocaleData(zh);
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    NavComponent
   ],
   entryComponents: [
   ],
@@ -44,6 +44,7 @@ registerLocaleData(zh);
     NgZorroAntdModule,
     BrowserAnimationsModule,
     ShareModule,
+    NavModule,
     // 注册全局的reducer和effects
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot(effects),

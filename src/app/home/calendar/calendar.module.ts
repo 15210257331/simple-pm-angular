@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ShareModule } from '../../share.module';
 import { CalendarComponent } from './calendar.component';
 import { CalendarAddComponent } from './calendar-add/calendar-add.component';
-import { ProjectComponent } from '../project/project.component';
 import { CalendarRoutingModule } from './calendar-routing.module';
 
 
@@ -13,7 +12,6 @@ import { CalendarRoutingModule } from './calendar-routing.module';
   declarations: [
     CalendarComponent,
     CalendarAddComponent,
-    ProjectComponent
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd';
-import { UpdateInfoComponent } from '../update-info/update-info.component';
+import { UpdateInfoComponent } from '../../home/nav/update-info/update-info.component';
 
 @Component({
   selector: 'app-header',

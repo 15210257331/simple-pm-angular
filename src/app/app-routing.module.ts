@@ -24,7 +24,7 @@ const routes: Routes = [
         data: { title: '门户' }
       },
       {
-        path: 'project',
+        path: 'project/:id',
         loadChildren: () => import('./home/project/project.module').then(m => m.ProjectModule),
         pathMatch: 'full',
         data: { title: '项目' }

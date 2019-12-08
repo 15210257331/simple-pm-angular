@@ -1,16 +1,31 @@
 <nav>
-  <h3 class="title">
-    <span>项目</span>
-    <i nz-icon nzType="plus-square" (click)="projectAdd()" nzTheme="twotone"></i>
-  </h3>
-  <div>
-    <nz-input-group class="search" [nzSuffix]="suffixIconSearch">
+  <div class="header">
+    <img [src]="userInfo?.avatar" alt="头像">
+    <span nz-popover [nzPopoverContent]="contentTemplate" [(nzVisible)]="visible" nzPopoverTrigger="click"
+      [nzPopoverPlacement]="'rightTop'">{{userInfo?.nickname}}</span>
+    <ng-template #contentTemplate>
+      <li class="operate" (click)="projectAdd()">
+        <i nz-icon nzType="folder-add" nzTheme="fill"></i>
+        <span>新建项目</span>
+      </li>
+      <li class="operate" (click)="updateInfo()&& visible = false">
+        <i nz-icon nzType="setting" nzTheme="fill"></i>
+        <span>账号设置</span>
+      </li>
+      <li class="operate" (click)="logout()&& visible = false">
+        <i nz-icon nzType="stop" nzTheme="fill"></i>
+        <span>退出登录</span>
+      </li>
+    </ng-template>
+  </div>
+  <div class="project-search">
+    <nz-input-group [nzSuffix]="suffixIconSearch">
       <input type="text" nz-input placeholder="搜索项目" [(ngModel)]="name" (keyup.enter)="searchProject()" />
     </nz-input-group>
     <ng-template #suffixIconSearch>
       <i nz-icon nzType="search" nzTheme='outline' (click)="searchProject()"></i></ng-template>
   </div>
-  <ul nz-menu [nzMode]="'inline'">
+  <ul class="project-list" nz-menu [nzMode]="'inline'">
     <li nz-submenu [nzOpen]="true">
       <span title><i nz-icon nzType="folder" nzTheme="twotone"></i><span>我的项目</span></span>
       <ul>
@@ -21,7 +36,8 @@
             style="font-size: 20px;" nz-icon nzType="ellipsis" nzTheme="outline"></i>
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu nzSelectable>
-              <li nz-menu-item (click)="delete(item._id, item.name)">删除项目</li>
+              <li nz-menu-item (click)="updateProject(item._id, item.name)">更新项目</li>
+              <li nz-menu-item (click)="deleteProject(item._id, item.name)">删除项目</li>
             </ul>
           </nz-dropdown-menu>
         </li>

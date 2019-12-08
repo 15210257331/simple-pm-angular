@@ -4,7 +4,7 @@ import { CalendarComponent } from './calendar.component';
 
 
 const routes: Routes = [
-    { path: 'orientation', component: CalendarComponent},
+    { path: '', component: CalendarComponent},
 ];
 
 @NgModule({

@@ -1,22 +1,30 @@
 nav {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    padding: 20px;
-    .title {
-      font-size: 18px;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      i:hover {
-        cursor: pointer;
-      }
-    }
-    .search {
-      margin: 10px 0;
-    }
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
 
+  .header {
+    font-size: 18px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    img {
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      border-radius: 50%;
+      margin: 0 5px;
+    }
+  }
+
+  .project-search {
+    margin: 10px 0;
+  }
+
+  .project-list {
     .project-item {
       display: flex;
       justify-content: space-between;
@@ -24,6 +32,32 @@ nav {
     }
   }
 
-  :host ::ng-deep .ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left {
-    border-right: none;
+}
+
+.operate {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  position: relative;
+  line-height: 20px;
+  color: #666;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 0 -10px;
+
+  i {
+    cursor: pointer;
+    margin-right: 10px;
   }
+
+  &:hover {
+    background-color: #f3f3f3;
+  }
+}
+
+:host ::ng-deep .ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+  border-right: none;
+}

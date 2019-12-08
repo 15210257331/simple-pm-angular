@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { UserOperateComponent } from './component/user-operate/user-operate.component';
-import { UpdateInfoComponent } from './component/update-info/update-info.component';
-import { TaskOptionComponent } from './component/task-option/task-option.component';
 import { TaskKanbanItemComponent } from './component/task-kanban-item/task-kanban-item.component';
 import { HeaderComponent } from './component/header/header.component';
 import { FormatDatePipe } from './pipe';
@@ -14,15 +11,12 @@ import { DebounceDirective } from './directive';
 
 @NgModule({
   declarations: [
-    UserOperateComponent,
-    UpdateInfoComponent,
-    TaskOptionComponent,
     TaskKanbanItemComponent,
     HeaderComponent,
     // 管道
     FormatDatePipe,
     // 组件
-    DebounceDirective
+    DebounceDirective,
   ],
   imports: [
     CommonModule,
@@ -34,9 +28,6 @@ import { DebounceDirective } from './directive';
   ],
   providers: [],
   entryComponents: [
-    UserOperateComponent,
-    UpdateInfoComponent,
-    TaskOptionComponent,
     TaskKanbanItemComponent,
   ],
   exports: [
@@ -46,9 +37,6 @@ import { DebounceDirective } from './directive';
     DragDropModule,
     NgxEchartsModule,
     // 组件
-    UserOperateComponent,
-    UpdateInfoComponent,
-    TaskOptionComponent,
     TaskKanbanItemComponent,
     HeaderComponent,
     // 管道
