@@ -1,50 +1,41 @@
 <div class="task-detail">
   <div class="detail-left">
-    <h2>{{taskDetail.name}}</h2>
-    <div class="detail-part">
+    <div class="detail-part" style="justify-content: space-between;">
+      <h2>{{taskDetail.name}}</h2>
       <app-avatar-show [avatar]="taskDetail.principal.avatar" [name]="taskDetail.principal.nickname"></app-avatar-show>
-      <div>
-        <label>开始时间:</label>
-        <nz-date-picker [nzSize]="'small'" [(ngModel)]="taskDetail.startTime" (ngModelChange)="timeChange($event)">
-        </nz-date-picker>
-      </div>
-      <div>
-        <label>截止时间:</label>
-        <nz-date-picker [nzSize]="'small'" [(ngModel)]="taskDetail.endTime" (ngModelChange)="timeChange($event)">
-        </nz-date-picker>
-      </div>
     </div>
-    <nz-tabset>
-      <nz-tab nzTitle="基本信息">
-        <div class="task-detail-item">
-          <div>
-            <h3 [ngSwitch]="taskDetail.status">
-              <nz-tag *ngSwitchCase="1" [nzColor]="'#2db7f5'">未开始</nz-tag>
-              <nz-tag *ngSwitchCase="2" [nzColor]="'#22d7bb'">进行中</nz-tag>
-              <nz-tag *ngSwitchCase="3" [nzColor]="'#87d068'">已完成</nz-tag>
-              <nz-tag *ngSwitchCase="4" [nzColor]="'#f50'">已作废</nz-tag>
-            </h3>
-            <h5>当前状态</h5>
-          </div>
-        </div>
-
-      </nz-tab>
-      <nz-tab nzTitle="附件">
-        <p>{{taskDetail.tag.join()}}</p>
-      </nz-tab>
-    </nz-tabset>
-    <div class="detail-tag">
+    <nz-divider></nz-divider>
+    <div class="detail-part">
+      <label>任务状态:</label>
+      <ng-container [ngSwitch]="taskDetail.status">
+        <nz-tag *ngSwitchCase="1" [nzColor]="'#2db7f5'">未开始</nz-tag>
+        <nz-tag *ngSwitchCase="2" [nzColor]="'#22d7bb'">进行中</nz-tag>
+        <nz-tag *ngSwitchCase="3" [nzColor]="'#87d068'">已完成</nz-tag>
+        <nz-tag *ngSwitchCase="4" [nzColor]="'#f50'">已作废</nz-tag>
+      </ng-container>
+    </div>
+    <div class="detail-part">
+      <label>开始时间:</label>
+      <nz-date-picker [nzSize]="'small'" [(ngModel)]="taskDetail.startTime" (ngModelChange)="timeChange($event)">
+      </nz-date-picker>
+    </div>
+    <div class="detail-part">
+      <label>截止时间:</label>
+      <nz-date-picker [nzSize]="'small'" [(ngModel)]="taskDetail.endTime" (ngModelChange)="timeChange($event)">
+      </nz-date-picker>
+    </div>
+    <div class="detail-part">
       <label for="">标签:</label>
       <p>{{taskDetail.tag.join()}}</p>
     </div>
-    <div class="detail-desc">
+    <div class="detail-part">
       <label for="">任务描述:</label>
       <p>{{taskDetail.content}}</p>
     </div>
   </div>
   <div class="detail-right">
     <div>
-      <label *ngIf="taskDetail.comment.length > 0">任务评论:</label>
+      <label>任务评论:</label>
       <nz-comment *ngFor="let item of taskDetail.comment;" [nzAuthor]="item.commentAuthor.nickname"
         [nzDatetime]="item.commentTime">
         <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.commentAuthor.avatar">
@@ -61,6 +52,7 @@
           <span class="count dislike">{{ 1 }}</span>
         </nz-comment-action>
       </nz-comment>
+      <nz-empty *ngIf="taskDetail.comment.length === 0"></nz-empty>
     </div>
     <div>
       <nz-input-group [nzPrefix]="prefixTemplate">

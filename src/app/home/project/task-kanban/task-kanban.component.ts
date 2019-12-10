@@ -129,10 +129,10 @@ export class TaskKanbanComponent implements OnInit {
         id
       },
       nzBodyStyle: {
-        "padding": 0,
+        padding: 0,
       },
       nzFooter: null,
-      nzWidth: '86%',
+      nzWidth: '70%',
     });
 
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
