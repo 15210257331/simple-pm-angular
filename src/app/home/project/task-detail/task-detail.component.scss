@@ -1,53 +1,78 @@
 .task-detail {
-  padding: 10px;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #eee;
 
-  .task-detail-part {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 60px;
-    margin: 10px 0;
+  .detail-left {
+    width: 65%;
+    height: 400px;
+    margin: 10px;
+    background-color: white;
+    padding: 15px;
+    overflow: auto;
 
-    .task-detail-item {
+    h2 {
+      margin: 10px 0;
+    }
+
+    .detail-part {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-content: center;
+      margin: 10px 0;
 
-      &>div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 0;
-        text-align: left;
-        margin-left: 8px;
+      div {
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          border: 1px solid #eee;
+        }
 
-        h3,
-        h5 {
-          margin-bottom: 0;
-          width: 100%;
-          color: rgba(0, 0, 0, 0.65)
+        label {
+          margin-right: 8px;
         }
       }
+    }
 
-      label {
-        margin-right: 10px;
-      }
+    .detail-tag {
+      margin-top: 10px;
+    }
 
-      p {
-        margin-bottom: 0;
-      }
+    .detail-desc {
+      margin-top: 10px;
     }
   }
 
-  .footer {
-    text-align: center;
+  .detail-right {
+    flex: 1;
+    height: 400px;
+    margin: 10px 10px 10px 0;
+    background-color: white;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 
-    button {
-      margin: 0 20px;
+    &>div:nth-child(1) {
+      flex: 1;
+      width: 100%;
+      overflow: auto;
+    }
+
+    &>div:nth-child(2) {
+      width: 100%;
     }
   }
 }
+
 :host ::ng-deep .ant-comment-inner {
   padding-bottom: 0px;
+}
+
+:host ::ng-deep .ant-modal-body {
+  padding: 0 !important;
 }

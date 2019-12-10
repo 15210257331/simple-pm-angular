@@ -1,22 +1,22 @@
 <nav>
   <div class="header">
-    <img [src]="userInfo?.avatar" alt="头像">
-    <span nz-popover [nzPopoverContent]="contentTemplate" [(nzVisible)]="visible" nzPopoverTrigger="click"
-      [nzPopoverPlacement]="'rightTop'">{{userInfo?.nickname}}</span>
+    <img [src]="userInfo?.avatar" nz-popover [nzPopoverContent]="contentTemplate" [(nzVisible)]="visible"
+      nzPopoverTrigger="click" [nzPopoverPlacement]="'bottom'">
     <ng-template #contentTemplate>
       <li class="operate" (click)="projectAdd()">
         <i nz-icon nzType="folder-add" nzTheme="fill"></i>
         <span>新建项目</span>
       </li>
-      <li class="operate" (click)="updateInfo()&& visible = false">
+      <li class="operate" (click)="updateInfo()">
         <i nz-icon nzType="setting" nzTheme="fill"></i>
         <span>账号设置</span>
       </li>
-      <li class="operate" (click)="logout()&& visible = false">
+      <li class="operate" (click)="logout()">
         <i nz-icon nzType="stop" nzTheme="fill"></i>
         <span>退出登录</span>
       </li>
     </ng-template>
+    <p>{{userInfo?.nickname}}</p>
   </div>
   <div class="project-search">
     <nz-input-group [nzSuffix]="suffixIconSearch">

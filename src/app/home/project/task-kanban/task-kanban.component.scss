@@ -55,6 +55,8 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
+    flex: 1;
+    overflow: auto;
 
     .task-sort {
       width: 280px;
@@ -65,7 +67,6 @@
       background: #fdfdfd;
       border-radius: 4px;
       max-height: 100%;
-      overflow: auto;
 
       .task-sort-header {
         padding: 10px 6px 10px 18px;
@@ -85,16 +86,91 @@
         }
       }
 
+      .task-sort-content {
+        margin-bottom: 10px;
+        min-height: 10px;
+        flex: 1;
+        overflow: auto;
+      }
+
       .progress {
         margin: 0 auto;
         width: 95%;
       }
     }
   }
-
-
 }
 
-:host ::ng-deep .ant-empty {
-  margin: 8px;
+.task-item {
+  cursor: pointer;
+  margin: 8px 6px;
+  padding: 8px 12px;
+  min-height: 60px;
+  background-color: #eee;
+  border-radius: 4px;
+  border-left: 4px solid salmon;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+
+  .task-item-header {
+    span {
+      vertical-align: text-bottom;
+      background-color:#cacaca;
+      border-radius: 4px;
+      padding: 2px 6px;
+      color: #eee;
+    }
+  }
+
+  .task-item-content {
+    margin: 10px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    img {
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
+    }
+
+    p {
+      flex: 1;
+      padding-right: 6px;
+    }
+  }
+
+  .task-item-tag {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    span {
+      color: gray;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+}
+
+
+.cdk-drag-placeholder {
+  visibility: hidden;
+}
+
+.cdk-drag-preview {
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid #eee;
+}
+
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Animate an item that has been dropped. */
+.cdk-drag-animating {
+  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.select {
+  color: #1890ff;
 }

@@ -36,6 +36,7 @@ export enum ProjectActionTypes {
     AddTaskComment = 'AddTaskComment',
     AddTaskCommentSuccess = 'AddTaskCommentSuccess',
     AddTaskCommentError = 'AddTaskCommentError',
+
 }
 
 export class LoadProjectList implements Action {
@@ -117,7 +118,7 @@ export class ChangeTaskStatus implements Action {
 
 export class ChangeTaskStatusCuccess implements Action {
     readonly type = ProjectActionTypes.ChangeTaskStatusCuccess;
-    constructor(public payload: string) { }
+    constructor(public payload: any) { }
 }
 
 export class ChangeTaskStatusError implements Action {

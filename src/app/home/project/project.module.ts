@@ -16,7 +16,7 @@ import { ProjectRoutingModule } from './project-routing.module';
         TaskKanbanComponent,
         TaskDetailComponent,
         TaskAddComponent,
-        ProjectOverviewComponent
+        ProjectOverviewComponent,
     ],
     imports: [
         CommonModule,

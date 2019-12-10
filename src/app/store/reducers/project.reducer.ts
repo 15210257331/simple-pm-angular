@@ -145,7 +145,6 @@ export function projectReducer(state: ProjectState = initialState, action: Proje
             return state;
         case ProjectActionTypes.AddTaskCommentError:
             return state;
-
         default:
             return state;
     }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd';
 import { Store } from '@ngrx/store';
-import { Appstate, ChangeTaskStatus } from '../../../store';
+import { Appstate, ChangeTaskStatus, DeleteTask, ChangeTaskStatusCuccess, } from '../../../store';
 import { map } from 'rxjs/operators';
 import { TaskAddComponent } from '../task-add/task-add.component';
 import { TaskDetailComponent } from '../task-detail/task-detail.component';
@@ -17,6 +17,8 @@ export class TaskKanbanComponent implements OnInit {
   projectId = '';
 
   taskList: any[] = [];
+
+  userInfo: any;
 
   taskSort = [
     {
@@ -45,6 +47,18 @@ export class TaskKanbanComponent implements OnInit {
     },
   ];
 
+  taskView = [
+    {
+      name: '全部任务',
+      code: 1,
+    },
+    {
+      name: '我负责的任务',
+      code: 2,
+    },
+  ];
+
+  selectViewName = '';
 
   constructor(
     private modalService: NzModalService,
@@ -52,17 +66,39 @@ export class TaskKanbanComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.selectViewName = this.taskView[0].name;
     const task$ = this.store
       .pipe(
         map(data => data.projectState.projectDetail)
       )
       .subscribe(res => {
-        this.taskList = res.task || [];
         this.projectId = res._id;
+        this.taskList = res.task || [];
         this.taskSort.map(item => {
           item.taskList = this.taskList.filter(task => task.status === item.status);
         });
       });
+
+    const userInfo$ = this.store
+      .pipe(
+        map(data => data.userState.userInfo)
+      )
+      .subscribe(res => {
+        this.userInfo = res;
+      });
+  }
+
+  selectView(data) {
+    this.selectViewName = data.name;
+    if (data.code === 2) {
+      this.taskSort.map(item => {
+        item.taskList = this.taskList.filter(task => task.status === item.status && task.principal._id === this.userInfo._id);
+      });
+    } else {
+      this.taskSort.map(item => {
+        item.taskList = this.taskList.filter(task => task.status === item.status);
+      });
+    }
   }
 
   addTask(status: number) {
@@ -92,8 +128,11 @@ export class TaskKanbanComponent implements OnInit {
       nzComponentParams: {
         id
       },
+      nzBodyStyle: {
+        "padding": 0,
+      },
       nzFooter: null,
-      nzWidth: 800,
+      nzWidth: '86%',
     });
 
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
@@ -103,22 +142,31 @@ export class TaskKanbanComponent implements OnInit {
       }
     });
   }
-
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<string[]>, status: number) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      const data = {
+        _id: event.container.data[event.currentIndex]['_id'],
+        status
+      };
+      this.store.dispatch(new ChangeTaskStatusCuccess(data));
+      this.store.dispatch(new ChangeTaskStatus(data));
     }
-    // console.log(event);
-    const data = {
-      _id: event.previousContainer.data[event.previousIndex]['_id'],
-      status
-    };
-    // this.store.dispatch(new ChangeTaskStatus(data));
-  }
-  enter(event) {
-    console.log(event);
   }
 
+  // 更改任务状态
+  changeStatus(id: any, status: number) {
+    const data = {
+      _id: id,
+      status
+    };
+    this.store.dispatch(new ChangeTaskStatus(data));
+  }
+
+  // 删除
+  delete(id: any) {
+    this.store.dispatch(new DeleteTask(id));
+  }
 }

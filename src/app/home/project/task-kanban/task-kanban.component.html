@@ -1,10 +1,10 @@
 <div class="kanban">
   <div class="kanban-header">
     <div>
-      <span>全部任务</span>
-      <nz-divider nzType="vertical"></nz-divider>
-      <span>我负责的任务</span>
-      <nz-divider nzType="vertical"></nz-divider>
+      <ng-container *ngFor="let item of taskView">
+        <span [class.select]="selectViewName === item.name" (click)="selectView(item)">{{item.name}}</span>
+        <nz-divider nzType="vertical"></nz-divider>
+      </ng-container>
     </div>
     <div>
       <span (click)="addTask(1)">
@@ -19,16 +19,37 @@
   <div class="kanban-content" cdkDropListGroup>
     <div class="task-sort" *ngFor="let item of taskSort;">
       <h3 class="task-sort-header" [ngStyle]="{'color': item.color}">
-        <span>{{item.name}}({{item.taskList.length}})</span>
-        <i nz-icon nzType="plus" (click)="addTask(item.status)" nzTheme="outline"></i>
+        <span>{{item.name}}({{item.taskList.length}}/{{taskList.length}})</span>
+        <i nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomCenter'" [nzTrigger]="'click'" nz-icon
+          nzType="ellipsis" nzTheme="outline"></i>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item (click)="addTask(item.status)">新建任务</li>
+            <li nz-menu-item (click)="addTask(item.status)">新建分组</li>
+            <li nz-menu-item (click)="addTask(item.status)">重命名</li>
+            <li nz-menu-item (click)="addTask(item.status)">删除分组</li>
+          </ul>
+        </nz-dropdown-menu>
       </h3>
-      <nz-progress class="progress" nzSize="small" [nzShowInfo]="false" [nzPercent]="0"></nz-progress>
-      <ul class="task-sort-content" cdkDropList [cdkDropListData]="item.taskList" (cdkDropListEntered)="enter($event)"
-        (cdkDropListDropped)="drop($event)">
-        <app-task-kanban-item cdkDrag *ngFor="let sonItem of item.taskList;" (click)="taskDetail(sonItem._id)"
-          [item]="sonItem"></app-task-kanban-item>
+      <nz-progress class="progress" nzSize="small" [nzShowInfo]="false"
+        [nzStrokeColor]="{ '0%': '#87d068', '100%': '#108ee9' }" [nzPercent]="item.taskList.length/taskList.length*100">
+      </nz-progress>
+      <ul class="task-sort-content" cdkDropList [cdkDropListData]="item.taskList"
+        (cdkDropListDropped)="drop($event, item.status)">
+        <li class="task-item" cdkDrag *ngFor="let sonItem of item.taskList;" (click)="taskDetail(sonItem._id)">
+          <div class="task-item-header">
+            <span>{{sonItem.number}}</span>
+          </div>
+          <div class="task-item-content">
+            <p>{{sonItem.name}}</p>
+            <img [src]="sonItem.principal.avatar" alt="">
+          </div>
+          <div class="task-item-tag">
+            <nz-tag [nzColor]="'#f50'">截止时间{{sonItem.endTime | formatDate}}</nz-tag>
+          </div>
+        </li>
+        <nz-empty *ngIf="item.taskList.length === 0"></nz-empty>
       </ul>
-      <nz-empty *ngIf="item.taskList.length === 0"></nz-empty>
     </div>
   </div>
 </div>

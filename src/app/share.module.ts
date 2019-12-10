@@ -8,14 +8,16 @@ import { FormatDatePipe } from './pipe';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { DebounceDirective } from './directive';
+import { AvatarShowComponent } from './component/avatar-show/avatar-show.component';
 
 @NgModule({
   declarations: [
     TaskKanbanItemComponent,
     HeaderComponent,
+    AvatarShowComponent,
     // 管道
     FormatDatePipe,
-    // 组件
+    // 指令
     DebounceDirective,
   ],
   imports: [
@@ -39,6 +41,7 @@ import { DebounceDirective } from './directive';
     // 组件
     TaskKanbanItemComponent,
     HeaderComponent,
+    AvatarShowComponent,
     // 管道
     FormatDatePipe,
     // 指令
