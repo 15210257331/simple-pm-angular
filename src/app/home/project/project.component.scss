@@ -28,6 +28,12 @@
           margin-left: 10px;
         }
       }
+      p.setting {
+        cursor: pointer;
+        span {
+          margin-left: 5px;
+        }
+      }
   
       .task-view-item {
         flex: 1;

@@ -23,20 +23,21 @@
     <div class="portal-part" style="margin: 0 0 0 10px;">
       <p>
         <i nz-icon nzType="bar-chart" nzTheme="outline"></i>
-        <span>我的消息</span>
+        <span>我的待办</span>
       </p>
       <div>
-        <nz-empty *ngIf="messageList.length === 0"></nz-empty>
+        <app-todo style="width: 100%;align-self: flex-start;"></app-todo>
       </div>
     </div>
 
     <div class="portal-part" style="width: 100%; margin: 15px 0 0 0; flex:none;">
       <p>
         <i nz-icon nzType="bars" nzTheme="outline"></i>
-        <span>今日待办</span>
+        <span>成员</span>
       </p>
       <div>
-        <nz-empty></nz-empty>
+        <app-member style="width: 100%;align-self: flex-start;"></app-member>
+        <!-- <nz-empty></nz-empty> -->
       </div>
     </div>
   </div>

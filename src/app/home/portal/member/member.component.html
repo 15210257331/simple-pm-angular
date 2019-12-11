@@ -1,0 +1,36 @@
+<div class="member-content">
+  <table>
+    <thead>
+      <tr>
+        <th>昵称</th>
+        <th>账号</th>
+        <th>密码</th>
+        <th>性别</th>
+        <th>邮箱</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of memberList;">
+        <td>
+          <nz-avatar nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
+          <span style="margin-left: 20px;">{{item.nickname}}</span>
+        </td>
+        <td>{{ item.username}}</td>
+        <td>{{ item.password }}</td>
+        <td>{{ item.sex === 1 ? '男' : '女' }}</td>
+        <td>{{ item.email }}</td>
+        <td>
+          <i nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomCenter'" [nzTrigger]="'click'"
+            style="font-size: 20px;" nz-icon nzType="setting" nzTheme="outline"></i>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li *ngIf="item.status !== 4" nz-menu-item>修改权限</li>
+              <li nz-menu-item>删除成员</li>
+            </ul>
+          </nz-dropdown-menu>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

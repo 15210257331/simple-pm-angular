@@ -4,7 +4,6 @@ import { ProjectAddComponent } from './project-add/project-add.component';
 import { UpdateInfoComponent } from './update-info/update-info.component';
 import { ShareModule } from '../../share.module';
 import { NavComponent } from './nav.component';
-import { ProjectUpdateComponent } from './project-update/project-update.component';
 
 
 @NgModule({
@@ -12,7 +11,6 @@ import { ProjectUpdateComponent } from './project-update/project-update.componen
         NavComponent,
         ProjectAddComponent,
         UpdateInfoComponent,
-        ProjectUpdateComponent,
     ],
     imports: [
         CommonModule,
@@ -26,7 +24,6 @@ import { ProjectUpdateComponent } from './project-update/project-update.componen
         ProjectAddComponent,
         UpdateInfoComponent,
         NavComponent,
-        ProjectUpdateComponent
     ]
 })
 export class NavModule { }

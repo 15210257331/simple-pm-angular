@@ -23,6 +23,32 @@
       <nz-date-picker formControlName="endTime"></nz-date-picker>
     </nz-form-control>
   </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="endTime">标签</nz-form-label>
+    <nz-form-control [nzSm]="16" [nzXs]="24">
+      <nz-select nzMode="multiple" nzShowSearch nzPlaceHolder="选择标签" formControlName="tag">
+        <nz-option nzCustomContent *ngFor="let item of tagList;" [nzLabel]="item.name" [nzValue]="item._id">
+          <nz-tag [nzColor]="item.color">{{item.name}}</nz-tag>
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <!-- <div class="form-item">
+    <label for="">标签:</label>
+    <div>
+      <nz-tag *ngFor="let item of taskTag; let i = index;" [nzColor]="item.color" nzMode="closeable"
+        (nzOnClose)="deleteTag(i)">
+        {{item.name}}</nz-tag>
+      <i nz-icon nzType="plus-circle" nz-popover nzPopoverTrigger="click" [nzPopoverTitle]="'添加标签'"
+        [nzPopoverContent]="contentTemplate" [(nzVisible)]="visible" nzTheme="twotone"></i>
+      <ng-template #contentTemplate>
+        <div class="tag-add">
+          <input nz-input [(ngModel)]="tagName" name="tagName" />
+          <button nz-button nzType="danger" (click)="addTag()">确定</button>
+        </div>
+      </ng-template>
+    </div>
+  </div> -->
   <div class="footer">
     <button nz-button class="login-form-button" nzType="primary" [disabled]="!form.valid"
       (click)="submitForm()">提交</button>

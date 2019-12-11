@@ -7,7 +7,6 @@ import { Store } from '@ngrx/store';
 import { Appstate, LoadUserInfo, LoadProjectList, DeleteProject, LoadMemberList, LoadScheduleList } from '../../store';
 import { map } from 'rxjs/operators';
 import { UpdateInfoComponent } from 'src/app/home/nav/update-info/update-info.component';
-import { ProjectUpdateComponent } from './project-update/project-update.component';
 
 
 
@@ -30,21 +29,15 @@ export class NavComponent implements OnInit {
 
   navList: any[] = [
     {
-      name: '门户',
-      icon: 'bank',
-      url: 'portal',
-      selected: false
-    },
-    {
       name: '日程',
       icon: 'calendar',
       url: 'calendar',
       selected: false
     },
     {
-      name: '成员',
-      icon: 'meh',
-      url: 'member',
+      name: '门户',
+      icon: 'bank',
+      url: 'portal',
       selected: false
     },
   ];
@@ -115,22 +108,6 @@ export class NavComponent implements OnInit {
       nzContent: ProjectAddComponent,
       nzComponentParams: {
         title: '新建项目'
-      },
-      nzFooter: null,
-      nzWidth: 840,
-    });
-    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
-    modal.afterClose.subscribe(res => {
-      if (res && res.result) { }
-    });
-  }
-
-  updateProject(id, name) {
-    const modal = this.modalService.create({
-      nzTitle: '更新项目',
-      nzContent: ProjectUpdateComponent,
-      nzComponentParams: {
-        title: '更新项目'
       },
       nzFooter: null,
       nzWidth: 840,

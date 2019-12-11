@@ -7,6 +7,8 @@ import { TaskKanbanComponent } from './task-kanban/task-kanban.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { map } from 'rxjs/operators';
 import { ProjectOverviewComponent } from './project-overview/project-overview.component';
+import { ProjectSettingComponent } from './project-setting/project-setting.component';
+import { NzModalService } from 'ng-zorro-antd';
 
 
 @Component({
@@ -51,7 +53,8 @@ export class ProjectComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private taskService: TaskService,
-    private store: Store<Appstate>
+    private store: Store<Appstate>,
+    private modalService: NzModalService,
   ) { }
 
   ngOnInit() {
@@ -75,12 +78,25 @@ export class ProjectComponent implements OnInit {
     });
     this.createComponent(selectComponent[0].component);
   }
-
   createComponent(component: any) {
     this.commentContainer.clear();
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(component);
     this.componentRef = this.commentContainer.createComponent(factory);
   }
-
+  projectSetting(id, name) {
+    const modal = this.modalService.create({
+      nzTitle: '项目设置',
+      nzContent: ProjectSettingComponent,
+      nzComponentParams: {
+        title: '项目设置'
+      },
+      nzFooter: null,
+      nzWidth: 550,
+    });
+    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
+    modal.afterClose.subscribe(res => {
+      if (res && res.result) { }
+    });
+  }
 
 }

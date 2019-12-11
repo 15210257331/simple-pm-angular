@@ -24,6 +24,7 @@ import { ScheduleService } from './service/schedule.service';
 import { SocketService } from './service/socket.service';
 import { ShareModule } from './share.module';
 import { NavModule } from './home/nav/nav.module';
+import { TagService } from './service/tag.service';
 
 
 registerLocaleData(zh);
@@ -59,6 +60,7 @@ registerLocaleData(zh);
     TaskService,
     ScheduleService,
     SocketService,
+    TagService,
     { provide: NZ_I18N, useValue: zh_CN },
     ...httpInterceptorProviders,
   ],

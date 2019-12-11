@@ -9,6 +9,8 @@ export enum ProjectActionTypes {
     AddProjectSuccess = 'AddProjectSuccess',
     AddProjectError = 'AddProjectError',
 
+    UpdateProjectSuccess = 'UpdateProjectSuccess',
+
     DeleteProject = 'DeleteProject',
     DeleteProjectSuccess = 'DeleteProjectSuccess',
     DeleteProjectError = 'DeleteProjectError',
@@ -65,6 +67,11 @@ export class AddProjectSuccess implements Action {
 
 export class AddProjectError implements Action {
     readonly type = ProjectActionTypes.AddProjectError;
+    constructor(public payload: any) { }
+}
+
+export class UpdateProjectSuccess implements Action {
+    readonly type = ProjectActionTypes.UpdateProjectSuccess;
     constructor(public payload: any) { }
 }
 

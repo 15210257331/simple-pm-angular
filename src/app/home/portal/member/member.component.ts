@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Appstate } from '../../store';
+import { Appstate } from '../../../store';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -11,21 +11,6 @@ import { map } from 'rxjs/operators';
 export class MemberComponent implements OnInit {
 
   memberList: any[] = [];
-
-  data = [
-    {
-      title: 'Ant Design Title 1'
-    },
-    {
-      title: 'Ant Design Title 2'
-    },
-    {
-      title: 'Ant Design Title 3'
-    },
-    {
-      title: 'Ant Design Title 4'
-    }
-  ];
 
   constructor(
     private store: Store<Appstate>
@@ -40,5 +25,6 @@ export class MemberComponent implements OnInit {
         this.memberList = res;
       });
   }
+
 
 }

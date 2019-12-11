@@ -52,23 +52,29 @@ export const initialState: ProjectState = {
         creater: null,
         member: [],
         createDate: null,
-        task: []
+        task: [],
     }
 };
 
 export function projectReducer(state: ProjectState = initialState, action: ProjectAction) {
     switch (action.type) {
-
         case ProjectActionTypes.LoadProjectListSuccess:
             state.projectList = action.payload.data;
-            return state;
-        case ProjectActionTypes.LoadProjectListError:
             return state;
 
         case ProjectActionTypes.AddProjectSuccess:
             state.projectList.unshift(action.payload.data);
             return state;
-        case ProjectActionTypes.AddProjectError:
+
+        case ProjectActionTypes.UpdateProjectSuccess:
+            state.projectList.map(item => {
+                if (item._id === action.payload._id) {
+                    item.name = action.payload.name;
+                }
+            });
+            state.projectDetail.name = action.payload.name;
+            state.projectDetail.content = action.payload.content;
+            state.projectDetail.member = action.payload.member;
             return state;
 
         case ProjectActionTypes.DeleteProjectSuccess:
@@ -80,8 +86,6 @@ export function projectReducer(state: ProjectState = initialState, action: Proje
             });
             state.projectList.splice(deleteProjectIndex, 1);
             return state;
-        case ProjectActionTypes.DeleteProjectError:
-            return state;
 
         case ProjectActionTypes.LoadProjectDetailSuccess:
             const projectDetail = action.payload.data;
@@ -92,16 +96,12 @@ export function projectReducer(state: ProjectState = initialState, action: Proje
                 creater: projectDetail.creater,
                 member: projectDetail.member,
                 createDate: projectDetail.createDate,
-                task: projectDetail.task
+                task: projectDetail.task,
             };
-            return state;
-        case ProjectActionTypes.LoadProjectDetailError:
             return state;
 
         case ProjectActionTypes.AddTaskSuccess:
             state.projectDetail.task.unshift(action.payload.data);
-            return state;
-        case ProjectActionTypes.AddTaskError:
             return state;
 
         case ProjectActionTypes.ChangeTaskStatusCuccess:
@@ -110,8 +110,6 @@ export function projectReducer(state: ProjectState = initialState, action: Proje
                     item.status = action.payload.status;
                 }
             });
-            return state;
-        case ProjectActionTypes.ChangeTaskStatusError:
             return state;
 
         case ProjectActionTypes.DeleteTaskCuccess:
@@ -123,8 +121,6 @@ export function projectReducer(state: ProjectState = initialState, action: Proje
             });
             state.projectDetail.task.splice(deleteIndex, 1);
             return state;
-        case ProjectActionTypes.DeleteTaskError:
-            return state;
 
         case ProjectActionTypes.GetTaskCommentSuccess:
             state.projectDetail.task.map((item, index) => {
@@ -132,8 +128,6 @@ export function projectReducer(state: ProjectState = initialState, action: Proje
                     state.projectDetail.task[index].comment = action.payload.res.data;
                 }
             });
-            return state;
-        case ProjectActionTypes.GetTaskCommentError:
             return state;
 
         case ProjectActionTypes.AddTaskCommentSuccess:
@@ -143,8 +137,7 @@ export function projectReducer(state: ProjectState = initialState, action: Proje
                 }
             });
             return state;
-        case ProjectActionTypes.AddTaskCommentError:
-            return state;
+
         default:
             return state;
     }

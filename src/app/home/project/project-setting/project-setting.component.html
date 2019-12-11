@@ -1,0 +1,25 @@
+<form class="form">
+  <div class="form-item">
+    <label for="">项目名称:</label>
+    <input nz-input [(ngModel)]="projectName" name="projectName" />
+  </div>
+  <div class="form-item">
+    <label for="">项目描述:</label>
+    <input nz-input [(ngModel)]="projectContent" name="projectContent" />
+  </div>
+  <div class="form-item">
+    <label for="">项目成员:</label>
+    <nz-select nzMode="multiple" nzShowSearch nzPlaceHolder="选择成员" name="projectMember" [(ngModel)]="projectMember">
+      <nz-option nzCustomContent *ngFor="let item of memberList" [nzLabel]="item.nickname" [nzValue]="item._id">
+        <div class="member-item">
+          <img [src]="item.avatar" alt="">
+          <span>{{item.nickname}}</span>
+        </div>
+      </nz-option>
+    </nz-select>
+  </div>
+  <div class="footer">
+    <button nz-button class="login-form-button" nzType="primary" (click)="submitForm()">确定</button>
+    <button nz-button class="login-form-button" (click)="cancel()" nzType="default">取消</button>
+  </div>
+</form>

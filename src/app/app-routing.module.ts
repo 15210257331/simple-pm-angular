@@ -35,12 +35,6 @@ const routes: Routes = [
         pathMatch: 'full',
         data: { title: '日历' }
       },
-      {
-        path: 'member',
-        loadChildren: () => import('./home/member/member.module').then(m => m.MemberModule),
-        pathMatch: 'full',
-        data: { title: '成员' }
-      },
     ]
   },
 ];

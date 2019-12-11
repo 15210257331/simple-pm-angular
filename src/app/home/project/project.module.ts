@@ -8,6 +8,7 @@ import { ProjectOverviewComponent } from './project-overview/project-overview.co
 import { TaskListComponent } from './task-list/task-list.component';
 import { ProjectComponent } from './project.component';
 import { ProjectRoutingModule } from './project-routing.module';
+import { ProjectSettingComponent } from './project-setting/project-setting.component';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import { ProjectRoutingModule } from './project-routing.module';
         TaskDetailComponent,
         TaskAddComponent,
         ProjectOverviewComponent,
+        ProjectSettingComponent,
     ],
     imports: [
         CommonModule,
@@ -29,7 +31,8 @@ import { ProjectRoutingModule } from './project-routing.module';
         TaskKanbanComponent,
         TaskDetailComponent,
         TaskAddComponent,
-        ProjectOverviewComponent
+        ProjectOverviewComponent,
+        ProjectSettingComponent
     ]
 })
 export class ProjectModule { }

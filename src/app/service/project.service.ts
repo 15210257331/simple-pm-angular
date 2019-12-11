@@ -33,6 +33,13 @@ export class ProjectService {
     }
 
     /**
+     * 更新project
+     */
+    updateProject(data: any): Observable<any> {
+        return this.http.post(`${API}/project/update`, data);
+    }
+
+    /**
      * 删除project
      */
     deleteProject(id: any): Observable<any> {
