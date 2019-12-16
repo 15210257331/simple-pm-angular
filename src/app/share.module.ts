@@ -9,12 +9,16 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { DebounceDirective } from './directive';
 import { AvatarShowComponent } from './component/avatar-show/avatar-show.component';
+import { ClockComponent } from './component/clock/clock.component';
+import { FlipComponent } from './component/clock/flip/flip.component';
 
 @NgModule({
   declarations: [
     TaskKanbanItemComponent,
     HeaderComponent,
     AvatarShowComponent,
+    ClockComponent,
+    FlipComponent,
     // 管道
     FormatDatePipe,
     // 指令
@@ -42,6 +46,8 @@ import { AvatarShowComponent } from './component/avatar-show/avatar-show.compone
     TaskKanbanItemComponent,
     HeaderComponent,
     AvatarShowComponent,
+    ClockComponent,
+    FlipComponent,
     // 管道
     FormatDatePipe,
     // 指令

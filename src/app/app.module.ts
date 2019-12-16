@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Component } from '@angular/core';
+import { NgModule, Component, enableProdMode } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +14,6 @@ import { httpInterceptorProviders } from './service/interceptor';
 import { ProjectService } from './service/project.service';
 import { UserService } from './service/user.service';
 import { TaskService } from './service/task.service';
-import { NavComponent } from './home/nav/nav.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -28,6 +27,8 @@ import { TagService } from './service/tag.service';
 
 
 registerLocaleData(zh);
+
+enableProdMode(); // 解决父组件检查完后 子组件有改变了父组件的属性 而产生的二次见检查报错
 
 @NgModule({
   declarations: [

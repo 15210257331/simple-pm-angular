@@ -1,4 +1,5 @@
 <div class="register">
+  <h3>注册账号<span (click)="goLogin()">立即登录</span></h3>
   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="username">用户名</nz-form-label>
@@ -68,7 +69,7 @@
     </nz-form-item>
     <nz-form-item nz-row style="margin-bottom:8px;">
       <nz-form-control [nzSpan]="14" [nzOffset]="6">
-        <button nz-button nzType="primary">Register</button>
+        <button style="width: 100%" nz-button nzType="primary">注册</button>
       </nz-form-control>
     </nz-form-item>
   </form>

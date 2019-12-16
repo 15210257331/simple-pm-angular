@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd';
 import { Store } from '@ngrx/store';
 import { Appstate, ChangeTaskStatus, DeleteTask, ChangeTaskStatusCuccess, } from '../../../store';
-import { map } from 'rxjs/operators';
+import { map, finalize } from 'rxjs/operators';
 import { TaskAddComponent } from '../task-add/task-add.component';
 import { TaskDetailComponent } from '../task-detail/task-detail.component';
 import { moveItemInArray, transferArrayItem, CdkDragDrop } from '@angular/cdk/drag-drop';
@@ -69,7 +69,7 @@ export class TaskKanbanComponent implements OnInit {
     this.selectViewName = this.taskView[0].name;
     const task$ = this.store
       .pipe(
-        map(data => data.projectState.projectDetail)
+        map(data => data.projectState.projectDetail),
       )
       .subscribe(res => {
         this.projectId = res._id;
@@ -155,7 +155,6 @@ export class TaskKanbanComponent implements OnInit {
       this.store.dispatch(new ChangeTaskStatus(data));
     }
   }
-
   // 更改任务状态
   changeStatus(id: any, status: number) {
     const data = {
