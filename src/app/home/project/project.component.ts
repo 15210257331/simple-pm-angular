@@ -84,19 +84,21 @@ export class ProjectComponent implements OnInit {
     this.componentRef = this.commentContainer.createComponent(factory);
   }
   projectSetting(id, name) {
-    const modal = this.modalService.create({
-      nzTitle: '项目设置',
-      nzContent: ProjectSettingComponent,
-      nzComponentParams: {
-        title: '项目设置'
-      },
-      nzFooter: null,
-      nzWidth: 550,
-    });
-    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
-    modal.afterClose.subscribe(res => {
-      if (res && res.result) { }
-    });
+    this.selectTab = null;
+    this.createComponent(ProjectSettingComponent);
+    // const modal = this.modalService.create({
+    //   nzTitle: '项目设置',
+    //   nzContent: ProjectSettingComponent,
+    //   nzComponentParams: {
+    //     title: '项目设置'
+    //   },
+    //   nzFooter: null,
+    //   nzWidth: 550,
+    // });
+    // modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
+    // modal.afterClose.subscribe(res => {
+    //   if (res && res.result) { }
+    // });
   }
 
 }

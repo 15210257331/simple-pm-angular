@@ -33,7 +33,8 @@
         </p>
         <p>
           <label for="">项目创建人:</label>
-          <span>{{projectDetail.creater.nickname}}</span>
+          <app-avatar-show [avatar]="projectDetail.creater.avatar" [type]="'simple'" nz-tooltip
+            [nzTooltipTitle]="projectDetail.creater.nickname"></app-avatar-show>
         </p>
         <p>
           <label for="">项目创建时间:</label>
@@ -41,7 +42,9 @@
         </p>
         <p>
           <label for="">项目成员:</label>
-          <span *ngFor="let item of projectDetail.member">{{item.nickname}}、</span>
+          <app-avatar-show *ngFor="let item of projectDetail.member" [avatar]="item?.avatar" [type]="'simple'"
+            nz-tooltip [nzTooltipTitle]="item.nickname">
+          </app-avatar-show>
         </p>
       </div>
     </div>

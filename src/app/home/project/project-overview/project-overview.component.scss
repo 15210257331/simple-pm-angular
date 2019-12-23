@@ -84,8 +84,14 @@
       &>div {
         padding: 10px 20px;
 
-        label {
-          margin-right: 20px;
+        p {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+
+          label {
+            margin-right: 20px;
+          }
         }
       }
     }
