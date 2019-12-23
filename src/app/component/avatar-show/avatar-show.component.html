@@ -1,7 +1,7 @@
 <div class="avatar-show">
   <img [src]="avatar">
-  <div>
+  <div *ngIf="type !== 'simple'">
     <p>{{name}}</p>
-    <span>负责人</span>
+    <span>{{role}}</span>
   </div>
 </div>

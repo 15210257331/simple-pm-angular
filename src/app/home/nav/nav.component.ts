@@ -35,7 +35,7 @@ export class NavComponent implements OnInit {
       selected: false
     },
     {
-      name: '门户',
+      name: '首页',
       icon: 'bank',
       url: 'portal',
       selected: false

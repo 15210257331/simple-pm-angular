@@ -1,7 +1,8 @@
 <nav>
   <div class="header">
-    <img [src]="userInfo?.avatar" nz-popover [nzPopoverContent]="contentTemplate" [(nzVisible)]="visible"
-      nzPopoverTrigger="click" [nzPopoverPlacement]="'bottom'">
+    <app-avatar-show [avatar]="userInfo?.avatar" [name]="userInfo.nickname" nz-popover
+      [nzPopoverContent]="contentTemplate" [(nzVisible)]="visible" nzPopoverTrigger="click"
+      nzPopoverPlacement="rightTop"></app-avatar-show>
     <ng-template #contentTemplate>
       <li class="operate" (click)="projectAdd()">
         <i nz-icon nzType="folder-add" nzTheme="fill"></i>
@@ -16,7 +17,6 @@
         <span>退出登录</span>
       </li>
     </ng-template>
-    <p>{{userInfo?.nickname}}</p>
   </div>
   <div class="project-search">
     <nz-input-group [nzSuffix]="suffixIconSearch">
