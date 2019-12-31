@@ -1,25 +1,63 @@
-<form class="form">
-  <div class="form-item">
-    <label for="">项目名称:</label>
-    <input nz-input [(ngModel)]="projectName" name="projectName" />
+<div class="setting">
+  <div class="setting-header">
+    <ng-container *ngFor="let item of data;">
+      <span [class.select]="item.value === selectTab" (click)="changeTab(item.value)">{{item.title}}</span>
+      <nz-divider nzType="vertical"></nz-divider>
+    </ng-container>
   </div>
-  <div class="form-item">
-    <label for="">项目描述:</label>
-    <input nz-input [(ngModel)]="projectContent" name="projectContent" />
-  </div>
-  <div class="form-item">
-    <label for="">项目成员:</label>
-    <nz-select nzMode="multiple" nzShowSearch nzPlaceHolder="选择成员" name="projectMember" [(ngModel)]="projectMember">
-      <nz-option nzCustomContent *ngFor="let item of memberList" [nzLabel]="item.nickname" [nzValue]="item._id">
-        <div class="member-item">
-          <img [src]="item.avatar" alt="">
-          <span>{{item.nickname}}</span>
+  <div class="setting-content">
+    <ng-container *ngIf="selectTab === 1">
+      <div class="form">
+        <div class="form-item">
+          <label for="">项目名称:</label>
+          <input nz-input [(ngModel)]="projectName" name="projectName" />
         </div>
-      </nz-option>
-    </nz-select>
+        <div class="form-item">
+          <label for="">项目描述:</label>
+          <input nz-input [(ngModel)]="projectContent" name="projectContent" />
+        </div>
+        <div style="justify-content: flex-end;" class="form-item">
+          <button nz-button class="login-form-button" nzType="primary" (click)="submitForm()">确定</button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="selectTab === 2">
+      <div class="form">
+        <div class="form-item">
+          <label for="">项目成员:</label>
+          <app-avatar-show *ngFor="let item of projectDetail.member" [avatar]="item?.avatar" [type]="'simple'"
+            nz-tooltip [nzTooltipTitle]="item.nickname">
+          </app-avatar-show>
+        </div>
+        <nz-divider></nz-divider>
+        <div class="form-item">
+          <label style="align-self: flex-start;" for="">全部成员:</label>
+          <table class="member">
+            <thead>
+              <tr>
+                <th>用户</th>
+                <th>邮箱</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of memberList;">
+                <td>{{item.nickname}}({{item.username}})</td>
+                <td>{{ item.email }}</td>
+                <td>添加</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="selectTab === 3">
+      <div class="form">
+        <div class="form-item">
+          <label for="">项目标签:</label>
+          <nz-tag *ngFor="let item of tags" [nzColor]="item.color">{{item.name}}</nz-tag>
+        </div>
+      </div>
+    </ng-container>
   </div>
-  <div class="footer">
-    <button nz-button class="login-form-button" nzType="primary" (click)="submitForm()">确定</button>
-    <button nz-button class="login-form-button" (click)="cancel()" nzType="default">取消</button>
-  </div>
-</form>
+</div>

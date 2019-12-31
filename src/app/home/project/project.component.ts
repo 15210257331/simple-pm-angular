@@ -78,13 +78,14 @@ export class ProjectComponent implements OnInit {
     });
     this.createComponent(selectComponent[0].component);
   }
+
   createComponent(component: any) {
     this.commentContainer.clear();
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(component);
     this.componentRef = this.commentContainer.createComponent(factory);
   }
   projectSetting(id, name) {
-    this.selectTab = null;
+    this.selectTab = 99;
     this.createComponent(ProjectSettingComponent);
     // const modal = this.modalService.create({
     //   nzTitle: '项目设置',

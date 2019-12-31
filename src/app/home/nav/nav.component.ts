@@ -34,12 +34,6 @@ export class NavComponent implements OnInit {
       url: 'calendar',
       selected: false
     },
-    {
-      name: '首页',
-      icon: 'bank',
-      url: 'portal',
-      selected: false
-    },
   ];
 
   constructor(

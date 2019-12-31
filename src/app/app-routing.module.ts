@@ -18,12 +18,6 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'portal',
-        loadChildren: () => import('./home/portal/portal.module').then(m => m.PortalModule),
-        pathMatch: 'full',
-        data: { title: '门户' }
-      },
-      {
         path: 'project/:id',
         loadChildren: () => import('./home/project/project.module').then(m => m.ProjectModule),
         pathMatch: 'full',

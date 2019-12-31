@@ -3,7 +3,7 @@ import { AddProjectSuccess, Appstate, UpdateProjectSuccess } from '../../../stor
 import { map } from 'rxjs/operators';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NzNotificationService, NzModalRef } from 'ng-zorro-antd';
+import { NzNotificationService } from 'ng-zorro-antd';
 import { Store } from '@ngrx/store';
 import { ProjectService } from '../../../service/project.service';
 
@@ -14,18 +14,40 @@ import { ProjectService } from '../../../service/project.service';
 })
 export class ProjectSettingComponent implements OnInit {
 
-  @Input() title;
+
+  data: any[] = [
+    {
+      title: '基本设置',
+      value: 1,
+    },
+    {
+      title: '成员设置',
+      value: 2,
+    },
+    {
+      title: '标签管理',
+      value: 3,
+    },
+  ];
+
+  selectTab = 1;
+
+  tags: any[] = [];
+
   projectDetail: any = {};
+
   projectName = '';
+
   projectContent = '';
+
   projectMember: any[] = [];
+
   memberList: any[] = [];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private notification: NzNotificationService,
-    private modal: NzModalRef,
     private projectService: ProjectService,
     private store: Store<Appstate>
   ) { }
@@ -37,8 +59,6 @@ export class ProjectSettingComponent implements OnInit {
       )
       .subscribe(res => {
         this.memberList = res.memberList;
-        const userId = res.userInfo._id;
-        this.memberList = this.memberList;
       });
 
     const projectDetail$ = this.store
@@ -52,27 +72,17 @@ export class ProjectSettingComponent implements OnInit {
         this.projectMember = this.projectDetail.member.map(item => item._id);
       });
   }
+
+  changeTab(value) {
+    this.selectTab = value;
+  }
+
   submitForm() {
-    const data = {
-      projectId: this.projectDetail._id,
-      name: this.projectName,
-      content: this.projectContent,
-      member: this.projectMember
-    };
-    this.projectService.updateProject(data).subscribe(res => {
-      if (res.code === 200) {
-        this.modal.destroy({ result: true });
-        this.store.dispatch(new UpdateProjectSuccess(res.data));
-        this.notification.create('success', 'sucess', res.msg);
-      } else {
-        this.modal.destroy({ result: false });
-        this.notification.create('error', 'error', res.msg);
-      }
-    });
+
   }
 
   cancel() {
-    this.modal.destroy();
+
   }
 
 }

@@ -1,17 +1,19 @@
 <div class="task">
   <div class="task-view">
-    <p class="title">
+    <ul class="title">
       <i nz-icon nzType="folder-open" nzTheme="twotone"></i>
       <span>{{projectName$ | async}}</span>
-    </p>
+    </ul>
     <ul class="task-view-item">
       <li [class.select]="item.value === selectTab" *ngFor="let item of viewList;" (click)="tabChange(item.value)">
         {{item.title}}</li>
     </ul>
-    <p class="setting" (click)="projectSetting()">
-      <i nz-icon nzType="setting" nzTheme="twotone"></i>
-      <span>设置</span>
-    </p>
+    <ul class="task-view-item setting">
+      <li [class.select]="99 === selectTab" (click)="projectSetting()">
+        <i nz-icon nzType="setting" nzTheme="twotone"></i>
+        <span>设置</span>
+      </li>
+    </ul>
   </div>
   <div class="task-view-detail">
     <ng-template #viewDetail></ng-template>
