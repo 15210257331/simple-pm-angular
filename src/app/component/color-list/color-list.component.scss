@@ -1,0 +1,33 @@
+.select {
+  opacity: 1 !important;
+
+  &::after {
+    content: "\2714";
+    display: inline-block;
+    position: absolute;
+    left: 7px;
+    bottom: 4px;
+    color: aliceblue;
+  }
+}
+
+ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px 0;
+  height: 35px;
+
+  li {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 0 8px;
+  }
+
+  li:hover {
+    opacity: 1 !important;
+  }
+}

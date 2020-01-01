@@ -48,6 +48,7 @@
       height: 100%;
       .form-item {
         min-height: 35px;
+        width: 70%;
         margin: 20px;
         display: flex;
         justify-content: flex-start;
@@ -55,6 +56,7 @@
         label {
           margin-right: 20px;
           min-width: 65px;
+          text-align: right;
         }
       }
     }

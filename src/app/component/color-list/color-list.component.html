@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let item of colors; let i = index;" [class.select]="i === selectIndex"
+    [ngStyle]="{'backgroundColor': item, 'opacity': 0.7}" (click)="click(item,i)">
+  </li>
+</ul>

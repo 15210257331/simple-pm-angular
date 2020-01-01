@@ -10,9 +10,8 @@ export class TagService {
 
     constructor(private http: HttpClient) { }
 
-    // 更改task状态
-    getTagList(): Observable<any> {
-        return this.http.get(`${API}/tag/list`);
+    addTag(data): Observable<any> {
+        return this.http.post(`${API}/tag/add`, data);
     }
 }
 

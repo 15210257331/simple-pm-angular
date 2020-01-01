@@ -29,6 +29,12 @@ export class NavComponent implements OnInit {
 
   navList: any[] = [
     {
+      name: '我的任务',
+      icon: 'smile',
+      url: 'my',
+      selected: false
+    },
+    {
       name: '日程',
       icon: 'calendar',
       url: 'calendar',

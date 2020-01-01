@@ -1,9 +1,10 @@
+import { TagService } from './../../../service/tag.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { AddProjectSuccess, Appstate, UpdateProjectSuccess } from '../../../store';
+import { AddProjectSuccess, Appstate, UpdateProjectSuccess, AddProjectTag, UpdateProject } from '../../../store';
 import { map } from 'rxjs/operators';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NzNotificationService } from 'ng-zorro-antd';
+import { NzNotificationService, NzMessageService } from 'ng-zorro-antd';
 import { Store } from '@ngrx/store';
 import { ProjectService } from '../../../service/project.service';
 
@@ -21,7 +22,7 @@ export class ProjectSettingComponent implements OnInit {
       value: 1,
     },
     {
-      title: '成员设置',
+      title: '成员管理',
       value: 2,
     },
     {
@@ -32,23 +33,27 @@ export class ProjectSettingComponent implements OnInit {
 
   selectTab = 1;
 
-  tags: any[] = [];
-
   projectDetail: any = {};
 
-  projectName = '';
+  projectModel: any = {
+    name: '',
+    content: ''
+  };
 
-  projectContent = '';
+  tagModel: any = {
+    name: '',
+    color: '',
+  };
 
-  projectMember: any[] = [];
-
-  memberList: any[] = [];
+  allMember: any[] = [];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private notification: NzNotificationService,
     private projectService: ProjectService,
+    private message: NzMessageService,
+    private tagService: TagService,
     private store: Store<Appstate>
   ) { }
 
@@ -58,7 +63,7 @@ export class ProjectSettingComponent implements OnInit {
         map(data => data.userState)
       )
       .subscribe(res => {
-        this.memberList = res.memberList;
+        this.allMember = res.memberList;
       });
 
     const projectDetail$ = this.store
@@ -67,22 +72,42 @@ export class ProjectSettingComponent implements OnInit {
       )
       .subscribe(res => {
         this.projectDetail = res.projectDetail;
-        this.projectName = this.projectDetail.name;
-        this.projectContent = this.projectDetail.content;
-        this.projectMember = this.projectDetail.member.map(item => item._id);
+        this.projectModel = {
+          name: this.projectDetail.name,
+          content: this.projectDetail.content
+        };
       });
   }
 
-  changeTab(value) {
-    this.selectTab = value;
+  updateProject() {
+    const data = Object.assign({}, this.projectModel, {
+      projectId: this.projectDetail._id,
+    });
+    this.store.dispatch(new UpdateProject(data));
   }
 
-  submitForm() {
-
+  addMember(item) {
+    if (this.projectDetail.member.indexOf(item._id) > -1) {
+      this.message.error('该成员已在项目中！');
+      return;
+    }
+    const member = this.projectDetail.member.map(ite => ite._id);
+    member.push(item._id);
+    const data = Object.assign({}, {
+      projectId: this.projectDetail._id,
+      member: Array.from(new Set(member))
+    });
+    this.store.dispatch(new UpdateProject(data));
   }
 
-  cancel() {
-
+  addTag() {
+    const data = Object.assign({}, this.tagModel, {
+      projectId: this.projectDetail._id
+    });
+    this.store.dispatch(new AddProjectTag(data));
+    this.tagModel = {
+      name: '',
+      color: '',
+    };
   }
-
 }

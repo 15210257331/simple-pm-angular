@@ -1,0 +1,53 @@
+<div class="my">
+  <app-header [icon]="'smile'" [title]="'我的任务'"></app-header>
+  <div class="my-content">
+    <div class="left">
+      <p class="title">
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+        <span>我的任务</span>
+      </p>
+      <div class="tasks">
+        <nz-card style="width:300px;margin: 10px 0 0 10px;" *ngFor="let item of myTasks" [nzHoverable]="true"
+          nzTitle="Card title" [nzExtra]="extraTemplate">
+          <p>Card content</p>
+          <p>Card content</p>
+          <p>Card content</p>
+        </nz-card>
+        <ng-template #extraTemplate>
+          <a>More</a>
+        </ng-template>
+      </div>
+    </div>
+    <div class="right">
+      <div class="static">
+        <li>
+          <p style="color: #484848">5</p>
+          <span>已完成</span>
+        </li>
+        <nz-divider nzType="vertical"></nz-divider>
+        <li>
+          <p style="color: #888">5</p>
+          <span>进行中</span>
+        </li>
+        <nz-divider nzType="vertical"></nz-divider>
+        <li>
+          <p style="color: #ff5b57">0</p>
+          <span>延期</span>
+        </li>
+      </div>
+      <div class="schedule">
+        <p class="title">
+          <i nz-icon nzType="bar-chart" nzTheme="outline"></i>
+          <span>我的日程</span>
+        </p>
+        <div>
+          <nz-timeline>
+            <nz-timeline-item *ngFor="let item of mySchedule">
+              <span>{{ item.name }}({{item.startTime}})</span>
+            </nz-timeline-item>
+          </nz-timeline>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

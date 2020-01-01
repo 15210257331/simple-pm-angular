@@ -11,6 +11,7 @@ import { DebounceDirective } from './directive';
 import { AvatarShowComponent } from './component/avatar-show/avatar-show.component';
 import { ClockComponent } from './component/clock/clock.component';
 import { FlipComponent } from './component/clock/flip/flip.component';
+import { ColorListComponent } from './component/color-list/color-list.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FlipComponent } from './component/clock/flip/flip.component';
     AvatarShowComponent,
     ClockComponent,
     FlipComponent,
+    ColorListComponent,
     // 管道
     FormatDatePipe,
     // 指令
@@ -48,6 +50,7 @@ import { FlipComponent } from './component/clock/flip/flip.component';
     AvatarShowComponent,
     ClockComponent,
     FlipComponent,
+    ColorListComponent,
     // 管道
     FormatDatePipe,
     // 指令

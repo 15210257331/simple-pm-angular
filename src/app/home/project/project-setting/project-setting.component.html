@@ -1,7 +1,7 @@
 <div class="setting">
   <div class="setting-header">
     <ng-container *ngFor="let item of data;">
-      <span [class.select]="item.value === selectTab" (click)="changeTab(item.value)">{{item.title}}</span>
+      <span [class.select]="item.value === selectTab" (click)="selectTab = item.value">{{item.title}}</span>
       <nz-divider nzType="vertical"></nz-divider>
     </ng-container>
   </div>
@@ -10,14 +10,14 @@
       <div class="form">
         <div class="form-item">
           <label for="">项目名称:</label>
-          <input nz-input [(ngModel)]="projectName" name="projectName" />
+          <input nz-input [(ngModel)]="projectModel.name" name="projectName" />
         </div>
         <div class="form-item">
-          <label for="">项目描述:</label>
-          <input nz-input [(ngModel)]="projectContent" name="projectContent" />
+          <label for="">描述:</label>
+          <textarea nz-input [(ngModel)]="projectModel.content" name="projectContent"></textarea>
         </div>
-        <div style="justify-content: flex-end;" class="form-item">
-          <button nz-button class="login-form-button" nzType="primary" (click)="submitForm()">确定</button>
+        <div style="padding-left: 85px" class="form-item">
+          <button nz-button nzType="primary" (click)="updateProject()">提交</button>
         </div>
       </div>
     </ng-container>
@@ -30,8 +30,8 @@
           </app-avatar-show>
         </div>
         <nz-divider></nz-divider>
-        <div class="form-item">
-          <label style="align-self: flex-start;" for="">全部成员:</label>
+        <div class="form-item" style="width: 100%;">
+          <label style="align-self: flex-start; line-height: 45px;" for="">全部成员:</label>
           <table class="member">
             <thead>
               <tr>
@@ -41,10 +41,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of memberList;">
+              <tr *ngFor="let item of allMember;">
                 <td>{{item.nickname}}({{item.username}})</td>
-                <td>{{ item.email }}</td>
-                <td>添加</td>
+                <td>{{item.email}}</td>
+                <td><span (click)="addMember(item)">添加</span></td>
               </tr>
             </tbody>
           </table>
@@ -54,8 +54,20 @@
     <ng-container *ngIf="selectTab === 3">
       <div class="form">
         <div class="form-item">
-          <label for="">项目标签:</label>
-          <nz-tag *ngFor="let item of tags" [nzColor]="item.color">{{item.name}}</nz-tag>
+          <label for="">标签:</label>
+          <nz-tag *ngFor="let item of projectDetail.tag" [nzColor]="item.color">{{item.name}}</nz-tag>
+        </div>
+        <nz-divider></nz-divider>
+        <div class="form-item">
+          <label for="">标签名称:</label>
+          <input nz-input [(ngModel)]="tagModel.name" name="projectName" />
+        </div>
+        <div class="form-item">
+          <label for="">颜色:</label>
+          <app-color-list (select)="tagModel.color = $event"></app-color-list>
+        </div>
+        <div style="padding-left: 85px" class="form-item">
+          <button nz-button nzType="primary" (click)="addTag()">确定</button>
         </div>
       </div>
     </ng-container>

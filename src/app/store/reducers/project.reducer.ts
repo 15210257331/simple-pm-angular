@@ -35,6 +35,7 @@ export interface ProjectDetail {
     member: any[];
     createDate: any;
     task: Array<Task>;
+    tag: Array<any>;
 }
 
 // project interface
@@ -53,6 +54,7 @@ export const initialState: ProjectState = {
         member: [],
         createDate: null,
         task: [],
+        tag: [],
     }
 };
 
@@ -68,13 +70,13 @@ export function projectReducer(state: ProjectState = initialState, action: Proje
 
         case ProjectActionTypes.UpdateProjectSuccess:
             state.projectList.map(item => {
-                if (item._id === action.payload._id) {
-                    item.name = action.payload.name;
+                if (item._id === action.payload.data._id) {
+                    item.name = action.payload.data.name;
                 }
             });
-            state.projectDetail.name = action.payload.name;
-            state.projectDetail.content = action.payload.content;
-            state.projectDetail.member = action.payload.member;
+            state.projectDetail.name = action.payload.data.name;
+            state.projectDetail.content = action.payload.data.content;
+            state.projectDetail.member = action.payload.data.member;
             return state;
 
         case ProjectActionTypes.DeleteProjectSuccess:
@@ -97,6 +99,7 @@ export function projectReducer(state: ProjectState = initialState, action: Proje
                 member: projectDetail.member,
                 createDate: projectDetail.createDate,
                 task: projectDetail.task,
+                tag: projectDetail.tag
             };
             return state;
 
@@ -136,6 +139,10 @@ export function projectReducer(state: ProjectState = initialState, action: Proje
                     state.projectDetail.task[index].comment.push(action.payload.data);
                 }
             });
+            return state;
+
+        case ProjectActionTypes.AddProjectTagSuccess:
+            state.projectDetail.tag.push(action.payload.data);
             return state;
 
         default:

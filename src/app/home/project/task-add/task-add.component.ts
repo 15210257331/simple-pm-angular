@@ -6,6 +6,7 @@ import { NzModalRef, NzNotificationService } from 'ng-zorro-antd';
 import { Store } from '@ngrx/store';
 import { Appstate, AddTaskSuccess } from '../../../store';
 import { TagService } from '../../../service/tag.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-task-add',
@@ -20,9 +21,7 @@ export class TaskAddComponent implements OnInit {
 
   form: FormGroup;
 
-  visible = false;
-  tagName = '';
-  tagList: any[] = [];
+  projectDetail: any;
 
   constructor(
     private fb: FormBuilder,
@@ -35,7 +34,6 @@ export class TaskAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getTagList();
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       content: ['', [Validators.required]],
@@ -43,12 +41,15 @@ export class TaskAddComponent implements OnInit {
       endTime: ['', [Validators.required]],
       tag: [[], Validators.required]
     });
+    const projectDetail$ = this.store
+      .pipe(
+        map(data => data.projectState)
+      )
+      .subscribe(res => {
+        this.projectDetail = res.projectDetail;
+      });
   }
-  getTagList() {
-    this.tagService.getTagList().subscribe(res => {
-      this.tagList = res.data;
-    });
-  }
+
   submitForm() {
     const data = Object.assign({}, this.form.value, {
       status: this.status,

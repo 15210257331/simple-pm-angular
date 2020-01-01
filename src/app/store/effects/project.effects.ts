@@ -1,8 +1,9 @@
+import { TagService } from './../../service/tag.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { of, forkJoin } from 'rxjs';
-import { ProjectActionTypes, LoadProjectDetailSuccess, LoadProjectDetailError, AddTaskSuccess, AddTaskError, ChangeTaskStatusCuccess, ChangeTaskStatusError, DeleteTaskError, DeleteTaskCuccess, LoadProjectListSuccess, LoadProjectListError, DeleteProjectSuccess, DeleteProjectError, AddTaskCommentError, AddTaskCommentSuccess, GetTaskCommentSuccess, GetTaskCommentError } from '../actions';
+import { ProjectActionTypes, LoadProjectDetailSuccess, LoadProjectDetailError, AddTaskSuccess, AddTaskError, ChangeTaskStatusCuccess, ChangeTaskStatusError, DeleteTaskError, DeleteTaskCuccess, LoadProjectListSuccess, LoadProjectListError, DeleteProjectSuccess, DeleteProjectError, AddTaskCommentError, AddTaskCommentSuccess, GetTaskCommentSuccess, GetTaskCommentError, AddProjectTagSuccess, AddProjectTagError, UpdateProjectError, UpdateProjectSuccess } from '../actions';
 import { ProjectService } from '../../service/project.service';
 import { TaskService } from '../../service/task.service';
 import { NzNotificationService } from 'ng-zorro-antd';
@@ -16,7 +17,8 @@ export class ProjectEffects {
         private actions$: Actions,
         private notification: NzNotificationService,
         private projectService: ProjectService,
-        private taskService: TaskService
+        private taskService: TaskService,
+        private tagService: TagService
     ) { }
 
     // 项目列表
@@ -76,6 +78,26 @@ export class ProjectEffects {
                         }
                     }),
                     catchError(err => of(new DeleteProjectError(err)))
+                )
+        )
+    );
+    // 更新项目
+    @Effect()
+    updateProjectData$ = this.actions$.pipe(
+        ofType(ProjectActionTypes.UpdateProject),
+        map((data: any) => data.payload),
+        mergeMap(updateData =>
+            this.projectService.updateProject(updateData)
+                .pipe(
+                    map(res => {
+                        if (res.code === 200) {
+                            this.notification.create('success', 'sucess', res.msg);
+                            return new UpdateProjectSuccess(res);
+                        } else {
+                            return of(new UpdateProjectError(res.msg));
+                        }
+                    }),
+                    catchError(err => of(new UpdateProjectError(err)))
                 )
         )
     );
@@ -159,6 +181,26 @@ export class ProjectEffects {
                         }
                     }),
                     catchError(err => of(new AddTaskCommentError(err)))
+                )
+        )
+    );
+    // 添加项目标签
+    @Effect()
+    addProjectTag$ = this.actions$.pipe(
+        ofType(ProjectActionTypes.AddProjectTag),
+        map((data: any) => data.payload),
+        mergeMap(tag =>
+            this.tagService.addTag(tag)
+                .pipe(
+                    map(res => {
+                        if (res.code === 200) {
+                            this.notification.create('success', 'sucess', res.msg);
+                            return new AddProjectTagSuccess(res);
+                        } else {
+                            return of(new AddProjectTagError(res.msg));
+                        }
+                    }),
+                    catchError(err => of(new AddProjectTagError(err)))
                 )
         )
     );

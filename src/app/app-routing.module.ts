@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'portal',
+        redirectTo: 'my',
         pathMatch: 'full'
       },
       {
@@ -22,6 +22,12 @@ const routes: Routes = [
         loadChildren: () => import('./home/project/project.module').then(m => m.ProjectModule),
         pathMatch: 'full',
         data: { title: '项目' }
+      },
+      {
+        path: 'my',
+        loadChildren: () => import('./home/my/my.module').then(m => m.MyModule),
+        pathMatch: 'full',
+        data: { title: '我的任务' }
       },
       {
         path: 'calendar',
