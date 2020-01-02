@@ -4,6 +4,8 @@ import { Appstate } from '../../store';
 import { TaskService } from '../../service/task.service';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
+import { TaskDetailComponent } from '../project/task-detail/task-detail.component';
+import { NzModalService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-my',
@@ -12,24 +14,28 @@ import * as moment from 'moment';
 })
 export class MyComponent implements OnInit {
 
-  myTasks: any[] = [1, 2, 3, 4, 5, 6];
+  myTasks: any[] = [];
+
+  completeNum = 0;
+
+  penddingNum = 0;
+
+  notStartNum = 0;
 
   mySchedule: any[] = [];
 
+  myTasksLoading = true;
+
+  myScheduleLoading = true;
+
   constructor(
     private store: Store<Appstate>,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private modalService: NzModalService,
   ) { }
 
   ngOnInit() {
-    this.store
-      .pipe(
-        map(data => data.userState)
-      )
-      .subscribe(res => {
-        // this.userInfo = res.userInfo;
-      });
-
+    this.getMytasks();
     this.store
       .pipe(
         map(data => data.scheduleState)
@@ -37,9 +43,22 @@ export class MyComponent implements OnInit {
       .subscribe(res => {
         this.mySchedule = res;
         this.mySchedule.map(item => {
-          item.startTime = moment(item.startTime).format('YYYY-MM-DD HH:mm:ss');
+          item.startTime = moment(item.startTime).format('YYYY-MM-DD');
         });
+        this.myScheduleLoading = false;
       });
+  }
+
+  getMytasks() {
+    this.taskService.getMyTasks().subscribe(res => {
+      if (res.code === 200) {
+        this.myTasks = res.data || [];
+        this.notStartNum = this.myTasks.filter(item => item.status === 1).length;
+        this.penddingNum = this.myTasks.filter(item => item.status === 2).length;
+        this.completeNum = this.myTasks.filter(item => item.status === 3).length;
+        this.myTasksLoading = false;
+      }
+    });
   }
 
 }

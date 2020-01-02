@@ -4,29 +4,6 @@ nav {
   width: 100%;
   padding: 10px;
 
-  .header {
-    font-size: 18px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    // border-bottom: 1px solid #eeeeee;
-
-    img {
-      cursor: pointer;
-      border: 1px solid #eeeeee;
-      width: 60px;
-      height: 60px;
-      display: inline-block;
-      border-radius: 50%;
-      margin: 0 5px;
-    }
-    p {
-      margin-top: 5px;
-      font-size: 14px;
-    }
-  }
-
   .project-search {
     margin: 10px 0;
   }
@@ -37,32 +14,6 @@ nav {
       justify-content: space-between;
       align-items: center;
     }
-  }
-
-}
-
-.operate {
-  display: flex;
-  flex-wrap: wrap;
-  width: 160px;
-  text-align: center;
-  padding: 10px 20px;
-  position: relative;
-  line-height: 20px;
-  color: #666;
-  align-items: center;
-  cursor: pointer;
-  text-decoration: none;
-  margin: 0 -16px;
-
-  i {
-    cursor: pointer;
-    margin-right: 10px;
-    color: #aaa;
-  }
-
-  &:hover {
-    background-color: #f3f3f3;
   }
 }
 

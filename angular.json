@@ -34,6 +34,7 @@
             ],
             "styles": [
               "src/styles.scss",
+              "src/assets/iconfont/iconfont.css",
               "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": []

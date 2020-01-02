@@ -23,17 +23,16 @@ export class NavComponent implements OnInit {
 
   name = '';
 
-  userInfo: any;
-
-  visible = false;
-
-  navList: any[] = [
+  navListTop: any[] = [
     {
       name: '我的任务',
       icon: 'smile',
       url: 'my',
       selected: false
     },
+  ];
+
+  navListBottom: any[] = [
     {
       name: '日程',
       icon: 'calendar',
@@ -56,7 +55,7 @@ export class NavComponent implements OnInit {
     this.store.dispatch(new LoadProjectList(String(this.name)));
     this.store.dispatch(new LoadMemberList());
     this.store.dispatch(new LoadScheduleList());
-    const projectList$ = this.store
+    this.store
       .pipe(
         map(data => data.projectState.projectList)
       )
@@ -71,7 +70,8 @@ export class NavComponent implements OnInit {
             }
           });
         } else {
-          this.navList.map(item => {
+          const navList = [...this.navListTop, ...this.navListBottom];
+          navList.map(item => {
             if (item.url === this.params[2]) {
               item.selected = true;
             } else {
@@ -79,13 +79,6 @@ export class NavComponent implements OnInit {
             }
           });
         }
-      });
-    const userInfo$ = this.store
-      .pipe(
-        map(data => data.userState.userInfo)
-      )
-      .subscribe(res => {
-        this.userInfo = res;
       });
   }
 
@@ -101,23 +94,6 @@ export class NavComponent implements OnInit {
     this.store.dispatch(new LoadProjectList(String(this.name)));
   }
 
-  projectAdd() {
-    this.visible = !this.visible;
-    const modal = this.modalService.create({
-      nzTitle: '新建项目',
-      nzContent: ProjectAddComponent,
-      nzComponentParams: {
-        title: '新建项目'
-      },
-      nzFooter: null,
-      nzWidth: 840,
-    });
-    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
-    modal.afterClose.subscribe(res => {
-      if (res && res.result) { }
-    });
-  }
-
   deleteProject(id, name) {
     this.modalService.confirm({
       nzTitle: '警告',
@@ -127,30 +103,5 @@ export class NavComponent implements OnInit {
       nzOnOk: () => this.store.dispatch(new DeleteProject(id)),
       nzCancelText: '取消',
     });
-  }
-
-  updateInfo() {
-    this.visible = !this.visible;
-    const modal = this.modalService.create({
-      nzTitle: '修改信息',
-      nzContent: UpdateInfoComponent,
-      nzComponentParams: {
-        title: '修改信息'
-      },
-      nzFooter: null,
-      nzWidth: 540,
-    });
-    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
-    modal.afterClose.subscribe(res => {
-      if (res && res.result) {
-        // this.getProjects();
-      }
-    });
-  }
-
-  logout() {
-    this.visible = !this.visible;
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
   }
 }

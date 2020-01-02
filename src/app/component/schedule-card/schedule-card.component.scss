@@ -1,0 +1,69 @@
+.schedule-card {
+  border: 1px solid #eeeeee;
+  border-radius: 4px;
+  height: 110px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: 10px 0;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, .1);
+
+  &:hover {
+    box-shadow: 0 2px 13px 1px rgba(0, 0, 0, .15);
+  }
+
+  .title {
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .mark {
+      position: absolute;
+      left: 8px;
+      top: -8px;
+    }
+
+    h2 {
+      width: 60%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 0;
+      color: #22d7bb;
+      padding-left: 5px;
+      text-align: left;
+    }
+
+    .time {
+        font-size: 13px;
+        color: #bbbbbb;
+        i {
+            color: #f961bf;
+        }
+    }
+  }
+
+  .line {
+    margin: 5px 0 8px 0;
+    width: 98%;
+    height: 0;
+    border-top: solid 1px #eee;
+  }
+
+  .content {
+    flex: 1;
+    width: 100%;
+    text-align: left;
+    overflow: hidden;
+    padding-left: 5px;
+  }
+}

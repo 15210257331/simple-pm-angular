@@ -8,6 +8,8 @@ import { ShareModule } from 'src/app/share.module';
 
 @NgModule({
   declarations: [MyComponent],
+  entryComponents: [
+  ],
   imports: [
     CommonModule,
     ShareModule,

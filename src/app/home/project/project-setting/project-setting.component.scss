@@ -46,6 +46,7 @@
       background-color: white;
       padding: 25px;
       height: 100%;
+
       .form-item {
         min-height: 35px;
         width: 70%;
@@ -53,25 +54,35 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
+
         label {
           margin-right: 20px;
           min-width: 65px;
           text-align: right;
+        }
+
+        img {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          border: 1px solid #eee;
+          margin: 2px 4px;
         }
       }
     }
 
     .member {
       width: 100%;
+
       thead {
         background-color: aliceblue;
       }
-  
+
       tbody tr:hover {
         background-color: honeydew;
         cursor: pointer;
       }
-  
+
       th,
       td {
         text-align: left;
@@ -81,12 +92,12 @@
         line-height: 29px;
         overflow: hidden;
       }
-  
+
       th {
         color: #909399;
         border-bottom: 1px solid rgb(235, 238, 245);
       }
-  
+
       td {
         color: #909399;
         height: 65px;

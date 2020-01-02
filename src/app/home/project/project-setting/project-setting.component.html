@@ -25,9 +25,8 @@
       <div class="form">
         <div class="form-item">
           <label for="">项目成员:</label>
-          <app-avatar-show *ngFor="let item of projectDetail.member" [avatar]="item?.avatar" [type]="'simple'"
-            nz-tooltip [nzTooltipTitle]="item.nickname">
-          </app-avatar-show>
+          <img *ngFor="let item of projectDetail.member" [src]="item?.avatar" nz-tooltip
+            [nzTooltipTitle]="item.nickname">
         </div>
         <nz-divider></nz-divider>
         <div class="form-item" style="width: 100%;">

@@ -17,6 +17,11 @@ export class TaskService {
     }
 
     // 删除task
+    getTaskDetail(id: any): Observable<any> {
+        return this.http.get(`${API}/task/detail?id=${id}`);
+    }
+
+    // 删除task
     deleteTask(id: any): Observable<any> {
         return this.http.get(`${API}/task/delete?id=${id}`);
     }
@@ -34,6 +39,11 @@ export class TaskService {
     // 添加任务评论
     addTaskComment(data: any): Observable<any> {
         return this.http.post(`${API}/task/comment/add`, data);
+    }
+
+    // 获取我负责的任务
+    getMyTasks(): Observable<any> {
+        return this.http.get(`${API}/task/myTask`);
     }
 }
 

@@ -34,24 +34,30 @@
           margin-left: 10px;
         }
       }
+    }
+
+    .right {
+      width: 76%;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
 
       .tasks {
-        padding: 15px;
+        padding: 5px 15px 15px 15px;
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
         justify-content: flex-start;
+        align-content: flex-start;
+        flex: 1;
+        overflow: auto;
       }
     }
 
     .left {
-      width: 76%;
-      margin-right: 15px;
-      background-color: white;
-    }
-
-    .right {
       width: 24%;
+      margin-right: 15px;
       display: flex;
       flex-direction: column;
 
@@ -80,8 +86,17 @@
       .schedule {
         background-color: white;
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        overflow: auto;
+
         div {
-            padding: 15px;
+          text-align: center;
+          padding: 0 10px 10px 10px;
+          width: 100%;
+          overflow: auto;
         }
       }
     }

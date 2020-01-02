@@ -1,27 +1,5 @@
 <nav>
-  <div class="header">
-    <app-avatar-show [avatar]="userInfo?.avatar" [name]="userInfo.nickname" nz-popover
-      [nzPopoverContent]="contentTemplate" [(nzVisible)]="visible" nzPopoverTrigger="click"
-      nzPopoverPlacement="rightTop"></app-avatar-show>
-    <ng-template #contentTemplate>
-      <li class="operate" (click)="projectAdd()">
-        <i nz-icon nzType="folder-add" nzTheme="fill"></i>
-        <span>新建项目</span>
-      </li>
-      <li class="operate" (click)="updateInfo()">
-        <i nz-icon nzType="setting" nzTheme="fill"></i>
-        <span>账号资料设置</span>
-      </li>
-      <li class="operate" (click)="updateInfo()">
-        <i nz-icon nzType="setting" nzTheme="fill"></i>
-        <span>皮肤主题设置</span>
-      </li>
-      <li class="operate" (click)="logout()">
-        <i nz-icon nzType="stop" nzTheme="fill"></i>
-        <span>退出登录</span>
-      </li>
-    </ng-template>
-  </div>
+  <app-nav-header></app-nav-header>
   <div class="project-search">
     <nz-input-group [nzSuffix]="suffixIconSearch">
       <input type="text" nz-input placeholder="搜索项目" [(ngModel)]="name" (keyup.enter)="searchProject()" />
@@ -30,6 +8,9 @@
       <i nz-icon nzType="search" nzTheme='outline' (click)="searchProject()"></i></ng-template>
   </div>
   <ul class="project-list" nz-menu [nzMode]="'inline'">
+    <li nz-menu-item *ngFor="let item of navListTop;" [nzSelected]="item.selected" (click)="selectOther(item.url)">
+      <span title><i nz-icon [nzType]="item.icon" nzTheme="twotone"></i><span>{{item.name}}</span></span>
+    </li>
     <li nz-submenu [nzOpen]="true">
       <span title><i nz-icon nzType="folder" nzTheme="twotone"></i><span>我的项目</span></span>
       <ul>
@@ -46,7 +27,7 @@
         </li>
       </ul>
     </li>
-    <li nz-menu-item *ngFor="let item of navList;" [nzSelected]="item.selected" (click)="selectOther(item.url)">
+    <li nz-menu-item *ngFor="let item of navListBottom;" [nzSelected]="item.selected" (click)="selectOther(item.url)">
       <span title><i nz-icon [nzType]="item.icon" nzTheme="twotone"></i><span>{{item.name}}</span></span>
     </li>
   </ul>

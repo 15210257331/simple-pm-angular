@@ -2,37 +2,20 @@
   <app-header [icon]="'smile'" [title]="'我的任务'"></app-header>
   <div class="my-content">
     <div class="left">
-      <p class="title">
-        <i nz-icon nzType="user" nzTheme="outline"></i>
-        <span>我的任务</span>
-      </p>
-      <div class="tasks">
-        <nz-card style="width:300px;margin: 10px 0 0 10px;" *ngFor="let item of myTasks" [nzHoverable]="true"
-          nzTitle="Card title" [nzExtra]="extraTemplate">
-          <p>Card content</p>
-          <p>Card content</p>
-          <p>Card content</p>
-        </nz-card>
-        <ng-template #extraTemplate>
-          <a>More</a>
-        </ng-template>
-      </div>
-    </div>
-    <div class="right">
       <div class="static">
         <li>
-          <p style="color: #484848">5</p>
+          <p style="color: #ff5b57">{{notStartNum}}</p>
+          <span>未开始</span>
+        </li>
+        <nz-divider nzType="vertical"></nz-divider>
+        <li>
+          <p style="color: #484848">{{completeNum}}</p>
           <span>已完成</span>
         </li>
         <nz-divider nzType="vertical"></nz-divider>
         <li>
-          <p style="color: #888">5</p>
+          <p style="color: #888">{{penddingNum}}</p>
           <span>进行中</span>
-        </li>
-        <nz-divider nzType="vertical"></nz-divider>
-        <li>
-          <p style="color: #ff5b57">0</p>
-          <span>延期</span>
         </li>
       </div>
       <div class="schedule">
@@ -41,12 +24,22 @@
           <span>我的日程</span>
         </p>
         <div>
-          <nz-timeline>
-            <nz-timeline-item *ngFor="let item of mySchedule">
-              <span>{{ item.name }}({{item.startTime}})</span>
-            </nz-timeline-item>
-          </nz-timeline>
+          <app-schedule-card *ngFor="let item of mySchedule;" [data]="item">
+          </app-schedule-card>
+          <nz-spin nzSimple *ngIf="myScheduleLoading"></nz-spin>
+          <nz-empty *ngIf="mySchedule.length === 0 && !myScheduleLoading"></nz-empty>
         </div>
+      </div>
+    </div>
+    <div class="right">
+      <p class="title">
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+        <span>我的任务</span>
+      </p>
+      <div class="tasks">
+        <app-task-card *ngFor="let item of myTasks;" [data]="item"></app-task-card>
+        <nz-spin nzSimple *ngIf="myTasksLoading"></nz-spin>
+        <nz-empty *ngIf="myTasks.length === 0 && !myTasksLoading"></nz-empty>
       </div>
     </div>
   </div>
