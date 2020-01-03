@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { Appstate, LoadUserInfo, LoadProjectList, DeleteProject, LoadMemberList, LoadScheduleList } from '../../store';
 import { map } from 'rxjs/operators';
 import { UpdateInfoComponent } from 'src/app/home/nav/update-info/update-info.component';
+import { SocketService } from '../../service/socket.service';
 
 
 
@@ -43,10 +44,8 @@ export class NavComponent implements OnInit {
 
   constructor(
     private modalService: NzModalService,
-    private projectService: ProjectService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private store: Store<Appstate>
+    private store: Store<Appstate>,
   ) { }
 
   ngOnInit() {

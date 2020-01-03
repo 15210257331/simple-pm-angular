@@ -14,23 +14,33 @@
             <nz-badge nzStatus="error"></nz-badge>
             <span>{{item.name}}</span>
             <ng-template #scheduleContent>
-              <p style="max-width: 300px;">{{item.content}}</p>
-              <p>开始时间: {{item.startTime}}</p>
-              <p>结束时间: {{item.endTime}}</p>
-              <p>发起人: {{item.organizer.nickname}}</p>
-              <p>
-                <span>参与人:</span>
-                <span *ngFor="let sonItem of item.participant">{{sonItem.nickname}}、</span>
-              </p>
-              <nz-divider></nz-divider>
-              <p style="text-align: right;">
-                <button nz-button nzSize="small" (click)="deleteSchedule(item._id)" nzType="danger" nzGhost>删除日程</button>
-              </p>
+              <div class="schedule">
+                <div class="option">
+                  <p>{{item.name}}</p>
+                  <div>
+                    <button nz-button nzSize="small" nzType="primary">参加</button>
+                    <button nz-button nzSize="small" nzType="danger">拒绝</button>
+                    <button nz-button nzSize="small" (click)="deleteSchedule(item._id)" nzType="danger"
+                      nzGhost>删除</button>
+                  </div>
+                </div>
+                <p><span>详情:</span><span>{{item.content}}</span></p>
+                <p><span>开始时间:</span><span>{{item.startTime}}</span></p>
+                <p><span>结束时间:</span><span>{{item.endTime}}</span></p>
+                <p>
+                  <span>发起人:</span>
+                  <img class="avatar" [src]="item.organizer.avatar">
+                </p>
+                <p>
+                  <span>参与人:</span>
+                  <img class="avatar" *ngFor="let sonItem of item.participant" nz-tooltip
+                    [nzTooltipTitle]="sonItem.nickname" [src]="sonItem.avatar">
+                </p>
+              </div>
             </ng-template>
           </li>
         </ng-container>
       </ul>
     </div>
   </ng-template>
-
 </div>

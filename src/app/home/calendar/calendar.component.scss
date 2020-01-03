@@ -66,3 +66,22 @@
     background-color: white;
   }
   
+  .schedule {
+    width: 370px;
+    .option {
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      p {
+        flex: 1;
+        font-size: 17px;
+        font-weight: 500;
+        color:#22d7bb;
+        margin-bottom: 0;
+      }
+      button {
+        margin: 0 5px;
+      }
+    }
+  }

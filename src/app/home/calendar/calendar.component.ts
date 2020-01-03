@@ -40,9 +40,6 @@ export class CalendarComponent implements OnInit {
           });
         });
       });
-    this.socketService.getMessage('remind').subscribe(res => {
-      this.notification.create('info', 'sucess', res.data);
-    });
   }
 
   addSchedule(date: any) {

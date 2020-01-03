@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { Appstate, AddTaskSuccess, LoadScheduleSuccess, AddScheduleSuccess } from '../../../store';
 import { ScheduleService } from '../../../service/schedule.service';
 import { map } from 'rxjs/operators';
+import { SocketService } from '../../../service/socket.service';
 
 
 @Component({
@@ -22,10 +23,12 @@ export class CalendarAddComponent implements OnInit {
 
   memberList: any[] = [];
 
+  userId;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private taskService: TaskService,
+    private socketService: SocketService,
     private notification: NzNotificationService,
     private modal: NzModalRef,
     private store: Store<Appstate>,
@@ -39,8 +42,7 @@ export class CalendarAddComponent implements OnInit {
       )
       .subscribe(res => {
         this.memberList = res.memberList;
-        const userId = res.userInfo._id;
-        this.memberList = this.memberList.filter(item => item._id !== userId);
+        this.userId = res.userInfo._id;
       });
     this.form = this.fb.group({
       name: ['', [Validators.required]],
@@ -57,7 +59,8 @@ export class CalendarAddComponent implements OnInit {
       if (res.code === 200) {
         this.modal.destroy({ result: true });
         this.store.dispatch(new AddScheduleSuccess(res));
-        this.notification.create('success', 'sucess', res.msg);
+        this.socketService.sendMessage('setRemind', this.userId);
+        this.notification.create('sucess', 'sucess', res.msg);
       }
     });
   }

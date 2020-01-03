@@ -5,7 +5,8 @@ import { TaskService } from '../../service/task.service';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { TaskDetailComponent } from '../project/task-detail/task-detail.component';
-import { NzModalService } from 'ng-zorro-antd';
+import { NzModalService, NzNotificationService } from 'ng-zorro-antd';
+import { SocketService } from '../../service/socket.service';
 
 @Component({
   selector: 'app-my',

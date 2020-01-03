@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import io from 'socket.io-client';
 import { environment } from '../../environments/environment';
 
-const API: string = environment.API;
+// const API: string = environment.API;
+
+const API = 'http://127.0.0.1:4000';
 
 @Injectable()
 export class SocketService {
