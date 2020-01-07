@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterContentInit, AfterViewInit } from '@angular/core';
-import { NzModalService } from 'ng-zorro-antd';
+import { NzModalService, NzNotificationService } from 'ng-zorro-antd';
 import { ProjectService } from '../../service/project.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProjectAddComponent } from './project-add/project-add.component';
@@ -46,9 +46,14 @@ export class NavComponent implements OnInit {
     private modalService: NzModalService,
     private router: Router,
     private store: Store<Appstate>,
+    private socketService: SocketService,
+    private notification: NzNotificationService,
   ) { }
 
   ngOnInit() {
+    this.socketService.getMessage('remind').subscribe(res => {
+      this.notification.create('info', '日程提醒', res.data, { nzDuration: 0 });
+    });
     this.params = this.router.url.split('/');
     this.store.dispatch(new LoadUserInfo());
     this.store.dispatch(new LoadProjectList(String(this.name)));

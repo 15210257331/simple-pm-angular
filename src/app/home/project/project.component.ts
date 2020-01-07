@@ -1,10 +1,10 @@
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Component, OnInit, ViewChild, ComponentRef, ViewContainerRef, ComponentFactoryResolver, ComponentFactory } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Appstate, LoadProjectDetail } from '../../store';
 import { TaskKanbanComponent } from './task-kanban/task-kanban.component';
 import { TaskListComponent } from './task-list/task-list.component';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { ProjectOverviewComponent } from './project-overview/project-overview.component';
 import { ProjectSettingComponent } from './project-setting/project-setting.component';
 
@@ -45,10 +45,10 @@ export class ProjectComponent implements OnInit {
     private resolver: ComponentFactoryResolver,
     private activatedRoute: ActivatedRoute,
     private store: Store<Appstate>,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    console.log(this.selectTab);
     this.activatedRoute.params.subscribe(data => {
       if (data.id) {
         const projectId = data.id;

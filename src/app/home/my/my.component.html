@@ -26,8 +26,7 @@
         <div>
           <app-schedule-card *ngFor="let item of mySchedule;" [data]="item">
           </app-schedule-card>
-          <nz-spin nzSimple *ngIf="myScheduleLoading"></nz-spin>
-          <nz-empty *ngIf="mySchedule.length === 0 && !myScheduleLoading"></nz-empty>
+          <nz-empty *ngIf="mySchedule.length === 0"></nz-empty>
         </div>
       </div>
     </div>
@@ -38,8 +37,7 @@
       </p>
       <div class="tasks">
         <app-task-card *ngFor="let item of myTasks;" [data]="item"></app-task-card>
-        <nz-spin nzSimple *ngIf="myTasksLoading"></nz-spin>
-        <nz-empty *ngIf="myTasks.length === 0 && !myTasksLoading"></nz-empty>
+        <nz-empty *ngIf="myTasks.length === 0"></nz-empty>
       </div>
     </div>
   </div>

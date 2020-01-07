@@ -42,9 +42,10 @@ export class MyComponent implements OnInit {
         map(data => data.scheduleState)
       )
       .subscribe(res => {
-        this.mySchedule = res;
-        this.mySchedule.map(item => {
-          item.startTime = moment(item.startTime).format('YYYY-MM-DD');
+        this.mySchedule = res.filter(item => item.startTime > Number(moment().format('x'))).map(item => {
+          return Object.assign({}, item, {
+            startTime: moment(item.startTime).format('MM-DD HH:mm:ss')
+          });
         });
         this.myScheduleLoading = false;
       });

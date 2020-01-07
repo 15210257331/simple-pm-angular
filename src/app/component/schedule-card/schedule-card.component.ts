@@ -12,18 +12,12 @@ export class ScheduleCardComponent implements OnInit {
 
   color: any;
 
+  colors: string[] = ['#f50', '#2db7f5', '#87d068', 'orange', '#108ee9'];
+
   constructor() { }
 
   ngOnInit() {
-    const startTime = moment(this.data.startTime).format('x');
-    const now = moment().format('x');
-    if (Number(startTime) - Number(now) < 1000 * 60 * 60 * 24) {
-      this.color = 'rgb(250, 90, 85)';
-    } else if (Number(startTime) - Number(now) >= 1000 * 60 * 60 * 24) {
-      this.color = '#348FE4';
-    } else {
-      this.color = 'greed';
-    }
+    const index = Math.floor(Math.random() * 5);
+    this.color = this.colors[index];
   }
-
 }

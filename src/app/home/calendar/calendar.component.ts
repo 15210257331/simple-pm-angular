@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { ScheduleService } from '../../service/schedule.service';
 import { CalendarAddComponent } from './calendar-add/calendar-add.component';
 import { SocketService } from '../../service/socket.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -34,8 +34,8 @@ export class CalendarComponent implements OnInit {
       .subscribe(res => {
         this.schedulekList = res.map(item => {
           return Object.assign({}, item, {
-            startTime: new Date(item.startTime).toLocaleString(),
-            endTime: new Date(item.endTime).toLocaleString(),
+            startTime: moment(item.startTime).format('YYYY-MM-DD HH:mm:ss'),
+            endTime: moment(item.endTime).format('YYYY-MM-DD HH:mm:ss'),
             showStartTime: new Date(item.startTime).toLocaleDateString(),
           });
         });

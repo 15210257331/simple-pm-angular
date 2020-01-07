@@ -47,6 +47,8 @@ export class ProjectSettingComponent implements OnInit {
 
   allMember: any[] = [];
 
+  visible = false;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,

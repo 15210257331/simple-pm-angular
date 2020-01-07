@@ -14,23 +14,9 @@ import { map } from 'rxjs/operators';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private socketService: SocketService,
-    private notification: NzNotificationService,
-    private store: Store<Appstate>,
   ) { }
 
   ngOnInit() {
-    this.store
-      .pipe(
-        map(data => data.userState.userInfo)
-      )
-      .subscribe(res => {
-        if (res._id) {
-          this.socketService.sendMessage('setRemind', res._id);
-        }
-      });
-    this.socketService.getMessage('remind').subscribe(res => {
-      this.notification.create('success', '日程提醒', res.data, { nzDuration: 0 });
-    });
+
   }
 }

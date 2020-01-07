@@ -8,7 +8,7 @@ import { Appstate, AddTaskSuccess, LoadScheduleSuccess, AddScheduleSuccess } fro
 import { ScheduleService } from '../../../service/schedule.service';
 import { map } from 'rxjs/operators';
 import { SocketService } from '../../../service/socket.service';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-calendar-add',
@@ -54,13 +54,16 @@ export class CalendarAddComponent implements OnInit {
   }
 
   submitForm() {
-    const data = Object.assign({}, this.form.value, {});
+    const data = Object.assign({}, this.form.value, {
+      startTime: moment(this.form.value.startTime).format('x'),
+      endTime: moment(this.form.value.endTime).format('x')
+    });
     this.scheduleService.addSchedule(data).subscribe(res => {
       if (res.code === 200) {
         this.modal.destroy({ result: true });
         this.store.dispatch(new AddScheduleSuccess(res));
         this.socketService.sendMessage('setRemind', this.userId);
-        this.notification.create('sucess', 'sucess', res.msg);
+        this.notification.create('success', 'success', res.msg);
       }
     });
   }
