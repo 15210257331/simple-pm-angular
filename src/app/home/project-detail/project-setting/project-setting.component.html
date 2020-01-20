@@ -1,0 +1,70 @@
+<div class="setting">
+  <div class="setting-header">
+    <ng-container *ngFor="let item of data;">
+      <span [class.select]="item.value === selectTab" (click)="selectTab = item.value">{{item.title}}</span>
+      <nz-divider nzType="vertical"></nz-divider>
+    </ng-container>
+  </div>
+  <div class="setting-content">
+    <ng-container *ngIf="selectTab === 1">
+      <div class="form">
+        <div class="form-item">
+          <label for="">项目名称:</label>
+          <input nz-input [(ngModel)]="projectModel.name" name="projectName" />
+        </div>
+        <div class="form-item">
+          <label for="">描述:</label>
+          <textarea nz-input [(ngModel)]="projectModel.content" name="projectContent"></textarea>
+        </div>
+        <div style="padding-left: 85px" class="form-item">
+          <button nz-button nzType="primary" (click)="updateProject()">提交</button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="selectTab === 2">
+      <div class="form">
+        <div class="form-item">
+          <label for="">项目成员:</label>
+          <img *ngFor="let item of projectDetail.member" [src]="item?.avatar" nz-tooltip
+            [nzTooltipTitle]="item.nickname">
+          <span class="add" nz-popover [nzPopoverContent]="contentTemplate" [(nzVisible)]="visible"
+            nzPopoverTrigger="click" nzPopoverPlacement="bottom" (click)="visible = !visible"></span>
+          <ng-template #contentTemplate>
+            <div class="member">
+              <li *ngFor="let item of allMember">
+                <label nz-checkbox></label>
+                <img class="avatar" [src]="item.avatar" alt="">
+                <span>{{item.nickname}}</span>
+              </li>
+            </div>
+          </ng-template>
+        </div>
+        <nz-divider></nz-divider>
+        <div class="form-item" style="width: 100%;">
+          <label style="align-self: flex-start; line-height: 45px;" for="">全部成员:</label>
+          <img *ngFor="let item of allMember" [src]="item?.avatar" nz-tooltip [nzTooltipTitle]="item.nickname">
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="selectTab === 3">
+      <div class="form">
+        <div class="form-item">
+          <label for="">标签:</label>
+          <nz-tag *ngFor="let item of projectDetail.tag" [nzColor]="item.color">{{item.name}}</nz-tag>
+        </div>
+        <nz-divider></nz-divider>
+        <div class="form-item">
+          <label for="">标签名称:</label>
+          <input nz-input [(ngModel)]="tagModel.name" name="projectName" />
+        </div>
+        <div class="form-item">
+          <label for="">颜色:</label>
+          <app-color-list (select)="tagModel.color = $event"></app-color-list>
+        </div>
+        <div style="padding-left: 85px" class="form-item">
+          <button nz-button nzType="primary" (click)="addTag()">确定</button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
