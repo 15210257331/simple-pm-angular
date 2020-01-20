@@ -1,4 +1,4 @@
-.task {
+.project {
   position: relative;
   overflow: hidden;
   height: 100%;
@@ -7,100 +7,55 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  padding: 20px;
 
-  .task-view {
-    height: 50px;
+  .project-search {
+    align-self: flex-start;
+  }
+
+  .project-list {
     width: 100%;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
-    background-color: white;
-    border-bottom: 1px solid #dbdbdb;
-    margin-bottom: 0;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
 
-    .title,
-    .setting {
-      line-height: 50px;
-      height: 50px;
-      margin: 0 20px;
-      font-size: 17px;
-
-      span {
-        margin-left: 10px;
-      }
-    }
-
-    .setting {
-      flex: none !important;
+    .project-item {
+      background-color: white;
+      border: 1px solid #eeeeee;
+      border-radius: 4px;
+      margin: 10px 0 0 10px;
       cursor: pointer;
-
-      li {
-        margin: 0 !important;
-      }
-
-      span {
-        margin-left: 5px;
-      }
-    }
-
-    .task-view-item {
-      flex: 1;
+      box-shadow: 0 1px 8px 0 rgba(0, 0, 0, .1);
       display: flex;
-      justify-content: center;
+      width: 280px;
+      flex-direction: column;
       align-items: center;
-      height: 50px;
-      margin-bottom: 0;
 
-      li {
-        margin: 0 30px;
-        text-align: center;
+      &:hover {
+        box-shadow: 0 2px 13px 1px rgba(0, 0, 0, .15);
+      }
+
+      .top,
+      .bottom {
+        padding-left: 15px;
+        width: 100%;
         height: 35px;
-        padding: 0 10px;
         line-height: 35px;
-        cursor: pointer;
-        font-size: 15px;
-        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
 
-        &:hover {
-          color: deepskyblue;
-
-          &::after {
-            content: "";
-            display: inline-block;
-            position: absolute;
-            height: 3px;
-            width: 100%;
-            left: 0;
-            bottom: -8px;
-            border-radius: 10px;
-            background-color: deepskyblue;
-          }
+      .middle {
+        width: 100%;
+        height: 140px;
+        img {
+          width: 100%;
+          height: 100%;
         }
       }
     }
-
-
-
-    .select {
-      color: deepskyblue;
-
-      &::after {
-        content: "";
-        display: inline-block;
-        position: absolute;
-        height: 3px;
-        width: 100%;
-        left: 0;
-        bottom: -8px;
-        border-radius: 10px;
-        background-color: deepskyblue;
-      }
-    }
-  }
-
-  .task-view-detail {
-    flex: 1;
-    width: 100%;
-    overflow: auto;
   }
 }

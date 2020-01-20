@@ -1,21 +1,20 @@
-<div class="task">
-  <div class="task-view">
-    <ul class="title">
-      <i nz-icon nzType="folder-open" nzTheme="twotone"></i>
-      <span>{{projectName$ | async}}</span>
-    </ul>
-    <ul class="task-view-item">
-      <li [class.select]="item.value === selectTab" *ngFor="let item of viewList;" (click)="tabChange(item.value)">
-        {{item.title}}</li>
-    </ul>
-    <ul class="task-view-item setting">
-      <li [class.select]="99 === selectTab" (click)="projectSetting()">
-        <i nz-icon nzType="setting" nzTheme="twotone"></i>
-        <span>设置</span>
-      </li>
-    </ul>
+<div class="project">
+  <div class="project-search">
+    <nz-input-group [nzSuffix]="suffixIconSearch">
+      <input type="text" nz-input placeholder="搜索项目" [(ngModel)]="name" (keyup.enter)="searchProject()" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search" nzTheme='outline' (click)="searchProject()"></i></ng-template>
   </div>
-  <div class="task-view-detail">
-    <ng-template #viewDetail></ng-template>
+  <div class="project-list">
+    <div class="project-item" *ngFor="let item of projectList;" (click)="projectDetail(item._id)">
+      <div class="top">{{item.name}}</div>
+      <div class="middle">
+        <img src="assets/imgs/project-1.jpg" alt="">
+      </div>
+      <div class="bottom">{{item.content}}</div>
+      <div class="option">
+      </div>
+    </div>
   </div>
 </div>

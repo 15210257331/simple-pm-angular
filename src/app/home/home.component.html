@@ -1,3 +1,46 @@
+<!-- <div class="home">
+  <header class="header">
+    <div class="header-left">
+      <i nz-icon nzType="home" nzTheme="outline" (click)="goProject()"></i>
+      <i nz-icon nzType="right" nzTheme="outline"></i>
+      <span>{{projectName$ | async}}</span>
+    </div>
+    <div class="header-center">
+
+    </div>
+    <div class="header-right">
+      <span>我的</span>
+      <i nz-icon nzType="calendar" nzTheme="twotone"></i>
+      <i nz-icon nzType="message" nzTheme="twotone"></i>
+      <img nz-popover [nzPopoverContent]="contentTemplate" [(nzVisible)]="visible" nzPopoverTrigger="click"
+        nzPopoverPlacement="bottom" [src]="userInfo?.avatar">
+    </div>
+  </header>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<ng-template #contentTemplate>
+  <li class="operate" (click)="projectAdd()">
+    <i nz-icon nzType="folder-add" nzTheme="fill"></i>
+    <span>新建项目</span>
+  </li>
+  <li class="operate" (click)="updateInfo()">
+    <i nz-icon nzType="setting" nzTheme="fill"></i>
+    <span>账号资料设置</span>
+  </li>
+  <li class="operate" (click)="updateInfo()">
+    <i nz-icon nzType="setting" nzTheme="fill"></i>
+    <span>皮肤主题设置</span>
+  </li>
+  <li class="operate" (click)="logout()">
+    <i nz-icon nzType="stop" nzTheme="fill"></i>
+    <span>退出登录</span>
+  </li>
+</ng-template> -->
+
+
 <div class="home">
   <div class="nav">
     <app-nav></app-nav>

@@ -1,24 +1,102 @@
-nav {
-  position: relative;
-  height: 100%;
+.nav {
   width: 100%;
-  padding: 10px;
+  height: 100%;
+  background-color: #484848;
+  border-right: 1px solid #dbdbdb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 25px;
 
-  .project-search {
-    margin: 10px 0;
+  .header {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+    cursor: pointer;
   }
 
-  .project-list {
-    .project-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+  ul {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    li {
+      width: 100%;
+      height: 70px;
+      text-align: center;
+      position: relative;
+      color: white;
+      cursor: pointer;
+
+      i {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        font-size: 24px;
+        transform: translate(0, 5px);
+        transition: all 0.3s linear;
+      }
+
+      span {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 25px;
+        left: 0;
+        top: 35px;
+        font-size: 14px;
+        transition: opacity 0.1s linear, transform 0.3s linear;
+        transform: translate(0, 5px);
+      }
+    }
+
+    li:hover {
+      background-color: #383838;
+
+      i,
+      span {
+        transform: translate(0, 0);
+      }
+
+      span {
+        opacity: 1;
+      }
     }
   }
 }
 
-:host ::ng-deep .ant-menu-inline,
-.ant-menu-vertical,
-.ant-menu-vertical-left {
-  border-right: none;
+.title {
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+.operate {
+  display: flex;
+  flex-wrap: wrap;
+  width: 220px;
+  text-align: left;
+  padding: 10px 20px;
+  position: relative;
+  line-height: 20px;
+  color: #666;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 0 -16px;
+
+  i {
+    margin-right: 10px;
+    color: #aaa;
+  }
+}
+
+li:hover {
+  background-color: #f3f3f3;
 }

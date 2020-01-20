@@ -1,11 +1,6 @@
 <div class="header">
-  <img [src]="userInfo?.avatar">
-  <div>
-    <p nz-popover [nzPopoverContent]="contentTemplate" [(nzVisible)]="visible" nzPopoverTrigger="click"
-      nzPopoverPlacement="bottom">{{userInfo.nickname}}(管理员)</p>
-    <nz-badge style="margin-left: 10px" nzStatus="success"></nz-badge>
-    <span>在线</span>
-  </div>
+  <img nz-popover [nzPopoverContent]="contentTemplate" [(nzVisible)]="visible" nzPopoverTrigger="click"
+    nzPopoverPlacement="bottom" [src]="userInfo?.avatar">
   <ng-template #contentTemplate>
     <li class="operate" (click)="projectAdd()">
       <i nz-icon nzType="folder-add" nzTheme="fill"></i>

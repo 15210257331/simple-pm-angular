@@ -24,6 +24,31 @@ export class NavComponent implements OnInit {
 
   name = '';
 
+  userInfo: any;
+
+  visible = false;
+
+  navList: any[] = [
+    {
+      name: '项目',
+      icon: 'iconfont icontask',
+      url: 'project',
+      selected: false
+    },
+    {
+      name: '日程',
+      icon: 'iconfont iconcalendar',
+      url: 'calendar',
+      selected: false
+    },
+    {
+      name: '消息',
+      icon: 'iconfont iconmessage2',
+      url: 'calendar',
+      selected: false
+    },
+  ];
+
   navListTop: any[] = [
     {
       name: '我的任务',
@@ -59,6 +84,13 @@ export class NavComponent implements OnInit {
     this.store.dispatch(new LoadProjectList(String(this.name)));
     this.store.dispatch(new LoadMemberList());
     this.store.dispatch(new LoadScheduleList());
+    this.store
+      .pipe(
+        map(data => data.userState.userInfo)
+      )
+      .subscribe(res => {
+        this.userInfo = res;
+      });
     this.store
       .pipe(
         map(data => data.projectState.projectList)
@@ -107,5 +139,47 @@ export class NavComponent implements OnInit {
       nzOnOk: () => this.store.dispatch(new DeleteProject(id)),
       nzCancelText: '取消',
     });
+  }
+
+  projectAdd() {
+    this.visible = !this.visible;
+    const modal = this.modalService.create({
+      nzTitle: '新建项目',
+      nzContent: ProjectAddComponent,
+      nzComponentParams: {
+        title: '新建项目'
+      },
+      nzFooter: null,
+      nzWidth: 840,
+    });
+    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
+    modal.afterClose.subscribe(res => {
+      if (res && res.result) { }
+    });
+  }
+
+  updateInfo() {
+    this.visible = !this.visible;
+    const modal = this.modalService.create({
+      nzTitle: '修改信息',
+      nzContent: UpdateInfoComponent,
+      nzComponentParams: {
+        title: '修改信息'
+      },
+      nzFooter: null,
+      nzWidth: 540,
+    });
+    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
+    modal.afterClose.subscribe(res => {
+      if (res && res.result) {
+        // this.getProjects();
+      }
+    });
+  }
+
+  logout() {
+    this.visible = !this.visible;
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }

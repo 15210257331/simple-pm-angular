@@ -14,13 +14,18 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'my',
+        redirectTo: 'project',
         pathMatch: 'full'
       },
       {
         path: 'project',
         loadChildren: () => import('./home/project/project.module').then(m => m.ProjectModule),
         data: { title: '项目' }
+      },
+      {
+        path: 'project/:id',
+        loadChildren: () => import('./home/project-detail/project-detail.module').then(m => m.ProjectDetailModule),
+        data: { title: '项目详情' }
       },
       {
         path: 'my',

@@ -1,12 +1,12 @@
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Component, OnInit, ViewChild, ComponentRef, ViewContainerRef, ComponentFactoryResolver, ComponentFactory } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Appstate, LoadProjectDetail } from '../../store';
-import { TaskKanbanComponent } from './task-kanban/task-kanban.component';
-import { TaskListComponent } from './task-list/task-list.component';
+import { Appstate, LoadProjectDetail, LoadProjectList } from '../../store';
+import { TaskKanbanComponent } from '../project-detail/task-kanban/task-kanban.component';
+import { TaskListComponent } from '../project-detail/task-list/task-list.component';
 import { map, filter } from 'rxjs/operators';
-import { ProjectOverviewComponent } from './project-overview/project-overview.component';
-import { ProjectSettingComponent } from './project-setting/project-setting.component';
+import { ProjectOverviewComponent } from '../project-detail/project-overview/project-overview.component';
+import { ProjectSettingComponent } from '../project-detail/project-setting/project-setting.component';
 
 @Component({
   selector: 'app-project',
@@ -15,31 +15,9 @@ import { ProjectSettingComponent } from './project-setting/project-setting.compo
 })
 export class ProjectComponent implements OnInit {
 
-  selectTab = 1;
+  name = '';
 
-  projectName$: any;
-
-  componentRef: ComponentRef<any>;
-
-  @ViewChild('viewDetail', { read: ViewContainerRef, static: true }) commentContainer: ViewContainerRef;
-
-  viewList: any[] = [
-    {
-      title: '看板',
-      value: 1,
-      component: TaskKanbanComponent
-    },
-    {
-      title: '列表',
-      value: 2,
-      component: TaskListComponent
-    },
-    {
-      title: '概览',
-      value: 4,
-      component: ProjectOverviewComponent
-    },
-  ];
+  projectList: any[] = [];
 
   constructor(
     private resolver: ComponentFactoryResolver,
@@ -49,33 +27,17 @@ export class ProjectComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(data => {
-      if (data.id) {
-        const projectId = data.id;
-        this.store.dispatch(new LoadProjectDetail(projectId));
-      }
+    this.store.dispatch(new LoadProjectList(String(this.name)));
+    this.store.pipe(map(data => data.projectState.projectList)).subscribe(res => {
+      this.projectList = res || [];
     });
-    this.projectName$ = this.store
-      .pipe(
-        map(data => data.projectState.projectDetail.name)
-      );
-    this.tabChange(this.selectTab);
   }
 
-  tabChange(value: any) {
-    this.selectTab = value;
-    const selectComponent = this.viewList.filter(item => item.value === this.selectTab)[0];
-    this.createComponent(selectComponent.component);
+  searchProject() {
+    this.store.dispatch(new LoadProjectList(String(this.name)));
   }
 
-  createComponent(component: any) {
-    this.commentContainer.clear();
-    const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(component);
-    this.componentRef = this.commentContainer.createComponent(factory);
-  }
-
-  projectSetting(id, name) {
-    this.selectTab = 99;
-    this.createComponent(ProjectSettingComponent);
+  projectDetail(id) {
+    this.router.navigate([`/home/project/${id}`]);
   }
 }
