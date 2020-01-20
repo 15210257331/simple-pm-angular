@@ -1,46 +1,55 @@
 <div class="calendar">
-  <app-header [icon]="'calendar'" [title]="'日历'"></app-header>
-  <div class="calendar-content">
+  <div class="calendar-left">
+    <div class="calendar-left-top">
+      <nz-calendar [nzFullscreen]="false"></nz-calendar>
+    </div>
+    <div class="schedule-list">
+      <app-schedule-card *ngFor="let item of schedulekList;" [data]="item">
+      </app-schedule-card>
+      <nz-empty *ngIf="schedulekList.length === 0"></nz-empty>
+    </div>
+  </div>
+  <div class="calendar-right">
     <nz-calendar [nzDateFullCell]="dateCellTpl" [(ngModel)]="selectedDate" (nzSelectChange)="selectChange($event)">
     </nz-calendar>
   </div>
-  <ng-template #dateCellTpl let-date>
-    <div class="calendar-cell" (dblclick)="addSchedule(date)">
-      <p>{{date.toLocaleDateString()}}</p>
-      <ul>
-        <ng-container *ngFor="let item of schedulekList;">
-          <li *ngIf="item.showStartTime === date.toLocaleDateString()" nz-popover [nzTitle]="'日程详情'"
-            [nzContent]="scheduleContent" nzTrigger="hover">
-            <nz-badge nzStatus="error"></nz-badge>
-            <span>{{item.name}}</span>
-            <ng-template #scheduleContent>
-              <div class="schedule">
-                <div class="option">
-                  <p>{{item.name}}</p>
-                  <div>
-                    <button nz-button nzSize="small" nzType="primary">参加</button>
-                    <button nz-button nzSize="small" nzType="danger">拒绝</button>
-                    <button nz-button nzSize="small" (click)="deleteSchedule(item._id)" nzType="danger"
-                      nzGhost>删除</button>
-                  </div>
-                </div>
-                <p><span>详情:</span><span>{{item.content}}</span></p>
-                <p><span>开始时间:</span><span>{{item.startTime}}</span></p>
-                <p><span>结束时间:</span><span>{{item.endTime}}</span></p>
-                <p>
-                  <span>发起人:</span>
-                  <img class="avatar" [src]="item.organizer.avatar">
-                </p>
-                <p>
-                  <span>参与人:</span>
-                  <img class="avatar" *ngFor="let sonItem of item.participant" nz-tooltip
-                    [nzTooltipTitle]="sonItem.nickname" [src]="sonItem.avatar">
-                </p>
-              </div>
-            </ng-template>
-          </li>
-        </ng-container>
-      </ul>
-    </div>
-  </ng-template>
 </div>
+<ng-template #dateCellTpl let-date>
+  <div class="calendar-cell" (dblclick)="addSchedule(date)">
+    <p>{{date.toLocaleDateString()}}</p>
+    <ul>
+      <ng-container *ngFor="let item of schedulekList;">
+        <li *ngIf="item.showStartTime === date.toLocaleDateString()" nz-popover [nzTitle]="'日程详情'"
+          [nzContent]="scheduleContent" nzTrigger="hover">
+          <nz-badge nzStatus="error"></nz-badge>
+          <span>{{item.name}}</span>
+          <ng-template #scheduleContent>
+            <div class="schedule">
+              <div class="option">
+                <p>{{item.name}}</p>
+                <div>
+                  <button nz-button nzSize="small" nzType="primary">参加</button>
+                  <button nz-button nzSize="small" nzType="danger">拒绝</button>
+                  <button nz-button nzSize="small" (click)="deleteSchedule(item._id)" nzType="danger"
+                    nzGhost>删除</button>
+                </div>
+              </div>
+              <p><span>详情:</span><span>{{item.content}}</span></p>
+              <p><span>开始时间:</span><span>{{item.startTime}}</span></p>
+              <p><span>结束时间:</span><span>{{item.endTime}}</span></p>
+              <p>
+                <span>发起人:</span>
+                <img class="avatar" [src]="item.organizer.avatar">
+              </p>
+              <p>
+                <span>参与人:</span>
+                <img class="avatar" *ngFor="let sonItem of item.participant" nz-tooltip
+                  [nzTooltipTitle]="sonItem.nickname" [src]="sonItem.avatar">
+              </p>
+            </div>
+          </ng-template>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</ng-template>

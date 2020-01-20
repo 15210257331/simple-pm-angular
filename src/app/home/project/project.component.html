@@ -1,19 +1,23 @@
 <div class="project">
-  <div class="project-search">
-    <nz-input-group [nzSuffix]="suffixIconSearch">
-      <input type="text" nz-input placeholder="搜索项目" [(ngModel)]="name" (keyup.enter)="searchProject()" />
-    </nz-input-group>
-    <ng-template #suffixIconSearch>
-      <i nz-icon nzType="search" nzTheme='outline' (click)="searchProject()"></i></ng-template>
-  </div>
-  <div class="project-list">
-    <div class="project-item" *ngFor="let item of projectList;" (click)="projectDetail(item._id)">
-      <div class="top">{{item.name}}</div>
-      <div class="middle">
-        <img src="assets/imgs/project-1.jpg" alt="">
+  <app-header [icon]="'folder'" [title]="'全部项目'"></app-header>
+  <div class="project-content">
+    <div class="opertion">
+      <input type="text" nz-input placeholder="搜索项目(按enter搜索)" [(ngModel)]="name" (keyup.enter)="searchProject()" />
+      <span>共<b>{{projectList.length}}</b>个项目</span>
+    </div>
+    <div class="project-list">
+      <div class="project-item" *ngFor="let item of projectList;" (click)="projectDetail(item._id)">
+        <span class="star iconfont iconstar"></span>
+        <div class="title">
+          <span>{{item?.name}}</span>
+        </div>
+        <div class="author">
+          <span>{{item?.creater.nickname}}· {{item?.creater.nickname}}</span>
+        </div>
       </div>
-      <div class="bottom">{{item.content}}</div>
-      <div class="option">
+      <div class="add-project" (click)="projectAdd()">
+        <span style="font-size: 25px;" class="iconfont iconplus"></span>
+        <span>创建新项目</span>
       </div>
     </div>
   </div>

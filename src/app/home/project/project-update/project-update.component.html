@@ -1,0 +1,13 @@
+<div class="form">
+  <div class="form-item">
+    <label for="">项目名称:</label>
+    <input nz-input [(ngModel)]="projectModel.name" name="projectName" />
+  </div>
+  <div class="form-item">
+    <label for="">描述:</label>
+    <textarea nz-input [(ngModel)]="projectModel.content" name="projectContent"></textarea>
+  </div>
+  <div style="padding-left: 85px" class="form-item">
+    <button nz-button nzType="primary" (click)="updateProject()">提交</button>
+  </div>
+</div>

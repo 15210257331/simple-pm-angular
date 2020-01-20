@@ -4,9 +4,12 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { ProjectOverviewComponent } from './project-overview/project-overview.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Appstate, LoadProjectDetail } from '../../store';
+import { Appstate, LoadProjectDetail, LoadMemberList } from '../../store';
 import { map } from 'rxjs/operators';
 import { ProjectSettingComponent } from './project-setting/project-setting.component';
+import { NzDrawerService } from 'ng-zorro-antd';
+import { ProjectMemberComponent } from './project-member/project-member.component';
+import { ProjectTagComponent } from './project-tag/project-tag.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -17,7 +20,9 @@ export class ProjectDetailComponent implements OnInit {
 
   selectTab = 1;
 
-  projectName$: any;
+  projectDetail: any;
+
+  memberList: any[] = [];
 
   componentRef: ComponentRef<any>;
 
@@ -45,20 +50,31 @@ export class ProjectDetailComponent implements OnInit {
     private resolver: ComponentFactoryResolver,
     private activatedRoute: ActivatedRoute,
     private store: Store<Appstate>,
-    private router: Router
+    private router: Router,
+    private drawerService: NzDrawerService
   ) { }
 
   ngOnInit() {
+    this.store.dispatch(new LoadMemberList());
     this.activatedRoute.params.subscribe(data => {
       if (data.id) {
         const projectId = data.id;
         this.store.dispatch(new LoadProjectDetail(projectId));
       }
     });
-    this.projectName$ = this.store
+    this.store
       .pipe(
-        map(data => data.projectState.projectDetail.name)
-      );
+        map(data => data.projectState.projectDetail)
+      ).subscribe(res => {
+        this.projectDetail = res;
+      });
+    this.store
+      .pipe(
+        map(data => data.userState)
+      )
+      .subscribe(res => {
+        this.memberList = res.memberList || [];
+      });
     this.tabChange(this.selectTab);
   }
 
@@ -77,6 +93,52 @@ export class ProjectDetailComponent implements OnInit {
   projectSetting(id, name) {
     this.selectTab = 99;
     this.createComponent(ProjectSettingComponent);
+  }
+
+  openMember(): void {
+    const drawerRef = this.drawerService.create({
+      nzTitle: '项目成员',
+      nzContent: ProjectMemberComponent,
+      nzMaskClosable: false,
+      nzWidth: 300,
+      nzContentParams: {
+        data: this.memberList
+      }
+    });
+
+    drawerRef.afterOpen.subscribe(() => {
+      console.log('Drawer(Component) open');
+    });
+
+    drawerRef.afterClose.subscribe(data => {
+      console.log(data);
+      if (typeof data === 'string') {
+
+      }
+    });
+  }
+
+  openMenu(): void {
+    const drawerRef = this.drawerService.create({
+      nzTitle: '菜单',
+      nzContent: ProjectTagComponent,
+      nzMaskClosable: false,
+      nzWidth: 300,
+      nzContentParams: {
+        data: this.projectDetail.tag
+      }
+    });
+
+    drawerRef.afterOpen.subscribe(() => {
+      console.log('Drawer(Component) open');
+    });
+
+    drawerRef.afterClose.subscribe(data => {
+      console.log(data);
+      if (typeof data === 'string') {
+
+      }
+    });
   }
 
 }

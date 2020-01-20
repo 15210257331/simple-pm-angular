@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "247432",
+      "name": "list",
+      "font_class": "list",
+      "unicode": "e695",
+      "unicode_decimal": 59029
+    },
+    {
       "icon_id": "380367",
       "name": "plus",
       "font_class": "plus",
@@ -69,11 +76,25 @@
       "unicode_decimal": 59369
     },
     {
+      "icon_id": "7596170",
+      "name": "Grid",
+      "font_class": "Grid",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
       "icon_id": "7712713",
       "name": "message",
       "font_class": "message2",
       "unicode": "e731",
       "unicode_decimal": 59185
+    },
+    {
+      "icon_id": "7736417",
+      "name": "tag",
+      "font_class": "tag",
+      "unicode": "e920",
+      "unicode_decimal": 59680
     },
     {
       "icon_id": "8474191",
@@ -95,6 +116,13 @@
       "font_class": "task1",
       "unicode": "e6ae",
       "unicode_decimal": 59054
+    },
+    {
+      "icon_id": "11231988",
+      "name": "star",
+      "font_class": "star",
+      "unicode": "e7b7",
+      "unicode_decimal": 59319
     }
   ]
 }

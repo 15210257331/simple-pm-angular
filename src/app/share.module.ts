@@ -13,6 +13,7 @@ import { FlipComponent } from './component/clock/flip/flip.component';
 import { ColorListComponent } from './component/color-list/color-list.component';
 import { TaskCardComponent } from './component/task-card/task-card.component';
 import { ScheduleCardComponent } from './component/schedule-card/schedule-card.component';
+import { ProjectCardComponent } from './component/project-card/project-card.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ScheduleCardComponent } from './component/schedule-card/schedule-card.c
     ColorListComponent,
     TaskCardComponent,
     ScheduleCardComponent,
+    ProjectCardComponent,
     // 管道
     FormatDatePipe,
     // 指令
@@ -53,6 +55,7 @@ import { ScheduleCardComponent } from './component/schedule-card/schedule-card.c
     ColorListComponent,
     TaskCardComponent,
     ScheduleCardComponent,
+    ProjectCardComponent,
     // 管道
     FormatDatePipe,
     // 指令

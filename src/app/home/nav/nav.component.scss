@@ -7,14 +7,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 25px;
 
   .header {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     border: 1px solid #eee;
-    margin-bottom: 15px;
+    margin: 15px;
     cursor: pointer;
   }
 
@@ -37,10 +36,11 @@
       i {
         position: absolute;
         left: 0;
+        top: 10px;
         width: 100%;
         height: 30px;
         font-size: 24px;
-        transform: translate(0, 5px);
+        transform: translate(0, 10px);
         transition: all 0.3s linear;
       }
 
@@ -50,10 +50,10 @@
         width: 100%;
         height: 25px;
         left: 0;
-        top: 35px;
+        top: 40px;
         font-size: 14px;
         transition: opacity 0.1s linear, transform 0.3s linear;
-        transform: translate(0, 5px);
+        transform: translate(0, 10px);
       }
     }
 
@@ -72,9 +72,19 @@
   }
 }
 
+.selected {
+  background-color: #383838;
+
+  i,
+  span {
+    transform: translate(0, 0);
+  }
+}
+
 .title {
   margin: 5px 0;
   font-size: 15px;
+  color: #666;
 }
 
 .operate {

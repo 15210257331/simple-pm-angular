@@ -18,7 +18,7 @@ import { SocketService } from '../../service/socket.service';
 })
 export class NavComponent implements OnInit {
 
-  params: any[] = [];
+  activatedRoute: string;
 
   projectList: any[] = [];
 
@@ -31,7 +31,7 @@ export class NavComponent implements OnInit {
   navList: any[] = [
     {
       name: '项目',
-      icon: 'iconfont icontask',
+      icon: 'iconfont iconGrid',
       url: 'project',
       selected: false
     },
@@ -44,25 +44,7 @@ export class NavComponent implements OnInit {
     {
       name: '消息',
       icon: 'iconfont iconmessage2',
-      url: 'calendar',
-      selected: false
-    },
-  ];
-
-  navListTop: any[] = [
-    {
-      name: '我的任务',
-      icon: 'smile',
       url: 'my',
-      selected: false
-    },
-  ];
-
-  navListBottom: any[] = [
-    {
-      name: '日程',
-      icon: 'calendar',
-      url: 'calendar',
       selected: false
     },
   ];
@@ -76,85 +58,30 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.activatedRoute = this.router.url.split('/')[2];
+    this.navList.map(item => {
+      if (item.url === this.activatedRoute) {
+        item.selected = true;
+      }
+    });
+    this.messageRemind();
+    this.store.dispatch(new LoadUserInfo());
+    this.store.pipe(map(data => data.userState.userInfo)).subscribe(res => {
+      this.userInfo = res;
+    });
+  }
+
+  navigate(data: any) {
+    this.navList.map(item => {
+      item.selected = false;
+    });
+    data.selected = true;
+    this.router.navigate([`/home/${data.url}`]);
+  }
+
+  messageRemind() {
     this.socketService.getMessage('remind').subscribe(res => {
       this.notification.create('info', '日程提醒', res.data, { nzDuration: 0 });
-    });
-    this.params = this.router.url.split('/');
-    this.store.dispatch(new LoadUserInfo());
-    this.store.dispatch(new LoadProjectList(String(this.name)));
-    this.store.dispatch(new LoadMemberList());
-    this.store.dispatch(new LoadScheduleList());
-    this.store
-      .pipe(
-        map(data => data.userState.userInfo)
-      )
-      .subscribe(res => {
-        this.userInfo = res;
-      });
-    this.store
-      .pipe(
-        map(data => data.projectState.projectList)
-      )
-      .subscribe(res => {
-        this.projectList = res || [];
-        if (this.params.length === 4) {
-          this.projectList.map(item => {
-            if (item._id === this.params[3]) {
-              item.isSelected = true;
-            } else {
-              item.isSelected = false;
-            }
-          });
-        } else {
-          const navList = [...this.navListTop, ...this.navListBottom];
-          navList.map(item => {
-            if (item.url === this.params[2]) {
-              item.selected = true;
-            } else {
-              item.selected = false;
-            }
-          });
-        }
-      });
-  }
-
-  selectProject(data: string) {
-    this.router.navigate([`/home/project/${data}`]);
-  }
-
-  selectOther(data: string) {
-    this.router.navigate([`/home/${data}`]);
-  }
-
-  searchProject() {
-    this.store.dispatch(new LoadProjectList(String(this.name)));
-  }
-
-  deleteProject(id, name) {
-    this.modalService.confirm({
-      nzTitle: '警告',
-      nzContent: `该项目下所有任务都会删除，确定删除${name}吗？`,
-      nzOkText: '确定',
-      nzOkType: 'danger',
-      nzOnOk: () => this.store.dispatch(new DeleteProject(id)),
-      nzCancelText: '取消',
-    });
-  }
-
-  projectAdd() {
-    this.visible = !this.visible;
-    const modal = this.modalService.create({
-      nzTitle: '新建项目',
-      nzContent: ProjectAddComponent,
-      nzComponentParams: {
-        title: '新建项目'
-      },
-      nzFooter: null,
-      nzWidth: 840,
-    });
-    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
-    modal.afterClose.subscribe(res => {
-      if (res && res.result) { }
     });
   }
 

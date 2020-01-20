@@ -1,1 +1,5 @@
-<p>project-tag works!</p>
+<ul>
+  <li *ngFor="let item of data;">
+    <nz-tag [nzColor]="item.color">{{item.name}}</nz-tag>
+  </li>
+</ul>

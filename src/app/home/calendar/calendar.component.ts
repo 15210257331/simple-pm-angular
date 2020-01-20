@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Appstate, DeleteScheduleList } from '../../store';
+import { Appstate, DeleteScheduleList, LoadScheduleList } from '../../store';
 import { NzModalService, NzNotificationService } from 'ng-zorro-antd';
 import { map } from 'rxjs/operators';
 import { ScheduleService } from '../../service/schedule.service';
@@ -27,7 +27,8 @@ export class CalendarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const schedule$ = this.store
+    this.store.dispatch(new LoadScheduleList());
+    this.store
       .pipe(
         map(data => data.scheduleState)
       )
@@ -72,5 +73,4 @@ export class CalendarComponent implements OnInit {
   selectChange(event) {
     console.log(event);
   }
-
 }

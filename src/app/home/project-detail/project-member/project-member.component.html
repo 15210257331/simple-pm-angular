@@ -1,1 +1,9 @@
-<p>project-member works!</p>
+<ul class="member">
+  <li *ngFor="let item of data;">
+    <div [ngStyle]="{'background-image': 'url(' + item.avatar + ')'}" class="avatar"></div>
+    <div>
+      <p>{{item.nickname}}</p>
+      <span>{{item.username}}</span>
+    </div>
+  </li>
+</ul>

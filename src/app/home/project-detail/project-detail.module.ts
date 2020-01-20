@@ -35,7 +35,9 @@ import { ProjectTagComponent } from './project-tag/project-tag.component';
         ProjectSettingComponent,
         TaskDetailComponent,
         TaskKanbanComponent,
-        TaskListComponent
+        TaskListComponent,
+        ProjectMemberComponent,
+        ProjectTagComponent
     ]
 })
 export class ProjectDetailModule { }

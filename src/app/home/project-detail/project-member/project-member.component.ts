@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Appstate } from '../../../store';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-project-member',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectMemberComponent implements OnInit {
 
-  constructor() { }
+  @Input() data: any[] = [];
+
+  constructor(
+    private store: Store<Appstate>
+  ) { }
 
   ngOnInit() {
+
   }
 
 }

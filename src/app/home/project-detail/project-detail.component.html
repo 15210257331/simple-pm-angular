@@ -1,23 +1,22 @@
 <div class="project-detail">
   <div class="view-header">
-    <div class="left"></div>
+    <div class="left">
+      <i nz-icon nzType="folder-open" nzTheme="twotone"></i>
+      <span>{{projectDetail.name}}</span>
+    </div>
     <div class="center">
       <li [class.select]="item.value === selectTab" *ngFor="let item of viewList;" (click)="tabChange(item.value)">
         {{item.title}}</li>
     </div>
     <div class="right">
-      <li (click)="projectSetting()">
-        <i nz-icon nzType="setting" nzTheme="twotone"></i>
-        <span>成员</span>
-      </li>
-      <li (click)="projectSetting()">
-        <i nz-icon nzType="setting" nzTheme="twotone"></i>
-        <span>标签</span>
-      </li>
-      <li (click)="projectSetting()">
-        <i nz-icon nzType="setting" nzTheme="twotone"></i>
-        <span>设置</span>
-      </li>
+      <div (click)="openMember()">
+        <i class="iconfont iconusers-alt"></i>
+        <span>{{memberList.length}}</span>
+      </div>
+      <div (click)="openMenu()">
+        <i class="iconfont icontag"></i>
+        <span>{{projectDetail.tag.length}}</span>
+      </div>
     </div>
   </div>
   <div class="view-detail">
