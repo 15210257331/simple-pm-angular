@@ -37,6 +37,11 @@ const routes: Routes = [
         loadChildren: () => import('./home/calendar/calendar.module').then(m => m.CalendarModule),
         data: { title: '日历' }
       },
+      {
+        path: 'trasha',
+        loadChildren: () => import('./home/trash/trash.module').then(m => m.TrashModule),
+        data: { title: '回收站' }
+      },
     ]
   },
 ];

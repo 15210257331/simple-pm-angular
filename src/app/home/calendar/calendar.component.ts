@@ -16,6 +16,8 @@ export class CalendarComponent implements OnInit {
 
   schedulekList: any[] = [];
 
+  mySchedule: any[] = [];
+
   selectedDate: any = new Date();
 
   constructor(
@@ -38,6 +40,11 @@ export class CalendarComponent implements OnInit {
             startTime: moment(item.startTime).format('YYYY-MM-DD HH:mm:ss'),
             endTime: moment(item.endTime).format('YYYY-MM-DD HH:mm:ss'),
             showStartTime: new Date(item.startTime).toLocaleDateString(),
+          });
+        });
+        this.mySchedule = res.filter(item => item.startTime > Number(moment().format('x'))).map(item => {
+          return Object.assign({}, item, {
+            startTime: moment(item.startTime).format('MM-DD HH:mm:ss')
           });
         });
       });

@@ -2,7 +2,7 @@
   <img class="header" nz-popover [nzPopoverTitle]="headerTemplate" [nzPopoverContent]="contentTemplate"
     [(nzVisible)]="visible" nzPopoverTrigger="click" nzPopoverPlacement="rightTop" [src]="userInfo?.avatar">
   <ul>
-    <li [class.selected] = "item.selected" *ngFor="let item of navList;" (click)="navigate(item)">
+    <li [class.selected]="item.selected" *ngFor="let item of navList;" (click)="navigate(item)">
       <i [class]="item.icon"></i>
       <span>{{item.name}}</span>
     </li>
@@ -15,15 +15,15 @@
 
 <ng-template #contentTemplate>
   <li class="operate" (click)="updateInfo()">
-    <!-- <i nz-icon nzType="setting" nzTheme="fill"></i> -->
+    <span>企业设置</span>
+  </li>
+  <li class="operate" (click)="updateInfo()">
     <span>账号资料设置</span>
   </li>
   <li class="operate" (click)="updateInfo()">
-    <!-- <i nz-icon nzType="setting" nzTheme="fill"></i> -->
-    <span>偏好设置</span>
+    <span>个人偏好设置</span>
   </li>
   <li class="operate" (click)="logout()">
-    <!-- <i nz-icon nzType="stop" nzTheme="fill"></i> -->
     <span>退出登录</span>
   </li>
 </ng-template>

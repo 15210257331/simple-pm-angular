@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterContentInit, AfterViewInit } from '@
 import { NzModalService, NzNotificationService } from 'ng-zorro-antd';
 import { ProjectService } from '../../service/project.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProjectAddComponent } from './project-add/project-add.component';
+import { ProjectAddComponent } from '../project/project-add/project-add.component';
 import { Store } from '@ngrx/store';
 import { Appstate, LoadUserInfo, LoadProjectList, DeleteProject, LoadMemberList, LoadScheduleList } from '../../store';
 import { map } from 'rxjs/operators';
@@ -36,15 +36,21 @@ export class NavComponent implements OnInit {
       selected: false
     },
     {
+      name: '我的',
+      icon: 'iconfont iconmy',
+      url: 'my',
+      selected: false
+    },
+    {
       name: '日程',
       icon: 'iconfont iconcalendar',
       url: 'calendar',
       selected: false
     },
     {
-      name: '消息',
-      icon: 'iconfont iconmessage2',
-      url: 'my',
+      name: '回收站',
+      icon: 'iconfont icontrash1',
+      url: 'trasha',
       selected: false
     },
   ];
@@ -66,6 +72,7 @@ export class NavComponent implements OnInit {
     });
     this.messageRemind();
     this.store.dispatch(new LoadUserInfo());
+    this.store.dispatch(new LoadMemberList());
     this.store.pipe(map(data => data.userState.userInfo)).subscribe(res => {
       this.userInfo = res;
     });

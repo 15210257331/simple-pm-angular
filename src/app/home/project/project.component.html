@@ -11,8 +11,15 @@
         <div class="title">
           <span>{{item?.name}}</span>
         </div>
+        <div class="content">
+          <span>{{item?.content}}</span>
+        </div>
         <div class="author">
-          <span>{{item?.creater.nickname}}· {{item?.creater.nickname}}</span>
+          <span>{{item?.creater.nickname}}· {{item?.createDate |formatDate}}</span>
+        </div>
+        <div class="option">
+          <span (click)="updateProject(item, $event)" class="iconfont iconsetting"></span>
+          <span (click)="deleteProject(item._id, item.name, $event)" class="iconfont icondelete"></span>
         </div>
       </div>
       <div class="add-project" (click)="projectAdd()">

@@ -16,7 +16,7 @@ import { ProjectUpdateComponent } from './project-update/project-update.componen
         ProjectRoutingModule
     ],
     entryComponents: [
-
+        ProjectUpdateComponent
     ]
 })
 export class ProjectModule { }

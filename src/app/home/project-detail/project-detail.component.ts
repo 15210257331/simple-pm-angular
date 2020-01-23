@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Appstate, LoadProjectDetail, LoadMemberList } from '../../store';
 import { map } from 'rxjs/operators';
-import { ProjectSettingComponent } from './project-setting/project-setting.component';
 import { NzDrawerService } from 'ng-zorro-antd';
 import { ProjectMemberComponent } from './project-member/project-member.component';
 import { ProjectTagComponent } from './project-tag/project-tag.component';
@@ -44,6 +43,11 @@ export class ProjectDetailComponent implements OnInit {
       value: 4,
       component: ProjectOverviewComponent
     },
+    {
+      title: '',
+      value: 4,
+      component: ProjectOverviewComponent
+    },
   ];
 
   constructor(
@@ -55,7 +59,6 @@ export class ProjectDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new LoadMemberList());
     this.activatedRoute.params.subscribe(data => {
       if (data.id) {
         const projectId = data.id;
@@ -67,13 +70,6 @@ export class ProjectDetailComponent implements OnInit {
         map(data => data.projectState.projectDetail)
       ).subscribe(res => {
         this.projectDetail = res;
-      });
-    this.store
-      .pipe(
-        map(data => data.userState)
-      )
-      .subscribe(res => {
-        this.memberList = res.memberList || [];
       });
     this.tabChange(this.selectTab);
   }
@@ -90,11 +86,6 @@ export class ProjectDetailComponent implements OnInit {
     this.componentRef = this.commentContainer.createComponent(factory);
   }
 
-  projectSetting(id, name) {
-    this.selectTab = 99;
-    this.createComponent(ProjectSettingComponent);
-  }
-
   openMember(): void {
     const drawerRef = this.drawerService.create({
       nzTitle: '项目成员',
@@ -102,14 +93,13 @@ export class ProjectDetailComponent implements OnInit {
       nzMaskClosable: false,
       nzWidth: 300,
       nzContentParams: {
-        data: this.memberList
+        data: this.projectDetail.member,
+        projectId: this.projectDetail._id
       }
     });
-
     drawerRef.afterOpen.subscribe(() => {
       console.log('Drawer(Component) open');
     });
-
     drawerRef.afterClose.subscribe(data => {
       console.log(data);
       if (typeof data === 'string') {
@@ -118,14 +108,15 @@ export class ProjectDetailComponent implements OnInit {
     });
   }
 
-  openMenu(): void {
+  openTag(): void {
     const drawerRef = this.drawerService.create({
-      nzTitle: '菜单',
+      nzTitle: '项目标签',
       nzContent: ProjectTagComponent,
       nzMaskClosable: false,
       nzWidth: 300,
       nzContentParams: {
-        data: this.projectDetail.tag
+        data: this.projectDetail.tag,
+        projectId: this.projectDetail._id
       }
     });
 

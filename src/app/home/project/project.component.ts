@@ -2,13 +2,10 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Component, OnInit, ViewChild, ComponentRef, ViewContainerRef, ComponentFactoryResolver, ComponentFactory } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Appstate, LoadProjectDetail, LoadProjectList, DeleteProject } from '../../store';
-import { TaskKanbanComponent } from '../project-detail/task-kanban/task-kanban.component';
-import { TaskListComponent } from '../project-detail/task-list/task-list.component';
 import { map, filter } from 'rxjs/operators';
-import { ProjectOverviewComponent } from '../project-detail/project-overview/project-overview.component';
-import { ProjectSettingComponent } from '../project-detail/project-setting/project-setting.component';
 import { NzModalService } from 'ng-zorro-antd';
-import { ProjectAddComponent } from '../nav/project-add/project-add.component';
+import { ProjectAddComponent } from './project-add/project-add.component';
+import { ProjectUpdateComponent } from './project-update/project-update.component';
 
 @Component({
   selector: 'app-project',
@@ -60,7 +57,25 @@ export class ProjectComponent implements OnInit {
     });
   }
 
-  deleteProject(id, name) {
+  updateProject(data, event) {
+    event.stopPropagation();
+    const modal = this.modalService.create({
+      nzTitle: '项目设置',
+      nzContent: ProjectUpdateComponent,
+      nzComponentParams: {
+        data
+      },
+      nzFooter: null,
+      nzWidth: 840,
+    });
+    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
+    modal.afterClose.subscribe(res => {
+      if (res && res.result) { }
+    });
+  }
+
+  deleteProject(id, name, event) {
+    event.stopPropagation();
     this.modalService.confirm({
       nzTitle: '警告',
       nzContent: `该项目下所有任务都会删除，确定删除${name}吗？`,

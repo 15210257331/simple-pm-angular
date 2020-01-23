@@ -20,6 +20,13 @@
       height: 320px;
     }
 
+    &>p {
+      margin: 8px 10px;
+      line-height: 30px;
+      border-bottom: 1px solid #dbdbdb;
+      font-size: 16px;
+    }
+
     .schedule-list {
       flex: 1;
       display: flex;
@@ -43,8 +50,11 @@
     justify-content: flex-start;
     align-items: center;
     overflow: auto;
-    nz-calendar {
-      height: 100%;
+    app-header {
+      width: 100%;
+    }
+    &>div {
+      flex: 1;
     }
   }
 }

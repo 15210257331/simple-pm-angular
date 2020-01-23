@@ -32,7 +32,7 @@ export class ProjectAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const memberList$ = this.store
+    this.store
       .pipe(
         map(data => data.userState)
       )
