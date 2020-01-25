@@ -24,21 +24,6 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.store.dispatch(new LoadUserInfo());
-    // this.store.dispatch(new LoadProjectList(String(this.name)));
-    // this.store.dispatch(new LoadMemberList());
-    // this.store.dispatch(new LoadScheduleList());
-    // this.store
-    //   .pipe(
-    //     map(data => data.userState.userInfo)
-    //   )
-    //   .subscribe(res => {
-    //     this.userInfo = res;
-    //     console.log(this.userInfo);
-    //   });
-    // this.projectName$ = this.store
-    //   .pipe(
-    //     map(data => data.projectState.projectDetail.name)
-    //   );
+
   }
 }

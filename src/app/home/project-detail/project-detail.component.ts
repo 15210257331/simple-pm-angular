@@ -6,9 +6,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Appstate, LoadProjectDetail, LoadMemberList } from '../../store';
 import { map } from 'rxjs/operators';
-import { NzDrawerService } from 'ng-zorro-antd';
+import { NzDrawerService, NzModalService } from 'ng-zorro-antd';
 import { ProjectMemberComponent } from './project-member/project-member.component';
 import { ProjectTagComponent } from './project-tag/project-tag.component';
+import { TaskAddComponent } from './task-add/task-add.component';
+import { ProjectFileComponent } from './project-file/project-file.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -44,9 +46,9 @@ export class ProjectDetailComponent implements OnInit {
       component: ProjectOverviewComponent
     },
     {
-      title: '',
-      value: 4,
-      component: ProjectOverviewComponent
+      title: '文件',
+      value: 5,
+      component: ProjectFileComponent
     },
   ];
 
@@ -55,7 +57,8 @@ export class ProjectDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private store: Store<Appstate>,
     private router: Router,
-    private drawerService: NzDrawerService
+    private drawerService: NzDrawerService,
+    private modalService: NzModalService,
   ) { }
 
   ngOnInit() {
@@ -132,4 +135,23 @@ export class ProjectDetailComponent implements OnInit {
     });
   }
 
+  addTask(status: number) {
+    const modal = this.modalService.create({
+      nzTitle: '添加任务',
+      nzContent: TaskAddComponent,
+      nzComponentParams: {
+        status,
+        projectId: this.projectDetail._id
+      },
+      nzFooter: null,
+      nzWidth: 540,
+    });
+
+    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
+    modal.afterClose.subscribe(res => {
+      if (res && res.result) {
+        // this.getTodoList();
+      }
+    });
+  }
 }

@@ -22,10 +22,11 @@
         <li class="task-item" cdkDrag *ngFor="let sonItem of item.taskList;" (click)="taskDetail(sonItem._id)">
           <div class="task-item-header">
             <span>{{sonItem.number}}</span>
+            <img [src]="sonItem.principal.avatar" alt="">
           </div>
           <div class="task-item-content">
             <p>{{sonItem.name}}</p>
-            <img [src]="sonItem.principal.avatar" alt="">
+            
           </div>
           <div class="task-item-tag">
             <nz-tag [nzColor]="'#f50'">截止时间{{sonItem.endTime | formatDate}}</nz-tag>

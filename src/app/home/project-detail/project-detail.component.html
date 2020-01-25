@@ -9,6 +9,9 @@
         {{item.title}}</li>
     </div>
     <div class="right">
+      <div (click)="addTask(1)">
+        <span style="font-size: 22px;" class="iconfont iconxinzeng"></span>
+      </div>
       <div (click)="openMember()">
         <i class="iconfont iconusers-alt"></i>
         <span>{{projectDetail.member.length}}</span>

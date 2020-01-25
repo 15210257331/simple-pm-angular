@@ -10,6 +10,7 @@ import { TaskKanbanComponent } from './task-kanban/task-kanban.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { ProjectMemberComponent } from './project-member/project-member.component';
 import { ProjectTagComponent } from './project-tag/project-tag.component';
+import { ProjectFileComponent } from './project-file/project-file.component';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { ProjectTagComponent } from './project-tag/project-tag.component';
         TaskListComponent,
         ProjectMemberComponent,
         ProjectTagComponent,
+        ProjectFileComponent,
     ],
     imports: [
         CommonModule,
@@ -35,6 +37,7 @@ import { ProjectTagComponent } from './project-tag/project-tag.component';
         TaskListComponent,
         ProjectMemberComponent,
         ProjectTagComponent,
+        ProjectFileComponent
     ]
 })
 export class ProjectDetailModule { }
