@@ -2,42 +2,23 @@
   <app-header [icon]="'smile'" [title]="'我的任务'"></app-header>
   <div class="my-content">
     <div class="left">
-      <div class="static">
-        <li>
-          <p style="color: #ff5b57">{{notStartNum}}</p>
-          <span>未开始</span>
-        </li>
-        <nz-divider nzType="vertical"></nz-divider>
-        <li>
-          <p style="color: #484848">{{completeNum}}</p>
-          <span>已完成</span>
-        </li>
-        <nz-divider nzType="vertical"></nz-divider>
-        <li>
-          <p style="color: #888">{{penddingNum}}</p>
-          <span>进行中</span>
-        </li>
-      </div>
-      <div class="schedule">
-        <p class="title">
-          <i nz-icon nzType="bar-chart" nzTheme="outline"></i>
-          <span>我的日程</span>
-        </p>
-        <div>
-          <app-schedule-card *ngFor="let item of mySchedule;" [data]="item">
-          </app-schedule-card>
-          <nz-empty *ngIf="mySchedule.length === 0"></nz-empty>
-        </div>
+      <p class="title">
+        <i nz-icon nzType="bar-chart" nzTheme="outline"></i>
+        <span>个人信息</span>
+      </p>
+      <div>
+        <nz-empty *ngIf="mySchedule.length === 0"></nz-empty>
       </div>
     </div>
     <div class="right">
       <p class="title">
-        <i nz-icon nzType="user" nzTheme="outline"></i>
-        <span>我的任务</span>
+        <i nz-icon nzType="bar-chart" nzTheme="outline"></i>
+        <span>今日日程</span>
       </p>
-      <div class="tasks">
-        <app-task-card *ngFor="let item of myTasks;" [data]="item"></app-task-card>
-        <nz-empty *ngIf="myTasks.length === 0"></nz-empty>
+      <div>
+        <app-schedule-card *ngFor="let item of mySchedule;" [data]="item">
+        </app-schedule-card>
+        <nz-empty *ngIf="mySchedule.length === 0"></nz-empty>
       </div>
     </div>
   </div>

@@ -15,8 +15,6 @@ import { SocketService } from '../../service/socket.service';
 })
 export class MyComponent implements OnInit {
 
-  myTasks: any[] = [];
-
   completeNum = 0;
 
   penddingNum = 0;
@@ -24,8 +22,6 @@ export class MyComponent implements OnInit {
   notStartNum = 0;
 
   mySchedule: any[] = [];
-
-  myTasksLoading = true;
 
   myScheduleLoading = true;
 
@@ -36,7 +32,6 @@ export class MyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getMytasks();
     this.store
       .pipe(
         map(data => data.scheduleState)
@@ -50,17 +45,4 @@ export class MyComponent implements OnInit {
         this.myScheduleLoading = false;
       });
   }
-
-  getMytasks() {
-    this.taskService.getMyTasks().subscribe(res => {
-      if (res.code === 200) {
-        this.myTasks = res.data || [];
-        this.notStartNum = this.myTasks.filter(item => item.status === 1).length;
-        this.penddingNum = this.myTasks.filter(item => item.status === 2).length;
-        this.completeNum = this.myTasks.filter(item => item.status === 3).length;
-        this.myTasksLoading = false;
-      }
-    });
-  }
-
 }

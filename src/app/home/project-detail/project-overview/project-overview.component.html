@@ -1,37 +1,68 @@
 <div class="overview">
-  <div class="overview-content">
-    <div class="overview-part">
-      <p class="title">
-        <i nz-icon nzType="bars" nzTheme="outline"></i><span>项目信息</span>
+  <div class="overview-part">
+    <p class="title">
+      <i nz-icon nzType="bars" nzTheme="outline"></i><span>项目信息</span>
+    </p>
+    <div class="content">
+      <p>
+        <label for="">项目名称:</label>
+        <span>{{projectDetail.name}}</span>
+        <label style="margin-left: 80px;" for="">创建人:</label>
+        <img [src]="projectDetail.creater.avatar" nz-tooltip [nzTooltipTitle]="projectDetail.creater.nickname">
+        <label style="margin-left: 80px;" for="">创建时间:</label>
+        <span>{{projectDetail.createDate}}</span>
       </p>
-      <div>
-        <p>
-          <label for="">项目名称:</label>
-          <span>{{projectDetail.name}}</span>
-          <label style="margin-left: 80px;" for="">创建人:</label>
-          <img [src]="projectDetail.creater.avatar" nz-tooltip [nzTooltipTitle]="projectDetail.creater.nickname">
-          <label style="margin-left: 80px;" for="">创建时间:</label>
-          <span>{{projectDetail.createDate}}</span>
-        </p>
-        <p>
-          <label for="">项目描述:</label>
-          <span>{{projectDetail.content}}</span>
-        </p>
-        <p>
-          <label for="">项目成员:</label>
-          <img *ngFor="let item of projectDetail.member" [src]="item?.avatar" nz-tooltip
-            [nzTooltipTitle]="item.nickname">
-        </p>
-      </div>
+      <p>
+        <label for="">项目描述:</label>
+        <span>{{projectDetail.content}}</span>
+      </p>
+      <p>
+        <label for="">项目成员:</label>
+        <img *ngFor="let item of projectDetail.member" [src]="item?.avatar" nz-tooltip [nzTooltipTitle]="item.nickname">
+      </p>
     </div>
-    <div class="overview-part" style="margin: 10px 0 0 0;">
-      <p class="title">
-        <i nz-icon nzType="bar-chart" nzTheme="outline"></i>
-        <span>任务进度</span>
-      </p>
-      <div>
-        <div echarts [options]="chartOption" style="height: 250px; width: 100%;"></div>
-      </div>
+  </div>
+  <div class="overview-part" style="margin: 10px 10px 0 0; flex: 1; width: 0; height: 430px;">
+    <p class="title">
+      <i nz-icon nzType="bar-chart" nzTheme="outline"></i><span>任务分布</span>
+    </p>
+    <div class="content" style="display: flex; align-items: center;">
+      <div echarts [options]="chartOption1" style="height: 250px; width: 50%;"></div>
+      <div echarts [options]="chartOption2" style="height: 250px; width: 50%;"></div>
+    </div>
+    <div class="static">
+      <li>
+        <p style="color: #ff5b57">{{notStartNum}}</p>
+        <span>未开始</span>
+      </li>
+      <nz-divider nzType="vertical"></nz-divider>
+      <li>
+        <p style="color: #888">{{penddingNum}}</p>
+        <span>进行中</span>
+      </li>
+      <nz-divider nzType="vertical"></nz-divider>
+      <li>
+        <p style="color: #484848">{{completeNum}}</p>
+        <span>已完成</span>
+      </li>
+      <nz-divider nzType="vertical"></nz-divider>
+      <li>
+        <p style="color: #484848">{{completeNum}}</p>
+        <span>已作废</span>
+      </li>
+      <nz-divider nzType="vertical"></nz-divider>
+      <li>
+        <p style="color: #484848">{{completeNum}}</p>
+        <span>任务总数</span>
+      </li>
+    </div>
+  </div>
+  <div class="overview-part" style="margin: 10px 0 0 10px; flex: 1; width: 0; height: 430px;">
+    <p class="title">
+      <i nz-icon nzType="bar-chart" nzTheme="outline"></i><span>任务进度</span>
+    </p>
+    <div class="content">
+      <div echarts [options]="chartOption" style="height: 250px; width: 100%;"></div>
     </div>
   </div>
 </div>

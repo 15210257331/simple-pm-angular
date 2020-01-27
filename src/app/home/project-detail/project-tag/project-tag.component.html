@@ -1,9 +1,8 @@
-<ul>
+<ul class="tag-list">
   <li *ngFor="let item of data;">
     <nz-tag [nzColor]="item.color">{{item.name}}</nz-tag>
   </li>
 </ul>
-
 <nz-divider></nz-divider>
 <div class="form-item">
   <label for="">标签名称:</label>
@@ -13,6 +12,6 @@
   <label for="">颜色:</label>
   <app-color-list (select)="tagModel.color = $event"></app-color-list>
 </div>
-<div style="padding-left: 85px" class="form-item">
+<div style="padding-left: 85px; margin-top: 60px;" class="form-item">
   <button nz-button nzType="primary" (click)="addTag()">确定</button>
 </div>
