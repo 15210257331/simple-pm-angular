@@ -10,7 +10,7 @@ import { NzDrawerService, NzModalService } from 'ng-zorro-antd';
 import { ProjectMemberComponent } from './project-member/project-member.component';
 import { ProjectTagComponent } from './project-tag/project-tag.component';
 import { TaskAddComponent } from './task-add/task-add.component';
-import { ProjectFileComponent } from './project-file/project-file.component';
+import { TrashComponent } from './trash/trash.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -46,9 +46,9 @@ export class ProjectDetailComponent implements OnInit {
       component: ProjectOverviewComponent
     },
     {
-      title: '文件',
+      title: '回收站',
       value: 5,
-      component: ProjectFileComponent
+      component: TrashComponent
     },
   ];
 
@@ -94,7 +94,7 @@ export class ProjectDetailComponent implements OnInit {
       nzTitle: '项目成员',
       nzContent: ProjectMemberComponent,
       nzMaskClosable: false,
-      nzWidth: 300,
+      nzWidth: 360,
       nzContentParams: {
         data: this.projectDetail.member,
         projectId: this.projectDetail._id
@@ -116,7 +116,7 @@ export class ProjectDetailComponent implements OnInit {
       nzTitle: '项目标签',
       nzContent: ProjectTagComponent,
       nzMaskClosable: false,
-      nzWidth: 300,
+      nzWidth: 360,
       nzContentParams: {
         data: this.projectDetail.tag,
         projectId: this.projectDetail._id

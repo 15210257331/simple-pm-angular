@@ -7,10 +7,12 @@
       <p>
         <label for="">项目名称:</label>
         <span>{{projectDetail.name}}</span>
-        <label style="margin-left: 80px;" for="">创建人:</label>
+        <label style="margin-left: 100px;" for="">创建人:</label>
         <img [src]="projectDetail.creater.avatar" nz-tooltip [nzTooltipTitle]="projectDetail.creater.nickname">
-        <label style="margin-left: 80px;" for="">创建时间:</label>
-        <span>{{projectDetail.createDate}}</span>
+        <label style="margin-left: 100px;" for="">创建时间:</label>
+        <span>{{projectDetail.createDate | formatDate}}</span>
+        <label style="margin-left: 100px;" for="">项目状态:</label>
+        <span>正常</span>
       </p>
       <p>
         <label for="">项目描述:</label>
@@ -22,38 +24,32 @@
       </p>
     </div>
   </div>
-  <div class="overview-part" style="margin: 10px 10px 0 0; flex: 1; width: 0; height: 430px;">
+  <div class="overview-part" style="margin: 10px 10px 0 0; flex: 1; width: 40%; height: 430px;">
     <p class="title">
       <i nz-icon nzType="bar-chart" nzTheme="outline"></i><span>任务分布</span>
     </p>
     <div class="content" style="display: flex; align-items: center;">
-      <div echarts [options]="chartOption1" style="height: 250px; width: 50%;"></div>
-      <div echarts [options]="chartOption2" style="height: 250px; width: 50%;"></div>
+      <div echarts [options]="chartOption1" style="height: 250px; width: 100%;"></div>
     </div>
     <div class="static">
       <li>
-        <p style="color: #ff5b57">{{notStartNum}}</p>
+        <p style="color: #2db7f5">{{notStartNum}}</p>
         <span>未开始</span>
       </li>
       <nz-divider nzType="vertical"></nz-divider>
       <li>
-        <p style="color: #888">{{penddingNum}}</p>
+        <p style="color: #22d7bb">{{penddingNum}}</p>
         <span>进行中</span>
       </li>
       <nz-divider nzType="vertical"></nz-divider>
       <li>
-        <p style="color: #484848">{{completeNum}}</p>
+        <p style="color: #87d068">{{completeNum}}</p>
         <span>已完成</span>
       </li>
       <nz-divider nzType="vertical"></nz-divider>
       <li>
-        <p style="color: #484848">{{completeNum}}</p>
+        <p style="color: #f50">{{invalidNum}}</p>
         <span>已作废</span>
-      </li>
-      <nz-divider nzType="vertical"></nz-divider>
-      <li>
-        <p style="color: #484848">{{completeNum}}</p>
-        <span>任务总数</span>
       </li>
     </div>
   </div>
@@ -62,7 +58,7 @@
       <i nz-icon nzType="bar-chart" nzTheme="outline"></i><span>任务进度</span>
     </p>
     <div class="content">
-      <div echarts [options]="chartOption" style="height: 250px; width: 100%;"></div>
+      <div echarts [options]="chartOption2" style="height: 350px; width: 100%;"></div>
     </div>
   </div>
 </div>

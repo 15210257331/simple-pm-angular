@@ -1,6 +1,6 @@
 <ul class="tag-list">
   <li *ngFor="let item of data;">
-    <nz-tag [nzColor]="item.color">{{item.name}}</nz-tag>
+    <nz-tag nzMode="closeable" (nzOnClose)="deleteTag($event)" [nzColor]="item.color">{{item.name}}</nz-tag>
   </li>
 </ul>
 <nz-divider></nz-divider>

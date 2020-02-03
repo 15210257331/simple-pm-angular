@@ -21,7 +21,9 @@ export class ProjectOverviewComponent implements OnInit {
 
   notStartNum = 0;
 
-  chartOption = {
+  invalidNum = 0;
+
+  chartOption2 = {
     color: ['#3398DB'],
     tooltip: {
       trigger: 'axis',
@@ -64,45 +66,26 @@ export class ProjectOverviewComponent implements OnInit {
       trigger: 'item',
       formatter: '{a} <br/>{b}: {c} ({d}%)'
     },
+    legend: {
+      orient: 'vertical',
+      left: '20%',
+      top: 'middle',
+      data: ['未开始', '进行中', '已完成', '已作废']
+    },
     series: [
       {
         name: '任务状态',
         type: 'pie',
-        radius: ['50%', '70%'],
-        avoidLabelOverlap: false,
-        label: {
-          normal: {
-            show: false,
-            position: 'center'
-          },
-          emphasis: {
-            show: true,
-            textStyle: {
-              fontSize: '30',
-              fontWeight: 'bold'
-            }
+        radius: '70%',
+        center: ['70%', '60%'],
+        data: [],
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
           }
-        },
-        labelLine: {
-          normal: {
-            show: false
-          }
-        },
-        data: []
-      }
-    ]
-  };
-
-  chartOption2 = {
-    tooltip: {
-      formatter: '{a} <br/>{b} : {c}%'
-    },
-    series: [
-      {
-        name: '任务完成率',
-        type: 'gauge',
-        detail: { formatter: '{value}%' },
-        data: [{ value: 87, name: '完成率' }]
+        }
       }
     ]
   };
@@ -112,52 +95,49 @@ export class ProjectOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store
-      .pipe(
-        map(data => data.projectState.projectDetail),
-      )
-      .subscribe(res => {
-        this.projectDetail = res;
-        this.taskList = this.projectDetail.task;
-        this.notStartNum = this.taskList.filter(item => item.status === 1).length;
-        this.penddingNum = this.taskList.filter(item => item.status === 2).length;
-        this.completeNum = this.taskList.filter(item => item.status === 3).length;
-        this.initEcharts();
-      });
+    this.store.pipe(map(data => data.projectState.projectDetail)).subscribe(res => {
+      this.projectDetail = res;
+      this.taskList = res.task || [];
+      this.notStartNum = this.taskList.filter(item => item.status === 1).length;
+      this.penddingNum = this.taskList.filter(item => item.status === 2).length;
+      this.completeNum = this.taskList.filter(item => item.status === 3).length;
+      this.invalidNum = this.taskList.filter(item => item.status === 4).length;
+      this.initEcharts();
+    });
   }
 
   initEcharts() {
-    const arr = [
+    const data = [
       {
-        value: this.taskList.filter(item => item.status === 1).length,
+        value: this.notStartNum,
         name: '未开始',
         itemStyle: {
           color: '#2db7f5'
         }
       },
       {
-        value: this.taskList.filter(item => item.status === 2).length,
+        value: this.penddingNum,
         name: '进行中',
         itemStyle: {
           color: '#22d7bb'
         }
       },
       {
-        value: this.taskList.filter(item => item.status === 3).length,
+        value: this.completeNum,
         name: '已完成',
         itemStyle: {
           color: '#87d068'
         }
       },
       {
-        value: this.taskList.filter(item => item.status === 4).length,
+        value: this.invalidNum,
         name: '已作废',
         itemStyle: {
           color: '#f50'
         }
       },
     ];
-    this.chartOption = {
+    this.chartOption2 = {
       color: ['#3398DB'],
       tooltip: {
         trigger: 'axis',
@@ -190,7 +170,7 @@ export class ProjectOverviewComponent implements OnInit {
           name: '任务',
           type: 'bar',
           barWidth: '30%',
-          data: arr
+          data: data
         }
       ]
     };
@@ -200,34 +180,28 @@ export class ProjectOverviewComponent implements OnInit {
         trigger: 'item',
         formatter: '{a} <br/>{b}: {c} ({d}%)'
       },
+      legend: {
+        orient: 'vertical',
+        left: '20%',
+        top: 'middle',
+        data: ['未开始', '进行中', '已完成', '已作废']
+      },
       series: [
         {
           name: '任务状态',
           type: 'pie',
-          radius: ['50%', '70%'],
-          avoidLabelOverlap: false,
-          label: {
-            normal: {
-              show: false,
-              position: 'center'
-            },
-            emphasis: {
-              show: true,
-              textStyle: {
-                fontSize: '30',
-                fontWeight: 'bold'
-              }
+          radius: '70%',
+          center: ['60%', '60%'],
+          data: data,
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
             }
-          },
-          labelLine: {
-            normal: {
-              show: false
-            }
-          },
-          data: arr
+          }
         }
       ]
     };
   }
-
 }

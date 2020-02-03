@@ -14,6 +14,8 @@ export class ProjectMemberComponent implements OnInit {
 
   @Input() projectId;
 
+  name;
+
   constructor(
     private store: Store<Appstate>
   ) { }
@@ -35,5 +37,4 @@ export class ProjectMemberComponent implements OnInit {
     });
     this.store.dispatch(new UpdateProject(data));
   }
-
 }

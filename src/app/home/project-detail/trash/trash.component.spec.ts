@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProjectFileComponent } from './project-file.component';
+import { TrashComponent } from './trash.component';
 
-describe('ProjectFileComponent', () => {
-  let component: ProjectFileComponent;
-  let fixture: ComponentFixture<ProjectFileComponent>;
+describe('TrashComponent', () => {
+  let component: TrashComponent;
+  let fixture: ComponentFixture<TrashComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectFileComponent ]
+      declarations: [ TrashComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProjectFileComponent);
+    fixture = TestBed.createComponent(TrashComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

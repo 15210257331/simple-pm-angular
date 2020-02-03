@@ -35,4 +35,8 @@ export class ProjectTagComponent implements OnInit {
       color: '',
     };
   }
+
+  deleteTag(event) {
+
+  }
 }
