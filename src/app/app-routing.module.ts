@@ -30,7 +30,7 @@ const routes: Routes = [
       {
         path: 'my',
         loadChildren: () => import('./home/my/my.module').then(m => m.MyModule),
-        data: { title: '我的任务' }
+        data: { title: '我的' }
       },
       {
         path: 'calendar',
@@ -38,9 +38,9 @@ const routes: Routes = [
         data: { title: '日历' }
       },
       {
-        path: 'trasha',
-        loadChildren: () => import('./home/trash/trash.module').then(m => m.TrashModule),
-        data: { title: '回收站' }
+        path: 'message',
+        loadChildren: () => import('./home/message/message.module').then(m => m.MessageModule),
+        data: { title: '消息' }
       },
     ]
   },

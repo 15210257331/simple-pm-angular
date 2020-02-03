@@ -36,21 +36,21 @@ export class NavComponent implements OnInit {
       selected: false
     },
     {
-      name: '我的',
-      icon: 'iconfont iconmy',
-      url: 'my',
+      name: '消息',
+      icon: 'iconfont iconmessage1',
+      url: 'message',
       selected: false
     },
     {
-      name: '日程',
+      name: '日历',
       icon: 'iconfont iconcalendar',
       url: 'calendar',
       selected: false
     },
     {
-      name: '回收站',
-      icon: 'iconfont icontrash1',
-      url: 'trasha',
+      name: '我的',
+      icon: 'iconfont iconmy',
+      url: 'my',
       selected: false
     },
   ];
