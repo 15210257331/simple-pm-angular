@@ -1,6 +1,23 @@
 <div class="message">
-  <app-header [icon]="'smile'" [title]="'消息'"></app-header>
-  <div class="message-content">
-    <nz-empty></nz-empty>
+  <div class="message-left">
+    <input nz-input [(ngModel)]="name" placeholder="搜索" />
+    <span style="font-size: 38px; margin-right: 5px" class="iconfont iconxinzeng"></span>
+    <ul>
+      <li *ngFor="let item of memberList;">
+        <div [ngStyle]="{'background-image': 'url(' + item.avatar + ')'}" class="avatar"></div>
+        <div>
+          <p>{{item.nickname}}</p>
+          <span>{{item.username}}({{item.password}})</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="message-right">
+    <div class="header">
+      
+    </div>
+    <div class="message-content">
+
+    </div>
   </div>
 </div>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Appstate } from '../../store';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-message',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessageComponent implements OnInit {
 
-  constructor() { }
+  name: string;
+
+  memberList: any[] = [];
+
+  constructor(
+    private store: Store<Appstate>,
+  ) { }
 
   ngOnInit() {
+    this.store.pipe(map(data => data.userState.memberList)).subscribe(res => {
+      this.memberList = res || [];
+    });
   }
 
 }
