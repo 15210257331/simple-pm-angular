@@ -1,5 +1,7 @@
 <div class="my">
-  <app-header [icon]="'smile'" [title]="'我的任务'"></app-header>
+  <div class="my-header">
+    <app-clock></app-clock>
+  </div>
   <div class="my-content">
     <div class="left" style="margin-right: 15px;">
       <p class="title">
@@ -7,7 +9,28 @@
         <span>个人信息</span>
       </p>
       <div>
-        <nz-empty *ngIf="mySchedule.length === 0"></nz-empty>
+        <div class="display-name">
+          <img class="avatar" [src]="userInfo?.avatar">
+          <p>{{userInfo?.nickname}}</p>
+          <span>({{userInfo?.username}})</span>
+        </div>
+        <ul class="display-info">
+          <li>
+            <label>部门: </label> <span>技术中心</span>
+          </li>
+          <li>
+            <label>职位: </label> <span>CEO</span>
+          </li>
+          <li>
+            <label>手机: </label> <span>{{userInfo?.phoneNumber}}</span>
+          </li>
+          <li>
+            <label>邮箱: </label> <span>{{userInfo?.email}}</span>
+          </li>
+          <li>
+            <label>简介: </label> <span>{{userInfo?.introduction}}</span>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="right">

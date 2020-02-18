@@ -5,6 +5,14 @@
   display: flex;
   flex-direction: column;
 
+  .my-header {
+    padding: 50px 0 0 15px;
+    height: 200px;
+    background-color: white;
+    background: url('/assets/imgs/project-1.jpg') top left no-repeat #fff;
+    background-size: cover;
+  }
+
   .my-content {
     padding: 15px;
     flex: 1;
@@ -39,6 +47,33 @@
 
       &>div {
         padding: 0 10px;
+      }
+    }
+
+    .left>div {
+      display: flex;
+      align-items: center;
+      height: 350px;
+      .display-name {
+        width: 40%;
+        text-align: center;
+        .avatar {
+          width: 120px;
+          height: 120px;
+        }
+      }
+      ul {
+        display: flex;
+        padding-left: 30px;
+        border-left: 1px solid #cccccc;
+        flex: 1;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        li {
+          width: 100%;
+          margin: 10px 0;
+        }
       }
     }
   }

@@ -15,6 +15,8 @@ import { SocketService } from '../../service/socket.service';
 })
 export class MyComponent implements OnInit {
 
+  userInfo: any;
+
   completeNum = 0;
 
   penddingNum = 0;
@@ -32,17 +34,16 @@ export class MyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store
-      .pipe(
-        map(data => data.scheduleState)
-      )
-      .subscribe(res => {
-        this.mySchedule = res.filter(item => item.startTime > Number(moment().format('x'))).map(item => {
-          return Object.assign({}, item, {
-            startTime: moment(item.startTime).format('MM-DD HH:mm:ss')
-          });
+    this.store.pipe(map(data => data.scheduleState)).subscribe(res => {
+      this.mySchedule = res.filter(item => item.startTime > Number(moment().format('x'))).map(item => {
+        return Object.assign({}, item, {
+          startTime: moment(item.startTime).format('MM-DD HH:mm:ss')
         });
-        this.myScheduleLoading = false;
       });
+      this.myScheduleLoading = false;
+    });
+    this.store.pipe(map(data => data.userState.userInfo)).subscribe(res => {
+      this.userInfo = res;
+    });
   }
 }
