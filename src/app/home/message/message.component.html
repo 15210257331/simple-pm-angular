@@ -1,9 +1,12 @@
 <div class="message">
   <div class="message-left">
-    <input nz-input [(ngModel)]="name" placeholder="搜索" />
-    <span style="font-size: 38px; margin-right: 5px" class="iconfont iconxinzeng"></span>
-    <ul>
-      <li *ngFor="let item of memberList;">
+    <div class="header">
+      <input nz-input [(ngModel)]="name" placeholder="搜索成员、消息" />
+      <span class="iconfont iconxinzeng"></span>
+    </div>
+    <nz-divider></nz-divider>
+    <ul class="friend-list">
+      <li *ngFor="let item of memberList;" [class.selected]="item.selected" (click)="selectMember(item)">
         <div [ngStyle]="{'background-image': 'url(' + item.avatar + ')'}" class="avatar"></div>
         <div>
           <p>{{item.nickname}}</p>
@@ -14,10 +17,35 @@
   </div>
   <div class="message-right">
     <div class="header">
-      
+      <img class="avatar" [src]="selectedMember?.memberAvatar">
+      <div>
+        <p>{{selectedMember?.memberName}} </p>
+        <span>好好学习，天天向上</span>
+      </div>
     </div>
     <div class="message-content">
-
+      <ul class="content-box">
+        <ng-container *ngFor="let item of selectedMember.messages">
+          <li class="other" *ngIf="item?.from !== userInfo._id">
+            <img class="avatar" [src]="item?.avatar" alt="">
+            <p>{{item?.content}}</p>
+          </li>
+          <li class="my" *ngIf="item?.from === userInfo._id">
+            <p>{{item?.content}}</p>
+            <img class="avatar" [src]="item?.avatar" alt="">
+          </li>
+        </ng-container>
+      </ul>
+      <div class="send-box">
+        <div>
+          <span class="iconfont icongif"></span>
+          <span class="iconfont iconsmile"></span>
+          <span class="iconfont iconzan"></span>
+          <span class="iconfont iconjiandao"></span>
+          <span class="iconfont iconfujian"></span>
+        </div>
+        <textarea placeholder="按enter发送消息" [(ngModel)]="messageContent"></textarea>
+      </div>
     </div>
   </div>
 </div>

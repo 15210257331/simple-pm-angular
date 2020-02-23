@@ -29,6 +29,18 @@ export function userReducer(state: UserState = initialState, action: UserAction)
             return state;
         case UserActionTypes.LoadMemberListError:
             return state;
+        case UserActionTypes.DeleteMemberSuccess:
+            let deleteIndex;
+            state.memberList.map((item, index) => {
+                if (item._id === action.payload.data) {
+                    deleteIndex = index;
+                }
+            });
+            state.memberList.splice(deleteIndex, 1);
+            return state;
+
+        case UserActionTypes.DeleteMemberError:
+            return state;
         case UserActionTypes.UpdateUserInfoSuccess:
             state.userInfo = action.payload.data;
             return state;

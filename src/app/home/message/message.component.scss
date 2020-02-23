@@ -5,49 +5,185 @@
   display: flex;
 
   .message-left {
+    height: 100%;
     width: 240px;
     border-right: 1px solid #cccccc;
     background-color: white;
-    li {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      height: 50px;
-      cursor: pointer;
 
-      .avatar {
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        margin: 0 10px 0 16px;
-        background-color: #eee;
-        display: inline-block;
-        background-size: cover !important;
-        background-repeat: no-repeat !important;
-        background-position: 50% !important;
+    .header {
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+
+      input {
+        border-radius: 25px;
+        margin-left: 10px;
       }
 
-      div {
-        height: 40px;
-        text-align: left;
-
-        p {
-          margin-bottom: 0;
-          color: #262626;
-        }
-
-        span {
-          color: #8c8c8c
-        }
+      span {
+        font-size: 30px;
+        margin: 0 10px;
       }
     }
 
-    li:hover {
-      background-color: #f0f0f0;
+    .friend-list {
+
+      li {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 60px;
+        cursor: pointer;
+
+        .avatar {
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          margin: 0 10px 0 16px;
+          background-color: #eee;
+          display: inline-block;
+          background-size: cover !important;
+          background-repeat: no-repeat !important;
+          background-position: 50% !important;
+        }
+
+        div {
+          height: 40px;
+          text-align: left;
+
+          p {
+            margin-bottom: 0;
+            color: #262626;
+          }
+
+          span {
+            color: #8c8c8c
+          }
+        }
+      }
+
+      li:hover {
+        background-color: #f0f0f0;
+      }
     }
   }
 
   .message-right {
+    display: flex;
+    flex-direction: column;
     flex: 1;
+    height: 100%;
+
+    .header {
+      padding-left: 10px;
+      height: 50px;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      background-color: white;
+      margin-bottom: 0;
+      border-bottom: 1px solid #dbdbdb;
+
+      div {
+        margin-left: 10px;
+
+        p {
+          font-size: 15px;
+          color: black;
+        }
+
+        span {
+          font-size: 12px;
+          color: #888;
+        }
+      }
+    }
+
+    .message-content {
+      margin: 15px;
+      background-color: white;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .content-box {
+        flex: 1;
+        overflow-y: auto;
+
+        .other,
+        .my {
+          padding: 0 20px;
+          height: 40px;
+          margin: 10px 0;
+          display: flex;
+          align-items: center;
+
+          p {
+            margin: 0 10px;
+            padding: 4px 8px;
+            border-radius: 5px;
+          }
+        }
+
+        .other {
+          justify-content: flex-start;
+
+          p {
+            background-color: #999;
+            color: white;
+          }
+        }
+
+        .my {
+          justify-content: flex-end;
+
+          p {
+            background-color: #1890ff;
+            color: white;
+          }
+        }
+
+      }
+
+      .send-box {
+        border-top: solid 1px #eee;
+        height: 180px;
+
+        div {
+          display: flex;
+          align-items: center;
+          height: 35px;
+          padding-left: 10px;
+          margin-bottom: 0;
+
+          span {
+            margin: 0 8px;
+            font-size: 24px;
+          }
+        }
+
+        textarea {
+          padding: 10px 0 0 18px;
+          outline: none;
+          display: block;
+          border: 0;
+          border-radius: 0;
+          width: 100%;
+          word-wrap: break-word;
+          height: 145px;
+          color: #333;
+        }
+      }
+    }
   }
+}
+
+:host ::ng-deep .ant-divider,
+.ant-divider-horizontal {
+  margin: 15px 0 5px 0;
+}
+
+.selected {
+  background-color: #f0f0f0;
 }

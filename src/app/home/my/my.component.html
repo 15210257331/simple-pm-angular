@@ -1,48 +1,51 @@
 <div class="my">
   <div class="my-header">
-    <app-clock></app-clock>
+    <img [src]="userInfo?.avatar" alt="" class="avatar">
+    <div class="pic">
+      <p>{{userInfo?.nickname}}<span>({{userInfo?.introduction}})</span>
+      </p>
+    </div>
+    <ul class="info">
+      <li>
+        <i class="iconfont icon3901qia"></i>
+        <span>CEO</span>
+      </li>
+      <nz-divider nzType="vertical"></nz-divider>
+      <li>
+        <i class="iconfont iconemail"></i>
+        <span>{{userInfo?.email}}</span>
+      </li>
+      <nz-divider nzType="vertical"></nz-divider>
+      <li>
+        <i class="iconfont iconphone"></i>
+        <span>{{userInfo?.phoneNumber}}</span>
+      </li>
+    </ul>
   </div>
   <div class="my-content">
-    <div class="left" style="margin-right: 15px;">
+    <div class="member">
       <p class="title">
         <i nz-icon nzType="bar-chart" nzTheme="outline"></i>
-        <span>个人信息</span>
+        <span>所有成员</span>
       </p>
-      <div>
-        <div class="display-name">
-          <img class="avatar" [src]="userInfo?.avatar">
-          <p>{{userInfo?.nickname}}</p>
-          <span>({{userInfo?.username}})</span>
-        </div>
-        <ul class="display-info">
-          <li>
-            <label>部门: </label> <span>技术中心</span>
-          </li>
-          <li>
-            <label>职位: </label> <span>CEO</span>
-          </li>
-          <li>
-            <label>手机: </label> <span>{{userInfo?.phoneNumber}}</span>
-          </li>
-          <li>
-            <label>邮箱: </label> <span>{{userInfo?.email}}</span>
-          </li>
-          <li>
-            <label>简介: </label> <span>{{userInfo?.introduction}}</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="right">
-      <p class="title">
-        <i nz-icon nzType="bar-chart" nzTheme="outline"></i>
-        <span>今日日程</span>
-      </p>
-      <div>
-        <app-schedule-card *ngFor="let item of mySchedule;" [data]="item">
-        </app-schedule-card>
-        <nz-empty *ngIf="mySchedule.length === 0"></nz-empty>
-      </div>
+      <table>
+        <tbody>
+          <tr *ngFor="let item of memberList;">
+            <td width="30%">
+              <div style="display: flex; align-items: center;">
+                <img class="avatar" [src]="item?.avatar" alt="">
+                <p>{{item?.nickname}}</p>
+              </div>
+            </td>
+            <td width="60%">
+              <span>{{item?.sex === 1 ? '男' : '女'}}</span>
+            </td>
+            <td width="10%">
+              <span class="iconfont icondelete" (click)="deleteMember(item._id, item?.nickname, $event)"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

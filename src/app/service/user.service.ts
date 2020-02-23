@@ -35,8 +35,13 @@ export class UserService {
         return this.http.post(`${API}/user/info/update`, data);
     }
 
+    // 删除用户
+    deleteMember(id: any): Observable<any> {
+        return this.http.get(`${API}/user/delete?id=${id}`);
+    }
+
     // 上传文件
-    uploadImg(data: any): Observable<any>  {
+    uploadImg(data: any): Observable<any> {
         return this.http.post(`${API}/user/uploadImg`, data);
     }
 }

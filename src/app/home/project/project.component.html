@@ -15,7 +15,7 @@
           <span>{{item?.content}}</span>
         </div>
         <div class="author">
-          <span>{{item?.creater.nickname}}· {{item?.createDate |formatDate}}</span>
+          <span>{{item?.creater?.nickname}}· {{item?.createDate |formatDate}}</span>
         </div>
         <div class="option">
           <span (click)="updateProject(item, $event)" class="iconfont iconsetting"></span>
