@@ -4,7 +4,7 @@ import { ProjectService } from '../../service/project.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProjectAddComponent } from '../project/project-add/project-add.component';
 import { Store } from '@ngrx/store';
-import { Appstate, LoadUserInfo, LoadProjectList, DeleteProject, LoadMemberList, LoadScheduleList } from '../../store';
+import { Appstate, LoadUserInfo, LoadProjectList, DeleteProject, LoadMemberList, LoadScheduleList, Logout } from '../../store';
 import { map } from 'rxjs/operators';
 import { UpdateInfoComponent } from 'src/app/home/nav/update-info/update-info.component';
 import { SocketService } from '../../service/socket.service';
@@ -75,6 +75,7 @@ export class NavComponent implements OnInit {
     this.store.dispatch(new LoadMemberList());
     this.store.pipe(map(data => data.userState.userInfo)).subscribe(res => {
       this.userInfo = res;
+      this.newUser();
     });
   }
 
@@ -90,6 +91,10 @@ export class NavComponent implements OnInit {
     this.socketService.getMessage('remind').subscribe(res => {
       this.notification.create('info', '日程提醒', res.data, { nzDuration: 0 });
     });
+  }
+
+  newUser() {
+    this.socketService.sendMessage('new user', this.userInfo._id);
   }
 
   updateInfo() {
@@ -115,5 +120,6 @@ export class NavComponent implements OnInit {
     this.visible = !this.visible;
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+    this.store.dispatch(new Logout(null));
   }
 }

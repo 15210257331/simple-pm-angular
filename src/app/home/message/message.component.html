@@ -17,21 +17,21 @@
   </div>
   <div class="message-right">
     <div class="header">
-      <img class="avatar" [src]="selectedMember?.memberAvatar">
+      <img class="avatar" [src]="selectedUser?.memberAvatar">
       <div>
-        <p>{{selectedMember?.memberName}} </p>
-        <span>好好学习，天天向上</span>
+        <p>{{selectedUser?.memberName}} </p>
+      <span>{{selectedUser?.introduction}}</span>
       </div>
     </div>
     <div class="message-content">
       <ul class="content-box">
-        <ng-container *ngFor="let item of selectedMember.messages">
+        <ng-container *ngFor="let item of selectedUser.messages">
           <li class="other" *ngIf="item?.from !== userInfo._id">
             <img class="avatar" [src]="item?.avatar" alt="">
-            <p>{{item?.content}}</p>
+            <p>{{item?.msg}}</p>
           </li>
           <li class="my" *ngIf="item?.from === userInfo._id">
-            <p>{{item?.content}}</p>
+            <p>{{item?.msg}}</p>
             <img class="avatar" [src]="item?.avatar" alt="">
           </li>
         </ng-container>
@@ -44,7 +44,7 @@
           <span class="iconfont iconjiandao"></span>
           <span class="iconfont iconfujian"></span>
         </div>
-        <textarea placeholder="按enter发送消息" [(ngModel)]="messageContent"></textarea>
+        <textarea placeholder="按enter发送消息" [(ngModel)]="msg" (keyup.enter)="sendMessage()"></textarea>
       </div>
     </div>
   </div>

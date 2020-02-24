@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Appstate } from '../../store';
 import { map } from 'rxjs/operators';
+import { SocketService } from '../../service/socket.service';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-message',
@@ -16,16 +18,20 @@ export class MessageComponent implements OnInit {
 
   userInfo: any;
 
-  messageContent = '';
+  msg = '';
 
-  selectedMember: any = {
-    messages: [],
+  selectedUser: any = {
+    introduction: '',
     memberName: '陈晓飞',
-    memberAvatar: ''
+    memberAvatar: '',
+    messages: [],
+    _id: ''
   };
 
   constructor(
     private store: Store<Appstate>,
+    private socketService: SocketService,
+    private notification: NzNotificationService,
   ) { }
 
   ngOnInit() {
@@ -40,6 +46,10 @@ export class MessageComponent implements OnInit {
 
     this.store.pipe(map(data => data.userState.userInfo)).subscribe(res => {
       this.userInfo = res;
+      this.socketService.getMessage(`to${this.userInfo._id}`).subscribe(resp => {
+        console.log(resp);
+        this.selectedUser.messages.push(resp);
+      });
     });
   }
 
@@ -48,36 +58,24 @@ export class MessageComponent implements OnInit {
       item.selected = false;
     });
     data.selected = true;
-    this.selectedMember = {
-      messages: [
-        {
-          avatar: data.avatar,
-          content: '你好我是陈晓飞',
-          from: data._id,
-          to: this.userInfo._id
-        },
-        {
-          avatar: this.userInfo.avatar,
-          content: '你好我是张三',
-          from: this.userInfo._id,
-          to: data._id
-        },
-        {
-          avatar: data.avatar,
-          content: '很高兴认识你',
-          from: data._id,
-          to: this.userInfo._id
-        },
-        {
-          avatar: this.userInfo.avatar,
-          content: '有多高兴',
-          from: this.userInfo._id,
-          to: data._id
-        },
-      ],
+    this.selectedUser = {
+      introduction: data.introduction,
       memberName: data.nickname,
-      memberAvatar: data.avatar
+      memberAvatar: data.avatar,
+      messages: [],
+      _id: data._id
     };
+  }
+
+  sendMessage() {
+    const data = {
+      from: this.userInfo._id,
+      to: this.selectedUser._id,
+      msgType: '文本消息',
+      msg: this.msg
+    };
+    this.socketService.sendMessage('private message', data);
+    this.selectedUser.messages.push(data);
   }
 
 }

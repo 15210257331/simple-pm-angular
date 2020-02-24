@@ -5,7 +5,6 @@ import { NzModalService, NzNotificationService } from 'ng-zorro-antd';
 import { map } from 'rxjs/operators';
 import { ScheduleService } from '../../service/schedule.service';
 import { CalendarAddComponent } from './calendar-add/calendar-add.component';
-import { SocketService } from '../../service/socket.service';
 import * as moment from 'moment';
 @Component({
   selector: 'app-calendar',
@@ -24,7 +23,6 @@ export class CalendarComponent implements OnInit {
     private store: Store<Appstate>,
     private modalService: NzModalService,
     private scheduleService: ScheduleService,
-    private socketService: SocketService,
     private notification: NzNotificationService,
   ) { }
 

@@ -68,7 +68,7 @@ export class UpdateUserInfoSuccess implements Action {
 
 export class Logout implements Action {
     readonly type = UserActionTypes.Logout;
-    constructor() { }
+    constructor(public payload: any) { }
 }
 
 

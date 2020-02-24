@@ -22,13 +22,17 @@ export function userReducer(state: UserState = initialState, action: UserAction)
         case UserActionTypes.LoadUserInfoSuccess:
             state.userInfo = action.payload.data;
             return state;
+
         case UserActionTypes.LoadUserInfoError:
             return state;
+
         case UserActionTypes.LoadMemberListSuccess:
             state.memberList = action.payload.data;
             return state;
+
         case UserActionTypes.LoadMemberListError:
             return state;
+
         case UserActionTypes.DeleteMemberSuccess:
             let deleteIndex;
             state.memberList.map((item, index) => {
@@ -41,12 +45,14 @@ export function userReducer(state: UserState = initialState, action: UserAction)
 
         case UserActionTypes.DeleteMemberError:
             return state;
+
         case UserActionTypes.UpdateUserInfoSuccess:
             state.userInfo = action.payload.data;
             return state;
+
         case UserActionTypes.Logout:
-            state.userInfo = {};
-            return state;
+            return initialState;
+
         default:
             return state;
     }
