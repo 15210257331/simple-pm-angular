@@ -1,44 +1,34 @@
-<form nz-form [formGroup]="form" class="login-form">
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="username">新账号</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="username" id="username" />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="nickname">新昵称</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="nickname" id="nickname" />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">新邮箱</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="email" id="email" />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="introduction">新简介</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <input nz-input formControlName="introduction" id="introduction" />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">上传头像</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
-      <nz-upload class="avatar-uploader" [nzAction]="uploadUrl" nzName="avatar"
-        nzListType="picture-card" [nzShowUploadList]="false" (nzChange)="handleChange($event)">
-        <ng-container *ngIf="!avatarUrl">
-          <i class="upload-icon" nz-icon [nzType]="'plus'"></i>
-          <div class="ant-upload-text">Upload</div>
-        </ng-container>
-        <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar" />
-      </nz-upload>
-    </nz-form-control>
-  </nz-form-item>
+<div [formGroup]="form" class="form">
+  <div class="form-item">
+    <label for="">新账号:</label>
+    <input nz-input formControlName="username" />
+  </div>
+  <div class="form-item">
+    <label for="">新昵称:</label>
+    <input nz-input formControlName="nickname" />
+  </div>
+  <div class="form-item">
+    <label for="">新邮箱:</label>
+    <input nz-input formControlName="email" />
+  </div>
+  <div class="form-item">
+    <label for="">新简介:</label>
+    <input nz-input formControlName="introduction" />
+  </div>
+  <div class="form-item">
+    <label for="">新头像:</label>
+    <nz-upload class="avatar-uploader" [nzAction]="uploadUrl" nzName="avatar" nzListType="picture-card"
+      [nzShowUploadList]="false" (nzChange)="handleChange($event)">
+      <ng-container *ngIf="!avatarUrl">
+        <i class="upload-icon" nz-icon [nzType]="'plus'"></i>
+        <div class="ant-upload-text">Upload</div>
+      </ng-container>
+      <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar" />
+    </nz-upload>
+  </div>
   <div class="footer">
     <button nz-button class="login-form-button" nzType="primary" [disabled]="!form.valid"
       (click)="submitForm()">确定</button>
     <button nz-button class="login-form-button" (click)="cancel()" nzType="default">取消</button>
   </div>
-</form>
+</div>

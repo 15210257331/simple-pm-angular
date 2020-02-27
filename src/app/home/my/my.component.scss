@@ -63,6 +63,12 @@
       height: 120px;
       z-index: 10;
     }
+
+    .clock {
+      position: absolute;
+      right: 120px;
+      top: 20px;
+    }
   }
 
   .my-content {
@@ -104,7 +110,8 @@
           cursor: pointer;
         }
 
-        td {
+        td,
+        th {
           text-align: left;
           height: 45px;
           padding: 8px 20px;
@@ -112,13 +119,16 @@
           line-height: 29px;
           overflow: hidden;
           color: #909399;
-          border-top: 1px solid rgb(235, 238, 245);
 
           p {
             margin-bottom: 0;
             height: 30px;
             line-height: 30px;
           }
+        }
+
+        td {
+          border-top: 1px solid rgb(235, 238, 245);
         }
       }
     }

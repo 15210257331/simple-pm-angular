@@ -4,6 +4,8 @@ import { ProjectAddComponent } from '../project/project-add/project-add.componen
 import { UpdateInfoComponent } from './update-info/update-info.component';
 import { ShareModule } from '../../share.module';
 import { NavComponent } from './nav.component';
+import { AuthorityComponent } from './authority/authority.component';
+import { PreferenceComponent } from './preference/preference.component';
 
 
 @NgModule({
@@ -11,6 +13,8 @@ import { NavComponent } from './nav.component';
         NavComponent,
         ProjectAddComponent,
         UpdateInfoComponent,
+        AuthorityComponent,
+        PreferenceComponent,
     ],
     imports: [
         CommonModule,
@@ -19,10 +23,14 @@ import { NavComponent } from './nav.component';
     entryComponents: [
         ProjectAddComponent,
         UpdateInfoComponent,
+        AuthorityComponent,
+        PreferenceComponent,
     ],
     exports: [
         ProjectAddComponent,
         UpdateInfoComponent,
+        AuthorityComponent,
+        PreferenceComponent,
         NavComponent,
     ]
 })

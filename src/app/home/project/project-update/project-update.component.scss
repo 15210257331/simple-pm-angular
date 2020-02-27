@@ -1,0 +1,14 @@
+.form {
+    .form-item {
+        overflow: hidden;
+        height: auto;
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        label {
+            margin-right: 10px;
+            width: 90px;
+        }
+    }
+}

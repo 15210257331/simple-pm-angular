@@ -12,6 +12,8 @@ export enum ScheduleActionTypes {
     DeleteScheduleList = 'DeleteScheduleList',
     DeleteScheduleSuccess = 'DeleteScheduleSuccess',
     DeleteScheduleError = 'DeleteScheduleError',
+
+    ResetSchedule = 'resetSchedule'
 }
 
 export class LoadScheduleList implements Action {
@@ -55,6 +57,11 @@ export class DeleteScheduleSuccess implements Action {
 
 export class DeleteScheduleError implements Action {
     readonly type = ScheduleActionTypes.DeleteScheduleError;
+    constructor(public payload: any) {}
+}
+
+export class ResetSchedule implements Action {
+    readonly type = ScheduleActionTypes.ResetSchedule;
     constructor(public payload: any) {}
 }
 

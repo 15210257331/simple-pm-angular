@@ -66,7 +66,7 @@ export class ProjectComponent implements OnInit {
         data
       },
       nzFooter: null,
-      nzWidth: 840,
+      nzWidth: 600,
     });
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
     modal.afterClose.subscribe(res => {

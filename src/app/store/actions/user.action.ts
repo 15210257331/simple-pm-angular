@@ -15,7 +15,7 @@ export enum UserActionTypes {
 
     UpdateUserInfoSuccess = 'UpdateUserInfoSuccess',
 
-    Logout = 'Logout',
+    ResetUser = 'ResetUser',
 }
 
 export class LoadUserInfo implements Action {
@@ -66,8 +66,8 @@ export class UpdateUserInfoSuccess implements Action {
     constructor(public payload: any) { }
 }
 
-export class Logout implements Action {
-    readonly type = UserActionTypes.Logout;
+export class ResetUser implements Action {
+    readonly type = UserActionTypes.ResetUser;
     constructor(public payload: any) { }
 }
 

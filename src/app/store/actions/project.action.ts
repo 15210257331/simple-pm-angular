@@ -45,6 +45,8 @@ export enum ProjectActionTypes {
     AddProjectTagSuccess = 'AddProjectTagSuccess',
     AddProjectTagError = 'AddProjectTagError',
 
+    ResetProject = 'ResetProject'
+
 }
 
 export class LoadProjectList implements Action {
@@ -199,4 +201,10 @@ export class AddProjectTagError implements Action {
     readonly type = ProjectActionTypes.AddProjectTagError;
     constructor(public payload: any) { }
 }
+
+export class ResetProject implements Action {
+    readonly type = ProjectActionTypes.ResetProject;
+    constructor(public payload: any) { }
+}
+
 

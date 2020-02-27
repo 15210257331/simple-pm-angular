@@ -7,7 +7,7 @@
     <div class="schedule-list">
       <app-schedule-card *ngFor="let item of mySchedule;" [data]="item">
       </app-schedule-card>
-      <nz-empty *ngIf="mySchedule.length === 0"></nz-empty>
+      <nz-empty style="margin-top: 50px;" *ngIf="mySchedule.length === 0"></nz-empty>
     </div>
   </div>
   <div class="calendar-right">

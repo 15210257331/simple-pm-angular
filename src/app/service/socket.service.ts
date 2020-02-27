@@ -15,6 +15,9 @@ export class SocketService {
 
     constructor(private http: HttpClient) {
         this.socket = io(API);
+        this.socket.on('disconnect', (data) => {
+            console.log('websocket 断开连接');
+        });
     }
 
     sendMessage(type: string, content: any) {

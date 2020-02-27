@@ -1,15 +1,34 @@
-form {
-    .footer {
-      text-align: center;
-  
-      button {
-        margin: 0 20px;
-      }
-    }
+.form {
+  .form-item {
+    overflow: hidden;
+    height: auto;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 
-    .avatar {
-      width: 120px;
-      height: 120px;
+    label {
+      margin-right: 10px;
+      width: 90px;
     }
   }
-  
+
+  .footer {
+    border-top: 1px solid #eeeeee;
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    button {
+      margin: 0 10px;
+    }
+  }
+}
+
+
+
+.avatar {
+  width: 120px;
+  height: 120px;
+}

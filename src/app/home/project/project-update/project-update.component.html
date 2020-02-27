@@ -7,7 +7,19 @@
     <label for="">描述:</label>
     <textarea nz-input [(ngModel)]="model.content" name="projectContent"></textarea>
   </div>
-  <div style="padding-left: 85px" class="form-item">
+  <div class="form-item">
+    <label for="">项目封面:</label>
+    <nz-upload class="avatar-uploader" [nzAction]="uploadUrl" nzName="avatar" nzListType="picture-card"
+      [nzShowUploadList]="false" (nzChange)="handleChange($event)">
+      <ng-container *ngIf="!model.cover">
+        <i class="upload-icon" nz-icon [nzType]="'plus'"></i>
+        <div class="ant-upload-text">Upload</div>
+      </ng-container>
+      <img *ngIf="model.cover" [src]="model.cover" class="project-cover" />
+    </nz-upload>
+  </div>
+  <div class="form-item" style="justify-content:flex-end; margin-bottom: 0;">
+    <button style="margin-right: 30px;" nz-button nzType="info" (click)="cancel()">取消</button>
     <button nz-button nzType="primary" (click)="updateProject()">提交</button>
   </div>
 </div>

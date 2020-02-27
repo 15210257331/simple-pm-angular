@@ -6,6 +6,90 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3702619",
+      "name": "角色管理",
+      "font_class": "navicon-jsgl",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "5634072",
+      "name": "folder",
+      "font_class": "folder1",
+      "unicode": "efdb",
+      "unicode_decimal": 61403
+    },
+    {
+      "icon_id": "6882972",
+      "name": "角色管理",
+      "font_class": "jiaoseguanli2",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "7090050",
+      "name": "角色管理",
+      "font_class": "jiaoseguanli3",
+      "unicode": "e70f",
+      "unicode_decimal": 59151
+    },
+    {
+      "icon_id": "7605117",
+      "name": "folder",
+      "font_class": "folder2",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "12770946",
+      "name": "角色切换",
+      "font_class": "jiaoseqiehuan",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "315967",
+      "name": "search",
+      "font_class": "3",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "742126",
+      "name": "角色管理",
+      "font_class": "jiaoseguanli",
+      "unicode": "ea62",
+      "unicode_decimal": 60002
+    },
+    {
+      "icon_id": "1160491",
+      "name": "folder",
+      "font_class": "folder",
+      "unicode": "e6fb",
+      "unicode_decimal": 59131
+    },
+    {
+      "icon_id": "1391486",
+      "name": "角色管理",
+      "font_class": "jiaoseguanli1",
+      "unicode": "e649",
+      "unicode_decimal": 58953
+    },
+    {
+      "icon_id": "1921131",
+      "name": "角色权限",
+      "font_class": "jiaosequanxian",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "2514758",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e7a2",
+      "unicode_decimal": 59298
+    },
+    {
       "icon_id": "696399",
       "name": "赞",
       "font_class": "zan",

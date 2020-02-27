@@ -43,6 +43,11 @@ export function scheduleReducer(state: Array<Schedule> = initialState, action: U
             return state;
         case ScheduleActionTypes.DeleteScheduleError:
             return state;
+
+        case ScheduleActionTypes.ResetSchedule:
+            state = [];
+            return state;
+
         default:
             return state;
     }

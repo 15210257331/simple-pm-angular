@@ -1,6 +1,9 @@
 <div class="my">
   <div class="my-header">
     <img [src]="userInfo?.avatar" alt="" class="avatar">
+    <div class="clock">
+      <app-clock></app-clock>
+    </div>
     <div class="pic">
       <p>{{userInfo?.nickname}}<span>({{userInfo?.introduction}})</span>
       </p>
@@ -29,19 +32,37 @@
         <span>所有成员</span>
       </p>
       <table>
+        <thead>
+          <tr>
+            <th>昵称</th>
+            <th>账号</th>
+            <th>在职状态</th>
+            <th>角色</th>
+            <th>操作</th>
+          </tr>
+        </thead>
         <tbody>
           <tr *ngFor="let item of memberList;">
-            <td width="30%">
+            <td width="20%">
               <div style="display: flex; align-items: center;">
                 <img class="avatar" [src]="item?.avatar" alt="">
                 <p>{{item?.nickname}}</p>
               </div>
             </td>
-            <td width="60%">
-              <span>{{item?.sex === 1 ? '男' : '女'}}</span>
+            <td width="10%">
+              <span>{{item.username}}</span>
             </td>
             <td width="10%">
-              <span class="iconfont icondelete" (click)="deleteMember(item._id, item?.nickname, $event)"></span>
+              <nz-badge nzColor="green" nzText="在职"></nz-badge>
+            </td>
+            <td width="45%">
+              <span>{{'超级管理员'}}</span>
+            </td>
+            <td width="15%">
+              <span style="font-size: 20px;" class="iconfont iconjiaoseguanli1"
+                (click)="deleteMember(item._id, item?.nickname, $event)"></span>
+              <span style="font-size: 20px; margin-left: 15px;" class="iconfont icontrash"
+                (click)="deleteMember(item._id, item?.nickname, $event)"></span>
             </td>
           </tr>
         </tbody>

@@ -50,8 +50,10 @@ export function userReducer(state: UserState = initialState, action: UserAction)
             state.userInfo = action.payload.data;
             return state;
 
-        case UserActionTypes.Logout:
-            return initialState;
+        case UserActionTypes.ResetUser:
+            state.memberList = [];
+            state.userInfo = {};
+            return state;
 
         default:
             return state;

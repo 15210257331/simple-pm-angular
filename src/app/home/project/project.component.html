@@ -2,7 +2,10 @@
   <app-header [icon]="'folder'" [title]="'全部项目'"></app-header>
   <div class="project-content">
     <div class="opertion">
-      <input type="text" nz-input placeholder="搜索项目(按enter搜索)" [(ngModel)]="name" (keyup.enter)="searchProject()" />
+      <div>
+        <input type="text" nz-input placeholder="搜索项目(按enter搜索)" [(ngModel)]="name" (keyup.enter)="searchProject()" />
+        <span style="font-size: 26px; margin-left: 13px; vertical-align: sub;" (click)="searchProject()" class="iconfont iconsearch"></span>
+      </div>
       <span>共<b>{{projectList.length}}</b>个项目</span>
     </div>
     <div class="project-list">

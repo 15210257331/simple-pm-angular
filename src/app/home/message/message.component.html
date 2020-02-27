@@ -1,41 +1,46 @@
 <div class="message">
   <div class="message-left">
     <div class="header">
-      <input nz-input [(ngModel)]="name" placeholder="搜索成员、消息" />
+      <input nz-input [(ngModel)]="name" (keyup.enter)="search()" placeholder="搜索成员、消息" />
       <span class="iconfont iconxinzeng"></span>
     </div>
     <nz-divider></nz-divider>
     <ul class="friend-list">
-      <li *ngFor="let item of memberList;" [class.selected]="item.selected" (click)="selectMember(item)">
+      <li *ngFor="let item of friendList; let last = last" [class.selected]="item.selected"
+        (click)="selectMember(item)">
         <div [ngStyle]="{'background-image': 'url(' + item.avatar + ')'}" class="avatar"></div>
         <div>
-          <p>{{item.nickname}}</p>
+          <p>{{item.nickname}} <span>{{item.date | formatDate}}</span></p>
           <span>{{item.username}}({{item.password}})</span>
         </div>
+        <nz-badge style="position: absolute; right: 15px; bottom:7px;" [nzCount]="item.count"></nz-badge>
       </li>
     </ul>
   </div>
   <div class="message-right">
     <div class="header">
-      <img class="avatar" [src]="selectedUser?.memberAvatar">
+      <img class="avatar" [src]="selectedMember?.avatar">
       <div>
-        <p>{{selectedUser?.memberName}} </p>
-      <span>{{selectedUser?.introduction}}</span>
+        <p>{{selectedMember?.nickname}} </p>
+        <span>{{selectedMember?.introduction}}</span>
       </div>
     </div>
     <div class="message-content">
-      <ul class="content-box">
-        <ng-container *ngFor="let item of selectedUser.messages">
-          <li class="other" *ngIf="item?.from !== userInfo._id">
-            <img class="avatar" [src]="item?.avatar" alt="">
-            <p>{{item?.msg}}</p>
-          </li>
-          <li class="my" *ngIf="item?.from === userInfo._id">
-            <p>{{item?.msg}}</p>
-            <img class="avatar" [src]="item?.avatar" alt="">
-          </li>
-        </ng-container>
-      </ul>
+      <div class="content-box">
+        <ul class="contentContainer" #contentContainer>
+          <ng-container *ngFor="let item of messages;">
+            <li class="other" *ngIf="item?.from !== userInfo._id">
+              <img class="avatar" [src]="item?.fromAvatar" alt="">
+              <p>{{item?.msg}}</p>
+            </li>
+            <li class="my" *ngIf="item?.from === userInfo._id">
+              <p>{{item?.msg}}</p>
+              <img class="avatar" [src]="item?.fromAvatar" alt="">
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+
       <div class="send-box">
         <div>
           <span class="iconfont icongif"></span>
@@ -44,7 +49,7 @@
           <span class="iconfont iconjiandao"></span>
           <span class="iconfont iconfujian"></span>
         </div>
-        <textarea placeholder="按enter发送消息" [(ngModel)]="msg" (keyup.enter)="sendMessage()"></textarea>
+        <textarea placeholder="按enter发送消息" [(ngModel)]="msg" (keyup.enter)="sendMessage($event)"></textarea>
       </div>
     </div>
   </div>

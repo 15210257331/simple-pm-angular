@@ -145,6 +145,20 @@ export function projectReducer(state: ProjectState = initialState, action: Proje
             state.projectDetail.tag.push(action.payload.data);
             return state;
 
+        case ProjectActionTypes.ResetProject:
+            state.projectList = [];
+            state.projectDetail = {
+                _id: '',
+                name: '',
+                content: '',
+                creater: null,
+                member: [],
+                createDate: null,
+                task: [],
+                tag: [],
+            };
+            return state;
+
         default:
             return state;
     }
