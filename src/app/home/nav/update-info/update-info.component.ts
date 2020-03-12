@@ -19,6 +19,8 @@ export class UpdateInfoComponent implements OnInit {
 
   @Input() title;
 
+  @Input() data;
+
   form: FormGroup;
 
   avatarUrl: string;
@@ -37,10 +39,10 @@ export class UpdateInfoComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      username: ['', [Validators.required]],
-      nickname: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      introduction: ['']
+      username: [this.data.username, [Validators.required]],
+      nickname: [this.data.nickname, [Validators.required]],
+      email: [this.data.email, [Validators.required]],
+      introduction: [this.data.introduction]
     });
   }
 

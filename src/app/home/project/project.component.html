@@ -9,7 +9,7 @@
       <span>共<b>{{projectList.length}}</b>个项目</span>
     </div>
     <div class="project-list">
-      <div class="project-item" *ngFor="let item of projectList;" (click)="projectDetail(item._id)">
+      <div class="project-item" [ngStyle]="{'backgroundImage': 'url(' + item.cover + ')'}" *ngFor="let item of projectList;" (click)="projectDetail(item._id)">
         <span class="star iconfont iconstar"></span>
         <div class="title">
           <span>{{item?.name}}</span>

@@ -16,7 +16,7 @@ export class ProjectUpdateComponent implements OnInit {
 
   @Input() data: any;
 
-  uploadUrl = `${API}/user/uploadImg`;
+  uploadUrl = `${API}/project/uploadImg`;
 
   model: any;
 
@@ -34,10 +34,11 @@ export class ProjectUpdateComponent implements OnInit {
     const data = {
       name: this.model.name,
       content: this.model.content,
-      projectId: this.model.content._id,
+      projectId: this.model._id,
       cover: this.model.cover
     };
     this.store.dispatch(new UpdateProject(data));
+    this.modal.destroy({ result: true });
   }
 
   handleChange(event) {

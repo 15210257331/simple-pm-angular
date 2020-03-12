@@ -1,27 +1,27 @@
 <div [formGroup]="form" class="form">
   <div class="form-item">
-    <label for="">新账号:</label>
+    <label for="">账号:</label>
     <input nz-input formControlName="username" />
   </div>
   <div class="form-item">
-    <label for="">新昵称:</label>
+    <label for="">昵称:</label>
     <input nz-input formControlName="nickname" />
   </div>
   <div class="form-item">
-    <label for="">新邮箱:</label>
+    <label for="">邮箱:</label>
     <input nz-input formControlName="email" />
   </div>
   <div class="form-item">
-    <label for="">新简介:</label>
+    <label for="">简介:</label>
     <input nz-input formControlName="introduction" />
   </div>
   <div class="form-item">
-    <label for="">新头像:</label>
+    <label for="">头像:</label>
     <nz-upload class="avatar-uploader" [nzAction]="uploadUrl" nzName="avatar" nzListType="picture-card"
       [nzShowUploadList]="false" (nzChange)="handleChange($event)">
       <ng-container *ngIf="!avatarUrl">
         <i class="upload-icon" nz-icon [nzType]="'plus'"></i>
-        <div class="ant-upload-text">Upload</div>
+        <div class="ant-upload-text">选择新头像</div>
       </ng-container>
       <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar" />
     </nz-upload>

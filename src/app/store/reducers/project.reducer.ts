@@ -11,6 +11,7 @@ export interface Project {
     name: string;
     content: string;
     creater: any;
+    cover: '';
     member: any[];
     createDate: any;
 }
@@ -33,6 +34,7 @@ export interface ProjectDetail {
     content: string;
     creater: any;
     member: any[];
+    cover: '';
     createDate: any;
     task: Array<Task>;
     tag: Array<any>;
@@ -52,6 +54,7 @@ export const initialState: ProjectState = {
         content: '',
         creater: null,
         member: [],
+        cover: '',
         createDate: null,
         task: [],
         tag: [],
@@ -72,11 +75,13 @@ export function projectReducer(state: ProjectState = initialState, action: Proje
             state.projectList.map(item => {
                 if (item._id === action.payload.data._id) {
                     item.name = action.payload.data.name;
+                    item.content = action.payload.data.content;
+                    item.cover = action.payload.data.cover;
                 }
             });
-            state.projectDetail.name = action.payload.data.name;
-            state.projectDetail.content = action.payload.data.content;
-            state.projectDetail.member = action.payload.data.member;
+            // state.projectDetail.name = action.payload.data.name;
+            // state.projectDetail.content = action.payload.data.content;
+            // state.projectDetail.member = action.payload.data.member;
             return state;
 
         case ProjectActionTypes.DeleteProjectSuccess:
@@ -97,6 +102,7 @@ export function projectReducer(state: ProjectState = initialState, action: Proje
                 content: projectDetail.content,
                 creater: projectDetail.creater,
                 member: projectDetail.member,
+                cover: projectDetail.cover,
                 createDate: projectDetail.createDate,
                 task: projectDetail.task,
                 tag: projectDetail.tag
@@ -153,6 +159,7 @@ export function projectReducer(state: ProjectState = initialState, action: Proje
                 content: '',
                 creater: null,
                 member: [],
+                cover: '',
                 createDate: null,
                 task: [],
                 tag: [],

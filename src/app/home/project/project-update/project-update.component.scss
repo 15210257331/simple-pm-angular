@@ -7,8 +7,11 @@
         align-items: center;
         justify-content: flex-start;
         label {
-            margin-right: 10px;
             width: 90px;
+            align-self: flex-start;
+        }
+        .project-cover {
+           width: 450px;
         }
     }
 }

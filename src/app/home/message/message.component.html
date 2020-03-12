@@ -11,7 +11,7 @@
         <div [ngStyle]="{'background-image': 'url(' + item.avatar + ')'}" class="avatar"></div>
         <div>
           <p>{{item.nickname}} <span>{{item.date | formatDate}}</span></p>
-          <span>{{item.username}}({{item.password}})</span>
+          <span>{{item.latestMessage}}</span>
         </div>
         <nz-badge style="position: absolute; right: 15px; bottom:7px;" [nzCount]="item.count"></nz-badge>
       </li>
@@ -21,13 +21,13 @@
     <div class="header">
       <img class="avatar" [src]="selectedMember?.avatar">
       <div>
-        <p>{{selectedMember?.nickname}} </p>
+        <p>{{selectedMember?.nickname}}<span>(@{{selectedMember?.username}})</span></p>
         <span>{{selectedMember?.introduction}}</span>
       </div>
     </div>
     <div class="message-content">
-      <div class="content-box">
-        <ul class="contentContainer" #contentContainer>
+      <div class="content-box" #contentContainer>
+        <ul class="contentContainer">
           <ng-container *ngFor="let item of messages;">
             <li class="other" *ngIf="item?.from !== userInfo._id">
               <img class="avatar" [src]="item?.fromAvatar" alt="">

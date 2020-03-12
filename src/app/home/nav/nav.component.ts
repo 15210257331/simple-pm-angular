@@ -122,7 +122,8 @@ export class NavComponent implements OnInit {
       nzTitle: '修改账号信息',
       nzContent: UpdateInfoComponent,
       nzComponentParams: {
-        title: '修改账号信息'
+        title: '修改账号信息',
+        data: this.userInfo,
       },
       nzFooter: null,
       nzWidth: 540,

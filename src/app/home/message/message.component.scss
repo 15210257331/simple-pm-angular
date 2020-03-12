@@ -69,8 +69,13 @@
             }
           }
 
-          span {
+          & > span {
+            width: 80%;
             color: #8c8c8c;
+            display: inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
         }
       }
