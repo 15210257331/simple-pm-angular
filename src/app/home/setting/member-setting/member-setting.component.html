@@ -1,0 +1,36 @@
+<div class="member">
+  <div class="top">
+    <nz-input-group style="width: 200px;" [nzPrefix]="prefixTemplateUser">
+      <input type="text" nzSize="large" nz-input placeholder="用户搜索" />
+    </nz-input-group>
+    <ng-template #prefixTemplateUser><i nz-icon nzType="user"></i></ng-template>
+    <button nz-button nzType="primary" (click)="addMember()" nzShape="round">
+      <i nz-icon nzType="download"></i>添加成员
+    </button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>昵称(用户名)</th>
+        <th>邮箱</th>
+        <th>手机</th>
+        <th>角色</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of memberList;">
+        <td width="20%">{{ item?.nickname }}({{item?.username}})</td>
+        <td width="20%">{{ item?.email }}</td>
+        <td width="20%">{{ item?.phoneNumber }}</td>
+        <td width="25%">
+          <span *ngFor="let item of item?.role">{{item.name}}</span>
+        </td>
+        <td width="15%">
+          <span (click)="setRole(item)">配置角色</span>
+          <span (click)="resetPassword(item._id)">重置密码</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

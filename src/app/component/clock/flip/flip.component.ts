@@ -26,7 +26,7 @@ export class FlipComponent implements OnInit {
     this.backTextFromData = this.backText;
   }
 
-  private _textClass(num) {
+  public _textClass(num) {
     return 'number' + num;
   }
   _flip(type, front, back) {

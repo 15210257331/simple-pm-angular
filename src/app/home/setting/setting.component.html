@@ -1,0 +1,12 @@
+<div class="setting">
+  <app-header [icon]="'folder'" [title]="'配置中心'"></app-header>
+  <div class="setting-tab">
+    <ng-container *ngFor="let item of viewList; let last = last">
+      <span [class.select]="item.value === selectTab" (click)="tabChange(item.value)">{{item.title}}</span>
+      <span *ngIf="!last" class="line"></span>
+    </ng-container>
+  </div>
+  <div class="setting-content">
+    <ng-template #viewDetail></ng-template>
+  </div>
+</div>

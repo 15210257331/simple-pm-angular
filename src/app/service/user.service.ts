@@ -25,9 +25,14 @@ export class UserService {
         return this.http.get(`${API}/user/info`);
     }
 
-    // 获取用户信息
+    // 获取用户列表
     getMemberList(): Observable<any> {
-        return this.http.get(`${API}/user/member/list`);
+        return this.http.get(`${API}/user/list`);
+    }
+
+    // 设置用户角色
+    setMemberRole(data: any): Observable<any> {
+        return this.http.post(`${API}/user/setMemberRole`, data);
     }
 
     // 更新用户信息
@@ -40,9 +45,29 @@ export class UserService {
         return this.http.get(`${API}/user/delete?id=${id}`);
     }
 
-    // 上传文件
+    // 上传用户头像
     uploadImg(data: any): Observable<any> {
         return this.http.post(`${API}/user/uploadImg`, data);
+    }
+
+    // 获取角色列表
+    getRoleList(): Observable<any> {
+        return this.http.get(`${API}/role/list`);
+    }
+
+    // 添加角色
+    addRole(data: any): Observable<any> {
+        return this.http.post(`${API}/role/add`, data);
+    }
+
+    // 更新角色
+    updateRole(data: any): Observable<any> {
+        return this.http.post(`${API}/role/update`, data);
+    }
+
+    // 删除角色
+    deleteRole(id: any): Observable<any> {
+        return this.http.get(`${API}/role/delete?id=${id}`);
     }
 }
 

@@ -1,0 +1,29 @@
+.send-box {
+  border-top: solid 1px #eee;
+  height: 180px;
+
+  div {
+    display: flex;
+    align-items: center;
+    height: 35px;
+    padding-left: 10px;
+    margin-bottom: 0;
+
+    span {
+      margin: 0 8px;
+      font-size: 24px;
+    }
+  }
+
+  textarea {
+    padding: 10px 0 0 18px;
+    outline: none;
+    display: block;
+    border: 0;
+    border-radius: 0;
+    width: 100%;
+    word-wrap: break-word;
+    height: 145px;
+    color: #333;
+  }
+}

@@ -1,0 +1,30 @@
+table {
+  width: 100%;
+  background-color: white;
+  border-radius: 4px;
+
+  tbody tr:hover {
+    background-color: honeydew;
+    cursor: pointer;
+  }
+
+  th,
+  td {
+    text-align: left;
+    height: 45px;
+    padding: 8px 20px;
+    box-sizing: border-box;
+    line-height: 29px;
+    overflow: hidden;
+  }
+
+  th {
+    color: #909399;
+    border-bottom: 1px solid rgb(235, 238, 245);
+  }
+
+  td {
+    color: #909399;
+    border-top: 1px solid rgb(235, 238, 245);
+  }
+}

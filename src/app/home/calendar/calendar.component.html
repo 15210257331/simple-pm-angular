@@ -1,21 +1,8 @@
 <div class="calendar">
-  <div class="calendar-left">
-    <div class="calendar-left-top">
-      <nz-calendar [nzFullscreen]="false"></nz-calendar>
-    </div>
-    <p>我的待办</p>
-    <div class="schedule-list">
-      <app-schedule-card *ngFor="let item of mySchedule;" [data]="item">
-      </app-schedule-card>
-      <nz-empty style="margin-top: 50px;" *ngIf="mySchedule.length === 0"></nz-empty>
-    </div>
-  </div>
-  <div class="calendar-right">
-    <app-header [icon]="'smile'" [title]="'我的日程'"></app-header>
-    <div>
-      <nz-calendar [nzDateFullCell]="dateCellTpl" [(ngModel)]="selectedDate" (nzSelectChange)="selectChange($event)">
-      </nz-calendar>
-    </div>
+  <app-header [icon]="'smile'" [title]="'我的日程'"></app-header>
+  <div class="calendar-content">
+    <nz-calendar [nzDateFullCell]="dateCellTpl" [(ngModel)]="selectedDate" (nzSelectChange)="selectChange($event)">
+    </nz-calendar>
   </div>
 </div>
 <ng-template #dateCellTpl let-date>
@@ -57,3 +44,7 @@
     </ul>
   </div>
 </ng-template>
+
+
+
+

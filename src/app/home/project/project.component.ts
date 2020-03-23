@@ -27,7 +27,6 @@ export class ProjectComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new LoadProjectList(String(this.name)));
     this.store.pipe(map(data => data.projectState.projectList)).subscribe(res => {
       this.projectList = res || [];
     });

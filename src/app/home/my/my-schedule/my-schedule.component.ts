@@ -1,14 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as moment from 'moment';
 
 @Component({
-  selector: 'app-schedule-card',
-  templateUrl: './schedule-card.component.html',
-  styleUrls: ['./schedule-card.component.scss']
+  selector: 'app-my-schedule',
+  templateUrl: './my-schedule.component.html',
+  styleUrls: ['./my-schedule.component.scss']
 })
-export class ScheduleCardComponent implements OnInit {
+export class MyScheduleComponent implements OnInit {
 
-  @Input() data: any;
+  @Input() data: any[] = [];
 
   color: any;
 

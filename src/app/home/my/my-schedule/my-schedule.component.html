@@ -1,14 +1,15 @@
-<div class="schedule-card">
+<div class="schedule-card" *ngFor="let item of data;">
   <div class="title">
     <span [style.color]="color" class="iconfont iconmark mark"></span>
-    <h2>{{data?.name}}</h2>
+    <h2>{{item?.name}}</h2>
     <span class="time">
-      {{data?.startTime}}
+      {{item?.startTime}}
       <i class="iconfont iconclock"></i>
     </span>
   </div>
   <div class="line"></div>
   <div class="content">
-    <p>{{data?.content}}</p>
+    <p>{{item?.content}}</p>
   </div>
 </div>
+<nz-empty style="margin-top: 50px;" *ngIf="data.length === 0"></nz-empty>

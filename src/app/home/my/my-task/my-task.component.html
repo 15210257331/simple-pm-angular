@@ -1,0 +1,33 @@
+<table>
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>状态</th>
+      <th>内容详情</th>
+      <th>所属项目</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data;" (click)="taskDetail(item._id)">
+      <td width="20%">{{ item.name }}</td>
+      <td width="10%">
+        <span [ngSwitch]="item.status">
+          <span *ngSwitchCase="1">
+            <nz-tag [nzColor]="'#2db7f5'">未开始</nz-tag>
+          </span>
+          <span *ngSwitchCase="2">
+            <nz-tag [nzColor]="'#22d7bb'">进行中</nz-tag>
+          </span>
+          <span *ngSwitchCase="3">
+            <nz-tag [nzColor]="'#87d068'">已完成</nz-tag>
+          </span>
+          <span *ngSwitchCase="4">
+            <nz-tag [nzColor]="'#f50'">已作废</nz-tag>
+          </span>
+        </span>
+      </td>
+      <td width="50%">{{ item.content }}</td>
+      <td width="20%">{{ 'simple-pm的第一个项目'}}</td>
+    </tr>
+  </tbody>
+</table>

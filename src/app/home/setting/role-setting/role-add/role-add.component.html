@@ -1,0 +1,14 @@
+<form class="form" [formGroup]="form">
+  <div class="form-item">
+    <label for="">角色名称:</label>
+    <input nz-input formControlName="name" name="projectName" />
+  </div>
+  <div class="form-item">
+    <label for="">描述:</label>
+    <textarea nz-input formControlName="description" name="projectContent"></textarea>
+  </div>
+  <div class="form-item" style="justify-content:flex-end; margin-bottom: 0;">
+    <button style="margin-right: 30px;" nz-button nzType="info" (click)="cancel()">取消</button>
+    <button nz-button nzType="primary" (click)="submitForm()">提交</button>
+  </div>
+</form>

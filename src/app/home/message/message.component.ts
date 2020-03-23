@@ -1,10 +1,12 @@
 import { MessageService } from './../../service/message.service';
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Renderer2, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Appstate } from '../../store';
 import { map, last, first } from 'rxjs/operators';
 import { SocketService } from '../../service/socket.service';
 import { NzNotificationService } from 'ng-zorro-antd';
+import { SelectedMemberData, LocalMessageData } from './message.interface';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-message',
@@ -13,21 +15,17 @@ import { NzNotificationService } from 'ng-zorro-antd';
 })
 export class MessageComponent implements OnInit, AfterViewChecked {
 
-  name = '';
+  selectedValue = null;
 
   memberList: any[] = [];
 
-  friendList: any[] = [];
-
   userInfo: any;
 
-  msg = '';
+  selectedMember: SelectedMemberData = {
+    message: []
+  };
 
-  messages: any[] = [];
-
-  selectedMember: any;
-
-  lastMessageList: any[] = [];
+  localMessages: Array<LocalMessageData> = [];
 
   @ViewChild('contentContainer', { static: false }) contentContainer: ElementRef;
 
@@ -36,109 +34,104 @@ export class MessageComponent implements OnInit, AfterViewChecked {
     private socketService: SocketService,
     private notification: NzNotificationService,
     private messageService: MessageService,
-    private renderer2: Renderer2,
-    private elementRef: ElementRef
   ) { }
 
   ngOnInit() {
-    // this.lastMessageList = JSON.parse(localStorage.getItem('lastMessage')) || [];
-    this.store
-      .pipe(
-        map(data => data.userState),
-      )
-      .subscribe(res => {
-        this.userInfo = res.userInfo;
-        this.memberList = res.memberList;
-        if (this.memberList.length > 0) {
-          this.memberList = this.memberList.map(item => {
-            return Object.assign({}, item, {
-              selected: false,
-              count: 0,
-              date: new Date().getTime(),
-              latestMessage: '',
-            });
-          }).filter(item => item._id !== this.userInfo._id);
-          this.selectMember(this.memberList[0]);
-          this.getPrivateMessage();
-        }
-        this.friendList = this.memberList;
-      });
-  }
-
-  search() {
-    this.friendList = this.memberList.filter(item => item.nickname.includes(this.name));
-  }
-
-  ngAfterViewChecked() {
-    this.contentContainer.nativeElement.scrollTop = this.contentContainer.nativeElement.scrollHeight;
-  }
-
-
-  selectMember(data) {
-    this.memberList.map(item => {
-      item.selected = false;
+    this.store.pipe(map(data => data.userState)).subscribe(res => {
+      this.userInfo = res.userInfo;
+      this.memberList = res.memberList.filter(item => item._id !== this.userInfo._id);
+      this.localMessages = JSON.parse(localStorage.getItem('localMessages' + this.userInfo._id)) || [];
+      if (this.localMessages.length > 0) {
+        this.selectMember(this.localMessages[0]);
+      }
+      this.getPrivateMessage();
     });
-    data.selected = true;
-    data.count = 0;
-    this.selectedMember = data;
-    this.loadSelectedMemberMessages(data._id);
   }
 
-  // 加载选中好友的消息
-  loadSelectedMemberMessages(id) {
-    this.messageService.getMessages(id).subscribe(res => {
+  // 选中一个好友
+  selectMember(event) {
+    if (!event) {
+      return;
+    }
+    const ids = this.localMessages.map(item => {
+      item.selected = false;
+      if (item._id === event._id) {
+        item.selected = true;
+        item.count = 0;
+      }
+      return item._id;
+    });
+    this.messageService.getMessages(event._id).subscribe(res => {
       if (res.code === 200) {
-        this.messages = res.data || [];
-        if (this.messages.length > 0) {
-          this.memberList.map(item => {
-            if (item._id === this.selectedMember._id) {
-              item.latestMessage = this.messages[this.messages.length - 1].msg;
-            }
+        this.selectedMember = Object.assign({}, event, {
+          message: res.data || [],
+        });
+        if (ids.indexOf(event._id) < 0) {
+          const localMessage = Object.assign({}, event, {
+            selected: false,
+            count: 0,
+            latestMessageDate: res.data.length > 0 ? moment(res.data[res.data.length - 1].msgDate).format('YYYY-MM-DD') : '',
+            latestMessage: res.data.length > 0 ? res.data[res.data.length - 1].msg : '',
           });
+          this.localMessages.push(localMessage);
+          localStorage.setItem('localMessages' + this.userInfo._id, JSON.stringify(this.localMessages));
         }
-        // this.lastMessageList.map((item, index) => {
-        //   if (item.from === this.messages[this.messages.length - 1].from) {
-        //     lastMessageList[index] = this.
-        //   }
-        // });
-        // this.lastMessageList.push(this.messages[this.messages.length - 1]);
-        // localStorage.setItem('lastMessage', JSON.stringify(this.lastMessageList));
       }
     });
   }
 
   // 接收好友发来的消息
   getPrivateMessage() {
-    this.socketService.getMessage(`to${this.userInfo._id}`).subscribe(resp => {
-      this.memberList.map(item => {
-        if (item._id === resp.from) {
-          item.count++;
-          item.date = resp.msgDate;
-          item.latestMessage = resp.msg;
-          this.messages.push(resp);
+    this.socketService.getMessage(`to${this.userInfo._id}`).subscribe(res => {
+      const ids = this.localMessages.map(item => item._id);
+      if (ids.indexOf(res.from) > -1) {
+        const data = this.localMessages.filter(item => item._id === res.from)[0];
+        data.latestMessageDate = moment(res.msgDate).format('YYYY-MM-DD');
+        data.latestMessage = res.msg;
+        if (this.selectedMember._id === res.from) {
+          this.selectedMember.message.push(res);
+          data.count = 0;
+        } else {
+          data.count += 1;
         }
-      });
+      } else {
+        this.memberList.map(item => {
+          if (item._id === res.from) {
+            const localMessage = Object.assign({}, item, {
+              selected: false,
+              count: 1,
+              date: new Date().getTime(),
+              latestMessage: res.msg
+            });
+            this.localMessages.push(localMessage);
+          }
+        });
+      }
+      localStorage.setItem('localMessages' + this.userInfo._id, JSON.stringify(this.localMessages));
     });
   }
 
-  // 发送消息
+  // 给好友发送消息
   sendMessage(event) {
-    // event.preventDefault();
     const data = {
       from: this.userInfo._id,
       fromAvatar: this.userInfo.avatar,
       to: this.selectedMember._id,
       toAvatar: this.selectedMember.avatar,
       msgType: 1,
-      msg: this.msg
+      msg: event
     };
-    this.msg = '';
     this.socketService.sendMessage('private message', data);
-    this.messages.push(data);
-    this.memberList.map(item => {
+    this.selectedMember.message.push(data);
+    this.localMessages.map(item => {
       if (item._id === data.to) {
         item.latestMessage = data.msg;
       }
     });
+    localStorage.setItem('localMessages' + this.userInfo._id, JSON.stringify(this.localMessages));
+  }
+
+  ngAfterViewChecked() {
+    this.contentContainer.nativeElement.scrollTop = this.contentContainer.nativeElement.scrollHeight;
   }
 }

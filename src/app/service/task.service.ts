@@ -41,7 +41,7 @@ export class TaskService {
         return this.http.post(`${API}/task/comment/add`, data);
     }
 
-    // 获取我负责的任务
+    // 获取我负责的所有任务
     getMyTasks(): Observable<any> {
         return this.http.get(`${API}/task/myTask`);
     }

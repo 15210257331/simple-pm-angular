@@ -72,19 +72,23 @@
   }
 
   .my-content {
-    padding: 15px;
+    margin: 15px;
     flex: 1;
     overflow: auto;
     border-radius: 4px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    overflow: auto;
 
-    .member {
-      height: auto;
-      width: 100%;
+    .task-list,
+    .schedule-list {
+      height: 100%;
       border-radius: 4px;
       background-color: white;
+      padding: 0 8px;
+      display: flex;
+      flex-direction: column;
 
       .title {
         width: 100%;
@@ -102,35 +106,19 @@
         }
       }
 
-      table {
-        width: 100%;
-
-        tr:hover {
-          background-color: honeydew;
-          cursor: pointer;
-        }
-
-        td,
-        th {
-          text-align: left;
-          height: 45px;
-          padding: 8px 20px;
-          box-sizing: border-box;
-          line-height: 29px;
-          overflow: hidden;
-          color: #909399;
-
-          p {
-            margin-bottom: 0;
-            height: 30px;
-            line-height: 30px;
-          }
-        }
-
-        td {
-          border-top: 1px solid rgb(235, 238, 245);
-        }
+      &>div {
+        overflow: auto;
+        flex: 1;
       }
+    }
+
+    .task-list {
+      margin-right: 15px;
+      width: 75%;
+    }
+
+    .schedule-list {
+      flex: 1;
     }
   }
 }

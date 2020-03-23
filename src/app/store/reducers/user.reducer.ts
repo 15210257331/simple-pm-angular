@@ -10,11 +10,13 @@ export interface UserAction extends Action {
 export interface UserState {
     userInfo: any;
     memberList: any[];
+    roleList: any[];
 }
 
 export const initialState: UserState = {
     userInfo: {},
-    memberList: []
+    memberList: [],
+    roleList: []
 };
 
 export function userReducer(state: UserState = initialState, action: UserAction) {
@@ -33,6 +35,13 @@ export function userReducer(state: UserState = initialState, action: UserAction)
         case UserActionTypes.LoadMemberListError:
             return state;
 
+        case UserActionTypes.LoadRoleListSuccess:
+            state.roleList = action.payload.data;
+            return state;
+
+        case UserActionTypes.LoadRoleListSuccess:
+            return state;
+
         case UserActionTypes.DeleteMemberSuccess:
             let deleteIndex;
             state.memberList.map((item, index) => {
@@ -44,6 +53,38 @@ export function userReducer(state: UserState = initialState, action: UserAction)
             return state;
 
         case UserActionTypes.DeleteMemberError:
+            return state;
+
+        case UserActionTypes.AddRoleSuccess:
+            state.roleList.push(action.payload.data);
+            return state;
+
+        case UserActionTypes.AddRoleError:
+            return state;
+
+        case UserActionTypes.UpdateRoleSuccess:
+            state.roleList.map(item => {
+                if (item._id === action.payload.data._id) {
+                    item.name = action.payload.data.name;
+                    item.description = action.payload.data.description;
+                }
+            });
+            return state;
+
+        case UserActionTypes.UpdateRoleError:
+            return state;
+
+        case UserActionTypes.DeleteRoleSuccess:
+            let deleteRoleIndex;
+            state.roleList.map((item, index) => {
+                if (item._id === action.payload.data) {
+                    deleteRoleIndex = index;
+                }
+            });
+            state.roleList.splice(deleteRoleIndex, 1);
+            return state;
+
+        case UserActionTypes.DeleteRoleError:
             return state;
 
         case UserActionTypes.UpdateUserInfoSuccess:
