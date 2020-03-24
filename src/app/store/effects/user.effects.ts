@@ -46,7 +46,7 @@ export class UserEffects {
         ofType(UserActionTypes.LoadMemberList),
         map((data: any) => data.payload),
         mergeMap((payload) =>
-            this.userService.getMemberList()
+            this.userService.getMemberList(payload)
                 .pipe(
                     map(res => {
                         if (res.code === 200) {
@@ -90,7 +90,7 @@ export class UserEffects {
         ofType(UserActionTypes.LoadRoleList),
         map((data: any) => data.payload),
         mergeMap((payload) =>
-            this.userService.getRoleList()
+            this.userService.getRoleList(payload)
                 .pipe(
                     map(res => {
                         if (res.code === 200) {

@@ -90,7 +90,6 @@ export class SetRoleComponent implements OnInit {
     this.userService.setMemberRole(data).subscribe(res => {
       if (res.code === 200) {
         this.modal.destroy({ result: true });
-        // this.store.dispatch(new UpdateRoleSuccess(res));
         this.notification.create('success', '修改成功', res.msg);
       }
     });

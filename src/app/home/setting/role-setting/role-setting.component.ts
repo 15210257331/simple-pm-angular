@@ -1,6 +1,6 @@
 import { UserService } from './../../../service/user.service';
 import { Component, OnInit } from '@angular/core';
-import { Appstate, DeleteRoleSuccess } from '../../../store';
+import { Appstate, DeleteRoleSuccess, LoadRoleList } from '../../../store';
 import { Store } from '@ngrx/store';
 import { TaskService } from 'src/app/service/task.service';
 import { NzModalService, NzNotificationService } from 'ng-zorro-antd';
@@ -17,6 +17,8 @@ export class RoleSettingComponent implements OnInit {
 
   roleList: any[] = [];
 
+  name: string;
+
   constructor(
     private store: Store<Appstate>,
     private taskService: TaskService,
@@ -29,6 +31,10 @@ export class RoleSettingComponent implements OnInit {
     this.store.pipe(map(data => data.userState.roleList)).subscribe(res => {
       this.roleList = res || [];
     });
+  }
+
+  searchRole() {
+    this.store.dispatch(new LoadRoleList(String(this.name)));
   }
 
   addRole(item?) {
@@ -67,12 +73,13 @@ export class RoleSettingComponent implements OnInit {
     });
   }
 
-  setAuthority() {
+  setAuthority(item) {
     const modal = this.modalService.create({
       nzTitle: '权限配置',
       nzContent: SetAuthorityComponent,
       nzComponentParams: {
-        title: '权限配置'
+        title: '权限配置',
+        data: item
       },
       nzFooter: null,
       nzWidth: 840,

@@ -1,4 +1,19 @@
 .form {
+  table {
+    width: 100%;
+
+    tr {
+      height: 70px;
+      line-height: 70px;
+      text-align: left;
+
+      td {
+        padding: 10px;
+        border: 1px solid #eeeeee;
+      }
+    }
+  }
+
   .form-item {
     overflow: hidden;
     height: auto;
@@ -11,9 +26,18 @@
       width: 140px;
       align-self: flex-start;
     }
+  }
 
-    .project-cover {
-      width: 450px;
+  .footer {
+    overflow: hidden;
+    height: auto;
+    margin: 20px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    button {
+      margin: 0 10px;
     }
   }
 }

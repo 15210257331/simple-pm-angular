@@ -47,6 +47,7 @@ export class LoadUserInfoError implements Action {
 
 export class LoadMemberList implements Action {
     readonly type = UserActionTypes.LoadMemberList;
+    constructor(public payload: any) { }
 }
 
 export class LoadMemberListSuccess implements Action {
@@ -87,6 +88,7 @@ export class ResetUser implements Action {
 
 export class LoadRoleList implements Action {
     readonly type = UserActionTypes.LoadRoleList;
+    constructor(public payload: any) { }
 }
 
 export class LoadRoleListSuccess implements Action {

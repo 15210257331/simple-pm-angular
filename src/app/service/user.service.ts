@@ -25,9 +25,9 @@ export class UserService {
         return this.http.get(`${API}/user/info`);
     }
 
-    // 获取用户列表
-    getMemberList(): Observable<any> {
-        return this.http.get(`${API}/user/list`);
+    // 获取所有用户列表
+    getMemberList(name: string): Observable<any> {
+        return this.http.post(`${API}/user/list`, { name });
     }
 
     // 设置用户角色
@@ -51,8 +51,8 @@ export class UserService {
     }
 
     // 获取角色列表
-    getRoleList(): Observable<any> {
-        return this.http.get(`${API}/role/list`);
+    getRoleList(name: string): Observable<any> {
+        return this.http.post(`${API}/role/list`, { name });
     }
 
     // 添加角色
@@ -68,6 +68,11 @@ export class UserService {
     // 删除角色
     deleteRole(id: any): Observable<any> {
         return this.http.get(`${API}/role/delete?id=${id}`);
+    }
+
+    // 角色关联权限
+    setAuthority(data: any): Observable<any> {
+        return this.http.post(`${API}/role/setAuthority`, data);
     }
 }
 

@@ -78,8 +78,8 @@ export class NavComponent implements OnInit {
     });
     this.messageRemind();
     this.store.dispatch(new LoadUserInfo());
-    this.store.dispatch(new LoadMemberList());
-    this.store.dispatch(new LoadRoleList());
+    this.store.dispatch(new LoadMemberList(''));
+    this.store.dispatch(new LoadRoleList(''));
     this.store.dispatch(new LoadScheduleList());
     this.store.dispatch(new LoadProjectList(''));
     this.store.pipe(map(data => data.userState.userInfo)).subscribe(res => {

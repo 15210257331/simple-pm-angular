@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Appstate } from '../../../store';
+import { Appstate, LoadMemberList } from '../../../store';
 import { NzModalService } from 'ng-zorro-antd';
 import { map } from 'rxjs/operators';
 import { SetRoleComponent } from './set-role/set-role.component';
@@ -15,6 +15,8 @@ export class MemberSettingComponent implements OnInit {
 
   memberList: any[] = [];
 
+  name: string = '';
+
   constructor(
     private store: Store<Appstate>,
     private modalService: NzModalService,
@@ -24,6 +26,10 @@ export class MemberSettingComponent implements OnInit {
     this.store.pipe(map(data => data.userState.memberList)).subscribe(res => {
       this.memberList = res || [];
     });
+  }
+
+  searchMember() {
+    this.store.dispatch(new LoadMemberList(String(this.name)));
   }
 
   setRole(item) {
@@ -39,7 +45,9 @@ export class MemberSettingComponent implements OnInit {
     });
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
     modal.afterClose.subscribe(res => {
-      if (res && res.result) { }
+      if (res && res.result) {
+        this.searchMember();
+      }
     });
   }
 

@@ -1,12 +1,10 @@
 <div class="member">
   <div class="top">
     <nz-input-group style="width: 200px;" [nzPrefix]="prefixTemplateUser">
-      <input type="text" nzSize="large" nz-input placeholder="用户搜索" />
+      <input type="text" nzSize="large" [(ngModel)]="name" nz-input placeholder="搜索用户" (keyup.enter)="searchMember()"/>
     </nz-input-group>
-    <ng-template #prefixTemplateUser><i nz-icon nzType="user"></i></ng-template>
-    <button nz-button nzType="primary" (click)="addMember()" nzShape="round">
-      <i nz-icon nzType="download"></i>添加成员
-    </button>
+    <ng-template #prefixTemplateUser><i nz-icon nzType="search" nzTheme="outline"></i></ng-template>
+    <button nz-button nzType="primary" (click)="addMember()" nzShape="round">添加成员</button>
   </div>
   <table>
     <thead>
@@ -24,11 +22,11 @@
         <td width="20%">{{ item?.email }}</td>
         <td width="20%">{{ item?.phoneNumber }}</td>
         <td width="25%">
-          <span *ngFor="let item of item?.role">{{item.name}}</span>
+          <span *ngFor="let item of item?.role; let last = last">{{item.name}}<span *ngIf="!last">、</span></span>
         </td>
-        <td width="15%">
-          <span (click)="setRole(item)">配置角色</span>
-          <span (click)="resetPassword(item._id)">重置密码</span>
+        <td style="text-align: center;" width="15%">
+          <button nz-button nzType="primary" (click)="setRole(item)">配置角色</button>
+          <button nz-button nzType="default" (click)="resetPassword(item._id)">重置密码</button>
         </td>
       </tr>
     </tbody>

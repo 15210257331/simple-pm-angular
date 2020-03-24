@@ -1,12 +1,19 @@
 <div class="form">
-  <div class="form-item" *ngFor="let item of authorityArray">
-    <label nz-checkbox [(ngModel)]="allChecked" (ngModelChange)="updateAllChecked()" [nzIndeterminate]="indeterminate">
-      {{item.label}}
-    </label>
-    <nz-checkbox-group [(ngModel)]="item.features" (ngModelChange)="updateSingleChecked()"></nz-checkbox-group>
-  </div>
-  <div class="form-item" style="justify-content:flex-end;">
-    <button style="margin-right: 30px;" nz-button nzType="info" (click)="cancel()">取消</button>
+  <table>
+    <tr *ngFor="let item of authorityArray; let i = index;">
+      <td>
+        <label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="updateAllChecked(item, i)"
+          [nzIndeterminate]="item.indeterminate">
+          {{item.label}}
+        </label>
+      </td>
+      <td>
+        <nz-checkbox-group [(ngModel)]="item.features" (ngModelChange)="updateSingleChecked(item, i)"></nz-checkbox-group>
+      </td>
+    </tr>
+  </table>
+  <div class="footer">
+    <button nz-button nzType="info" (click)="cancel()">取消</button>
     <button nz-button nzType="primary" (click)="submitForm()">提交</button>
   </div>
 </div>
