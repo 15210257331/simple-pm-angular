@@ -30,3 +30,35 @@ p {
   border: 1px solid #eee;
   margin: 2px 4px;
 }
+
+.common-form {
+  .form-item {
+    overflow: hidden;
+    height: auto;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    label {
+      margin-right: 10px;
+      width: 100px;
+    }
+
+    nz-select {
+      flex: 1;
+    }
+  }
+
+  .footer {
+    border-top: 1px solid #eeeeee;
+    padding-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    button {
+      margin: 0 10px;
+    }
+  }
+}

@@ -5,24 +5,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: url('/assets/imgs/login-back.jpg') top left no-repeat #fff;
+  background-size: cover;
 
-  .login {
+  form {
     padding: 20px;
+    border-radius: 6px;
+    background: #fff;
+    width: 400px;
+    height: 360px;
 
-    .login-form {
-      padding: 20px;
-      max-width: 650px;
-      background-color: #eeeeee;
-      border: 1px solid #eeeeee;
-      border-radius: 8px;
+    .title {
+      text-align: center;
+      margin-top: 20px;
+    }
 
-      .login-form-forgot {
-        float: right;
-      }
+    .login-form-forgot {
+      float: right;
+    }
 
-      .login-form-button {
-        width: 100%;
-      }
+    .login-form-button {
+      width: 100%;
     }
   }
 }

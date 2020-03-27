@@ -12,19 +12,6 @@ export class LoginComponent implements OnInit {
 
   validateForm: FormGroup;
 
-  submitForm(): void {
-    const data = {
-      username: this.validateForm.value.username,
-      password: this.validateForm.value.password
-    };
-    this.userService.login(this.validateForm.value).subscribe(res => {
-      if (res.code === 200) {
-        localStorage.setItem('token', res.token);
-        this.router.navigate(['/home']);
-      }
-    });
-  }
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -33,9 +20,18 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      username: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [true]
+      username: ['admin', [Validators.required]],
+      password: ['admin', [Validators.required]],
+      remember: [false]
+    });
+  }
+
+  submitForm(): void {
+    this.userService.login(this.validateForm.value).subscribe(res => {
+      if (res.code === 200) {
+        localStorage.setItem('token', res.token);
+        this.router.navigate(['/home']);
+      }
     });
   }
 

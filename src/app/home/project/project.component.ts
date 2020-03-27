@@ -48,7 +48,7 @@ export class ProjectComponent implements OnInit {
         title: '新建项目'
       },
       nzFooter: null,
-      nzWidth: 840,
+      nzWidth: 540,
     });
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
     modal.afterClose.subscribe(res => {
