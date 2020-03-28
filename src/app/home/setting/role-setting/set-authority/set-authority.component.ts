@@ -3,6 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NzModalRef, NzNotificationService } from 'ng-zorro-antd';
 import { UserService } from '../../../../service/user.service';
 import { UtilsService } from '../../../../service/utils.service';
+import { Store } from '@ngrx/store';
+import { Appstate, UpdateRoleSuccess } from '../../../../store';
 
 @Component({
   selector: 'app-set-authority',
@@ -21,16 +23,16 @@ export class SetAuthorityComponent implements OnInit {
     private notification: NzNotificationService,
     private modal: NzModalRef,
     private userService: UserService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private store: Store<Appstate>
   ) { }
 
   ngOnInit() {
     this.authorityArray = [
       {
         label: '配置中心',
-        value: 1,
+        value: '配置中心',
         checked: false,
-        indeterminate: false,
         features: [
           {
             label: '配置角色',
@@ -95,44 +97,21 @@ export class SetAuthorityComponent implements OnInit {
           },
         ]
       }
-
     ];
-  }
-
-  updateAllChecked(data, index): void {
-    this.authorityArray[index].indeterminate = false;
-    if (data.checked) {
-      this.authorityArray[index].features = this.authorityArray[index].features.map(item => {
-        return {
-          ...item,
-          checked: true
-        };
+    this.authorityArray.map(item => {
+      if (this.data.authority.indexOf(item.label) > -1) {
+        item.checked = true;
+      }
+      item.features.map(sonItem => {
+        if (this.data.authority.indexOf(sonItem.label) > -1) {
+          sonItem.checked = true;
+        }
       });
-    } else {
-      this.authorityArray[index].features = this.authorityArray[index].features.map(item => {
-        return {
-          ...item,
-          checked: false
-        };
-      });
-    }
-  }
-
-  updateSingleChecked(data, index): void {
-    if (this.authorityArray[index].features.every(item => !item.checked)) {
-      this.authorityArray[index].checked = false;
-      this.authorityArray[index].indeterminate = false;
-    } else if (this.authorityArray[index].features.every(item => item.checked)) {
-      this.authorityArray[index].checked = false;
-      this.authorityArray[index].indeterminate = false;
-    } else {
-      this.authorityArray[index].indeterminate = true;
-    }
+    });
   }
 
   submitForm() {
     const arr = this.utilsService.treeToList(this.authorityArray, 'features').filter(item => item.checked).map(item => item.label);
-    console.log(arr);
     const data = {
       id: this.data._id,
       authority: arr
@@ -140,7 +119,7 @@ export class SetAuthorityComponent implements OnInit {
     this.userService.setAuthority(data).subscribe(res => {
       if (res.code === 200) {
         this.modal.destroy({ result: true });
-        // this.store.dispatch(new UpdateRoleSuccess(res));
+        this.store.dispatch(new UpdateRoleSuccess(res));
         this.notification.create('success', '修改成功', res.msg);
       }
     });

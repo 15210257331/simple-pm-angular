@@ -2,13 +2,12 @@
   <table>
     <tr *ngFor="let item of authorityArray; let i = index;">
       <td>
-        <label nz-checkbox [(ngModel)]="item.checked" (ngModelChange)="updateAllChecked(item, i)"
-          [nzIndeterminate]="item.indeterminate">
+        <label nz-checkbox [(ngModel)]="item.checked">
           {{item.label}}
         </label>
       </td>
       <td>
-        <nz-checkbox-group [(ngModel)]="item.features" (ngModelChange)="updateSingleChecked(item, i)"></nz-checkbox-group>
+        <nz-checkbox-group [(ngModel)]="item.features"></nz-checkbox-group>
       </td>
     </tr>
   </table>

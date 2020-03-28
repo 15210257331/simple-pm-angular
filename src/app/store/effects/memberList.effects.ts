@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { of, forkJoin } from 'rxjs';
-import { UserActionTypes, LoadUserInfoSuccess, LoadUserInfoError, LoadMemberListSuccess, LoadMemberListError, DeleteMemberSuccess, DeleteMemberError } from '../actions';
 import { NzMessageService } from 'ng-zorro-antd';
 import { UserService } from '../../service/user.service';
 import { SocketService } from '../../service/socket.service';
+import { MemberListActionTypes, LoadMemberListSuccess, LoadMemberListError } from '../actions';
 
 @Injectable()
-export class UserEffects {
+export class MemberEffects {
 
     constructor(
         private actions$: Actions,
@@ -17,24 +17,23 @@ export class UserEffects {
         private socketService: SocketService
     ) { }
 
-    // 获取用户信息
+    // 获取成员列表
     @Effect()
-    userInfo$ = this.actions$.pipe(
-        ofType(UserActionTypes.LoadUserInfo),
+    memberData$ = this.actions$.pipe(
+        ofType(MemberListActionTypes.LoadMemberList),
         map((data: any) => data.payload),
         mergeMap((payload) =>
-            this.userService.getUserInfo()
+            this.userService.getMemberList(payload)
                 .pipe(
                     map(res => {
                         if (res.code === 200) {
-                            this.socketService.sendMessage('setRemind', res.data._id);
-                            return new LoadUserInfoSuccess(res);
+                            return new LoadMemberListSuccess(res);
                         } else {
-                            return of(new LoadUserInfoError(res.msg));
+                            return of(new LoadMemberListError(res.msg));
                         }
                     }),
                     catchError(err => {
-                        return of(new LoadUserInfoError(err.message));
+                        return of(new LoadMemberListError(err.message));
                     })
                 ),
         )

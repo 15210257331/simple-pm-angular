@@ -23,7 +23,7 @@ export class MemberSettingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.pipe(map(data => data.userState.memberList)).subscribe(res => {
+    this.store.pipe(map(data => data.memberList)).subscribe(res => {
       this.memberList = res || [];
     });
   }

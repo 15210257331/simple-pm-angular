@@ -45,11 +45,12 @@ export class RoleAddComponent implements OnInit {
   }
 
   submitForm() {
-    const data = Object.assign({}, this.form.value, {
-      authority: [],
-      valid: true
-    });
     if (this.data) {
+      const data = Object.assign({}, this.form.value, {
+        authority: [],
+        valid: true,
+        id: this.data._id
+      });
       this.userService.updateRole(data).subscribe(res => {
         if (res.code === 200) {
           this.modal.destroy({ result: true });
@@ -61,6 +62,10 @@ export class RoleAddComponent implements OnInit {
         }
       });
     } else {
+      const data = Object.assign({}, this.form.value, {
+        authority: [],
+        valid: true,
+      });
       this.userService.addRole(data).subscribe(res => {
         if (res.code === 200) {
           this.modal.destroy({ result: true });

@@ -22,8 +22,8 @@
           <nz-badge *ngIf="item?.valid" [nzStatus]="'success'" nzText="有效"></nz-badge>
           <nz-badge *ngIf="!item?.valid" [nzStatus]="'default'" nzText="无效"></nz-badge>
         </td>
-        <td width="55%">{{ item?.description }}</td>
-        <td width="15%">
+        <td width="50%">{{ item?.description }}</td>
+        <td width="20%">
           <button nz-button nzType="primary" (click)="addRole(item)">修改</button>
           <button nz-button nzType="default" (click)="setAuthority(item)">配置权限</button>
           <button nz-button nzType="danger" (click)="deleteRole(item._id, item.name, $event)">删除</button>

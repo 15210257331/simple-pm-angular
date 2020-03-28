@@ -1,20 +1,23 @@
 .form {
-    .form-item {
-      overflow: hidden;
-      height: auto;
-      margin: 20px 0;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-  
-      label {
-        width: 90px;
-        align-self: flex-start;
-      }
-  
-      .project-cover {
-        width: 450px;
-      }
+  .form-item {
+    overflow: hidden;
+    height: auto;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    label {
+      width: 90px;
+      align-self: flex-start;
+    }
+
+    .project-cover {
+      width: 450px;
     }
   }
-  
+}
+
+:host ::ng-deep .ant-checkbox-group-item{
+  margin-bottom: 20px;
+}

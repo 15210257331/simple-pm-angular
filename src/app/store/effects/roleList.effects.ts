@@ -2,39 +2,36 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { of, forkJoin } from 'rxjs';
-import { UserActionTypes, LoadUserInfoSuccess, LoadUserInfoError, LoadMemberListSuccess, LoadMemberListError, DeleteMemberSuccess, DeleteMemberError } from '../actions';
+import { RoleListActionTypes, LoadRoleListSuccess, LoadRoleListError, } from '../actions';
 import { NzMessageService } from 'ng-zorro-antd';
 import { UserService } from '../../service/user.service';
 import { SocketService } from '../../service/socket.service';
 
 @Injectable()
-export class UserEffects {
+export class RoleListEffects {
 
     constructor(
         private actions$: Actions,
         private userService: UserService,
-        private message: NzMessageService,
-        private socketService: SocketService
     ) { }
 
-    // 获取用户信息
+    // 获取角色列表
     @Effect()
-    userInfo$ = this.actions$.pipe(
-        ofType(UserActionTypes.LoadUserInfo),
+    roleData$ = this.actions$.pipe(
+        ofType(RoleListActionTypes.LoadRoleList),
         map((data: any) => data.payload),
         mergeMap((payload) =>
-            this.userService.getUserInfo()
+            this.userService.getRoleList(payload)
                 .pipe(
                     map(res => {
                         if (res.code === 200) {
-                            this.socketService.sendMessage('setRemind', res.data._id);
-                            return new LoadUserInfoSuccess(res);
+                            return new LoadRoleListSuccess(res);
                         } else {
-                            return of(new LoadUserInfoError(res.msg));
+                            return of(new LoadRoleListError(res.msg));
                         }
                     }),
                     catchError(err => {
-                        return of(new LoadUserInfoError(err.message));
+                        return of(new LoadRoleListError(err.message));
                     })
                 ),
         )

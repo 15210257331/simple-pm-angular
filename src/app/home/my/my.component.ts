@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Appstate, DeleteMember } from '../../store';
+import { Appstate } from '../../store';
 import { TaskService } from '../../service/task.service';
 import { map } from 'rxjs/operators';
 import { NzModalService, NzNotificationService } from 'ng-zorro-antd';
@@ -46,18 +46,6 @@ export class MyComponent implements OnInit {
       if (res.code === 200) {
         this.myTaskList = res.data || [];
       }
-    });
-  }
-
-  deleteMember(id, name, event) {
-    event.stopPropagation();
-    this.modalService.confirm({
-      nzTitle: '警告',
-      nzContent: `确定删除成员${name}吗？`,
-      nzOkText: '确定',
-      nzOkType: 'danger',
-      nzOnOk: () => this.store.dispatch(new DeleteMember(id)),
-      nzCancelText: '取消',
     });
   }
 }

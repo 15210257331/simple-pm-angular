@@ -28,7 +28,7 @@ export class RoleSettingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.pipe(map(data => data.userState.roleList)).subscribe(res => {
+    this.store.pipe(map(data => data.roleList)).subscribe(res => {
       this.roleList = res || [];
     });
   }
