@@ -1,13 +1,10 @@
 <div class="task-detail">
   <div class="detail-left">
-    <div class="detail-part" style="justify-content: space-between;">
-      <h2>{{taskDetail.name}}</h2>
-      <app-avatar-show [avatar]="taskDetail.principal.avatar" [name]="taskDetail.principal.nickname"></app-avatar-show>
-    </div>
+    <h2 style="margin-bottom: 0;">{{taskDetail?.name}}</h2>
     <nz-divider></nz-divider>
     <div class="detail-part">
       <label>任务状态:</label>
-      <ng-container [ngSwitch]="taskDetail.status">
+      <ng-container [ngSwitch]="taskDetail?.status">
         <nz-tag *ngSwitchCase="1" [nzColor]="'#2db7f5'">未开始</nz-tag>
         <nz-tag *ngSwitchCase="2" [nzColor]="'#22d7bb'">进行中</nz-tag>
         <nz-tag *ngSwitchCase="3" [nzColor]="'#87d068'">已完成</nz-tag>
@@ -15,14 +12,23 @@
       </ng-container>
     </div>
     <div class="detail-part">
+      <label>负责人:</label>
+      <app-member-item [data]="taskDetail?.principal"></app-member-item>
+    </div>
+    <div class="detail-part">
       <label>开始时间:</label>
       <nz-date-picker [nzSize]="'small'" [(ngModel)]="taskDetail.startTime" (ngModelChange)="timeChange($event)">
       </nz-date-picker>
-    </div>
-    <div class="detail-part">
-      <label>截止时间:</label>
+      <label style="margin-left: 20px; margin-right: 5px;">结束时间:</label>
       <nz-date-picker [nzSize]="'small'" [(ngModel)]="taskDetail.endTime" (ngModelChange)="timeChange($event)">
       </nz-date-picker>
+    </div>
+
+    <div class="detail-part">
+      <label>任务类型:</label>
+      <nz-select style="width: 150px;" [(ngModel)]="taskDetail.type" nzPlaceHolder="任务类型">
+        <nz-option *ngFor="let item of types" [nzValue]="item.value" [nzLabel]="item.name"></nz-option>
+      </nz-select>
     </div>
     <div class="detail-part">
       <label for="">标签:</label>
@@ -31,8 +37,8 @@
       </p>
     </div>
     <div class="detail-part">
-      <label for="">任务描述:</label>
-      <p>{{taskDetail.content}}</p>
+      <label style=" align-self: flex-start;" for="">任务描述:</label>
+      <textarea rows="10" nz-input [(ngModel)]="taskDetail.content"></textarea>
     </div>
   </div>
   <div class="detail-right">
@@ -54,9 +60,10 @@
           <span class="count dislike">{{ 1 }}</span>
         </nz-comment-action>
       </nz-comment>
-      <nz-empty *ngIf="taskDetail.comment.length === 0"></nz-empty>
+      <nz-empty style="margin-top: 170px;" *ngIf="taskDetail?.comment"></nz-empty>
     </div>
-    <div>
+    <nz-divider></nz-divider>
+    <div style="width: 100%; margin-bottom: 10px;">
       <nz-input-group [nzPrefix]="prefixTemplate">
         <input type="text" [(ngModel)]="comment" nz-input (keyup.enter)="addComment()" placeholder="添加评论按enter发送" />
       </nz-input-group>

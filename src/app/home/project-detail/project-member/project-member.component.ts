@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Appstate, UpdateProject } from '../../../store';
+import { Appstate, } from '../../../store';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 
@@ -35,6 +35,6 @@ export class ProjectMemberComponent implements OnInit {
       projectId: this.projectId,
       member: Array.from(new Set(member))
     });
-    this.store.dispatch(new UpdateProject(data));
+    // this.store.dispatch(new UpdateProject(data));
   }
 }

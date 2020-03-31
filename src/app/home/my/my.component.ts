@@ -17,7 +17,7 @@ export class MyComponent implements OnInit {
 
   memberList: any[] = [];
 
-  myScheduleList: any[] = [];
+  scheduleList: any[] = [];
 
   myTaskList: any[] = [];
 
@@ -32,11 +32,7 @@ export class MyComponent implements OnInit {
       this.userInfo = res;
     });
     this.store.pipe(map(data => data.scheduleList)).subscribe(res => {
-      this.myScheduleList = res.filter(item => item.startTime > Number(moment().format('x'))).map(item => {
-        return Object.assign({}, item, {
-          startTime: moment(item.startTime).format('MM-DD HH:mm:ss')
-        });
-      });
+      this.scheduleList = res.filter(item => Number(moment(item.startTime).format('x')) > Number(moment().format('x')));
     });
     this.getMyTask();
   }

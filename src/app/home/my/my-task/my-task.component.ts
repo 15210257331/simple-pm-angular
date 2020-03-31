@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TaskService } from '../../../service/task.service';
 import { NzModalService } from 'ng-zorro-antd';
-import { Appstate, ChangeTaskStatus, DeleteTask } from '../../../store';
+import { Appstate } from '../../../store';
 import { map } from 'rxjs/operators';
 import { TaskDetailComponent } from '../../project-detail/task-detail/task-detail.component';
 
@@ -29,11 +29,12 @@ export class MyTaskComponent implements OnInit {
     const modal = this.modalService.create({
       nzTitle: '任务详情',
       nzContent: TaskDetailComponent,
-      nzComponentParams: {
-        id
+      nzComponentParams: { id },
+      nzBodyStyle: {
+        padding: 0,
       },
       nzFooter: null,
-      nzWidth: 800,
+      nzWidth: '60%',
     });
 
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
@@ -50,11 +51,6 @@ export class MyTaskComponent implements OnInit {
       _id: id,
       status
     };
-    this.store.dispatch(new ChangeTaskStatus(data));
-  }
 
-  // 删除
-  delete(id: any) {
-    this.store.dispatch(new DeleteTask(id));
   }
 }

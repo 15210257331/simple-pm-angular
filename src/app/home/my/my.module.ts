@@ -5,6 +5,7 @@ import { MyRoutingModule } from './my-routing.module';
 import { ShareModule } from 'src/app/share.module';
 import { MyTaskComponent } from './my-task/my-task.component';
 import { MyScheduleComponent } from './my-schedule/my-schedule.component';
+import { ProjectDetailModule } from '../project-detail/project-detail.module';
 
 
 
@@ -15,7 +16,8 @@ import { MyScheduleComponent } from './my-schedule/my-schedule.component';
   imports: [
     CommonModule,
     ShareModule,
-    MyRoutingModule
+    MyRoutingModule,
+    ProjectDetailModule
   ]
 })
 export class MyModule { }

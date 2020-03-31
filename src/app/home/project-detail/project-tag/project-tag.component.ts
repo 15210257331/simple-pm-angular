@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Appstate, AddProjectTag } from '../../../store';
+import { Appstate, AddProjectTagSuccess } from '../../../store';
+import { NzMessageService } from 'ng-zorro-antd';
+import { TagService } from '../../../service/tag.service';
 
 @Component({
   selector: 'app-project-tag',
@@ -19,17 +21,27 @@ export class ProjectTagComponent implements OnInit {
   };
 
   constructor(
-    private store: Store<Appstate>
+    private store: Store<Appstate>,
+    private message: NzMessageService,
+    private tagService: TagService
   ) { }
 
   ngOnInit() {
   }
 
   addTag() {
+    if (!this.tagModel.name || this.tagModel.color) {
+      this.message.create('warning', '请填写标签名称');
+      return;
+    }
     const data = Object.assign({}, this.tagModel, {
       projectId: this.projectId
     });
-    this.store.dispatch(new AddProjectTag(data));
+    this.tagService.addTag(data).subscribe(res => {
+      if (res.code === 200) {
+        this.store.dispatch(new AddProjectTagSuccess(res.data));
+      }
+    });
     this.tagModel = {
       name: '',
       color: '',

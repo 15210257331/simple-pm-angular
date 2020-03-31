@@ -6,15 +6,12 @@ export enum CurrentProjectActionTypes {
     LoadCurrentProjectSuccess = 'LoadCurrentProjectSuccess',
     LoadCurrentProjectError = 'LoadCurrentProjectError',
 
-    AddTask = 'AddTask',
     AddTaskSuccess = 'AddTaskSuccess',
     AddTaskError = 'AddTaskSuccess',
 
-    ChangeTaskStatus = 'changeTaskStatus',
     ChangeTaskStatusCuccess = 'changeTaskStatusCuccess',
     ChangeTaskStatusError = 'changeTaskStatusCuccess',
 
-    DeleteTask = 'DeleteTask',
     DeleteTaskCuccess = 'DeleteTaskCuccess',
     DeleteTaskError = 'DeleteTaskError',
 
@@ -22,11 +19,9 @@ export enum CurrentProjectActionTypes {
     GetTaskCommentSuccess = 'GetTaskCommentSuccess',
     GetTaskCommentError = 'GetTaskCommentError',
 
-    AddTaskComment = 'AddTaskComment',
     AddTaskCommentSuccess = 'AddTaskCommentSuccess',
     AddTaskCommentError = 'AddTaskCommentError',
 
-    AddProjectTag = 'AddProjectTag',
     AddProjectTagSuccess = 'AddProjectTagSuccess',
     AddProjectTagError = 'AddProjectTagError',
 
@@ -50,11 +45,6 @@ export class LoadCurrentProjectError implements Action {
     constructor(public payload: any) { }
 }
 
-export class AddTask implements Action {
-    readonly type = CurrentProjectActionTypes.AddTask;
-    constructor(public payload: any) { }
-}
-
 export class AddTaskSuccess implements Action {
     readonly type = CurrentProjectActionTypes.AddTaskSuccess;
     constructor(public payload: any) { }
@@ -65,11 +55,6 @@ export class AddTaskError implements Action {
     constructor(public payload: any) { }
 }
 
-export class ChangeTaskStatus implements Action {
-    readonly type = CurrentProjectActionTypes.ChangeTaskStatus;
-    constructor(public payload: any) { }
-}
-
 export class ChangeTaskStatusCuccess implements Action {
     readonly type = CurrentProjectActionTypes.ChangeTaskStatusCuccess;
     constructor(public payload: any) { }
@@ -77,11 +62,6 @@ export class ChangeTaskStatusCuccess implements Action {
 
 export class ChangeTaskStatusError implements Action {
     readonly type = CurrentProjectActionTypes.ChangeTaskStatusError;
-    constructor(public payload: string) { }
-}
-
-export class DeleteTask implements Action {
-    readonly type = CurrentProjectActionTypes.DeleteTask;
     constructor(public payload: string) { }
 }
 
@@ -110,10 +90,6 @@ export class GetTaskCommentError implements Action {
     constructor(public payload: any) { }
 }
 
-export class AddTaskComment implements Action {
-    readonly type = CurrentProjectActionTypes.AddTaskComment;
-    constructor(public payload: any) { }
-}
 export class AddTaskCommentSuccess implements Action {
     readonly type = CurrentProjectActionTypes.AddTaskCommentSuccess;
     constructor(public payload: any) { }
@@ -123,11 +99,6 @@ export class AddTaskCommentError implements Action {
     constructor(public payload: any) { }
 }
 
-
-export class AddProjectTag implements Action {
-    readonly type = CurrentProjectActionTypes.AddProjectTag;
-    constructor(public payload: any) { }
-}
 export class AddProjectTagSuccess implements Action {
     readonly type = CurrentProjectActionTypes.AddProjectTagSuccess;
     constructor(public payload: any) { }

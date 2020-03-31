@@ -3,7 +3,7 @@
     <span [style.color]="color" class="iconfont iconmark mark"></span>
     <h2>{{item?.name}}</h2>
     <span class="time">
-      {{item?.startTime}}
+      {{item?.startTime | date: 'yyyy-MM-dd'}}
       <i class="iconfont iconclock"></i>
     </span>
   </div>

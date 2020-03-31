@@ -5,15 +5,12 @@ export enum ProjectListActionTypes {
     LoadProjectListSuccess = 'LoadProjectListSuccess',
     LoadProjectListError = 'LoadProjectListError',
 
-    AddProject = 'AddProject',
     AddProjectSuccess = 'AddProjectSuccess',
     AddProjectError = 'AddProjectError',
 
-    UpdateProject = 'UpdateProject',
     UpdateProjectSuccess = 'UpdateProjectSuccess',
     UpdateProjectError = 'UpdateProjectError',
 
-    DeleteProject = 'DeleteProject',
     DeleteProjectSuccess = 'DeleteProjectSuccess',
     DeleteProjectError = 'DeleteProjectError',
 
@@ -36,11 +33,6 @@ export class LoadProjectListError implements Action {
     constructor(public payload: any) { }
 }
 
-export class AddProject implements Action {
-    readonly type = ProjectListActionTypes.AddProject;
-    constructor(public payload: any) { }
-}
-
 export class AddProjectSuccess implements Action {
     readonly type = ProjectListActionTypes.AddProjectSuccess;
     constructor(public payload: any) { }
@@ -51,10 +43,6 @@ export class AddProjectError implements Action {
     constructor(public payload: any) { }
 }
 
-export class UpdateProject implements Action {
-    readonly type = ProjectListActionTypes.UpdateProject;
-    constructor(public payload: any) { }
-}
 export class UpdateProjectSuccess implements Action {
     readonly type = ProjectListActionTypes.UpdateProjectSuccess;
     constructor(public payload: any) { }
@@ -64,10 +52,6 @@ export class UpdateProjectError implements Action {
     constructor(public payload: any) { }
 }
 
-export class DeleteProject implements Action {
-    readonly type = ProjectListActionTypes.DeleteProject;
-    constructor(public payload: any) { }
-}
 export class DeleteProjectSuccess implements Action {
     readonly type = ProjectListActionTypes.DeleteProjectSuccess;
     constructor(public payload: any) { }

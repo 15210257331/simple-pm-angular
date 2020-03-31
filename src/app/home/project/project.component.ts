@@ -1,11 +1,12 @@
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Component, OnInit, ViewChild, ComponentRef, ViewContainerRef, ComponentFactoryResolver, ComponentFactory } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Appstate, LoadProjectList, DeleteProject } from '../../store';
+import { Appstate, LoadProjectList, DeleteProjectSuccess, } from '../../store';
 import { map, filter } from 'rxjs/operators';
-import { NzModalService } from 'ng-zorro-antd';
+import { NzModalService, NzNotificationService } from 'ng-zorro-antd';
 import { ProjectAddComponent } from './project-add/project-add.component';
 import { ProjectUpdateComponent } from './project-update/project-update.component';
+import { ProjectService } from '../../service/project.service';
 
 @Component({
   selector: 'app-project',
@@ -24,6 +25,8 @@ export class ProjectComponent implements OnInit {
     private store: Store<Appstate>,
     private router: Router,
     private modalService: NzModalService,
+    private projectService: ProjectService,
+    private notification: NzNotificationService,
   ) { }
 
   ngOnInit() {
@@ -80,7 +83,14 @@ export class ProjectComponent implements OnInit {
       nzContent: `该项目下所有任务都会删除，确定删除${name}吗？`,
       nzOkText: '确定',
       nzOkType: 'danger',
-      nzOnOk: () => this.store.dispatch(new DeleteProject(id)),
+      nzOnOk: () => {
+        this.projectService.deleteProject(id).subscribe(res => {
+          if (res.code === 200) {
+            this.notification.create('success', 'sucess', res.msg);
+            this.store.dispatch(new DeleteProjectSuccess(res));
+          }
+        });
+      },
       nzCancelText: '取消',
     });
   }

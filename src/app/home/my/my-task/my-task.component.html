@@ -3,8 +3,8 @@
     <tr>
       <th>名称</th>
       <th>状态</th>
+      <th>任务类型</th>
       <th>内容详情</th>
-      <th>所属项目</th>
     </tr>
   </thead>
   <tbody>
@@ -26,8 +26,15 @@
           </span>
         </span>
       </td>
+      <td width="20%">
+        <span [ngSwitch]="item.type">
+          <span *ngSwitchCase="1">常规任务</span>
+          <span *ngSwitchCase="2">测试任务</span>
+          <span *ngSwitchCase="3">缺陷任务</span>
+          <span *ngSwitchCase="4">需求任务</span>
+        </span>
+      </td>
       <td width="50%">{{ item.content }}</td>
-      <td width="20%">{{ 'simple-pm的第一个项目'}}</td>
     </tr>
   </tbody>
 </table>

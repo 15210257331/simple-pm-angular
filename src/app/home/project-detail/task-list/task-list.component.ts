@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Appstate, DeleteTask, ChangeTaskStatus } from '../../../store';
+import { Appstate, ChangeTaskStatusCuccess } from '../../../store';
 import { map } from 'rxjs/operators';
 import { TaskAddComponent } from '../task-add/task-add.component';
 import { NzNotificationService, NzModalService } from 'ng-zorro-antd';
@@ -80,12 +80,11 @@ export class TaskListComponent implements OnInit {
       _id: id,
       status
     };
-    this.store.dispatch(new ChangeTaskStatus(data));
-  }
-
-  // 删除
-  delete(id: any) {
-    this.store.dispatch(new DeleteTask(id));
+    this.taskService.changeTaskStatus(data).subscribe(res => {
+      if (res.code === 200) {
+        this.store.dispatch(new ChangeTaskStatusCuccess(data));
+      }
+    });
   }
 
 }

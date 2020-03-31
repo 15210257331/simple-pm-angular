@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Appstate, UpdateProject } from '../../../store';
+import { Appstate, UpdateProjectSuccess } from '../../../store';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
-import { NzModalRef } from 'ng-zorro-antd';
+import { NzModalRef, NzNotificationService } from 'ng-zorro-antd';
 import { environment } from '../../../../environments/environment';
+import { ProjectService } from '../../../service/project.service';
 
 const API: string = environment.API;
 
@@ -23,6 +24,8 @@ export class ProjectUpdateComponent implements OnInit {
   constructor(
     private store: Store<Appstate>,
     private modal: NzModalRef,
+    private notification: NzNotificationService,
+    private projectService: ProjectService,
   ) { }
 
   ngOnInit() {
@@ -37,8 +40,13 @@ export class ProjectUpdateComponent implements OnInit {
       projectId: this.model._id,
       cover: this.model.cover
     };
-    this.store.dispatch(new UpdateProject(data));
-    this.modal.destroy({ result: true });
+    this.projectService.updateProject(data).subscribe(res => {
+      if (res.code === 200) {
+        this.store.dispatch(new UpdateProjectSuccess(data));
+        this.modal.destroy({ result: true });
+        this.notification.create('success', 'sucess', res.msg);
+      }
+    });
   }
 
   handleChange(event) {

@@ -23,6 +23,25 @@ export class TaskAddComponent implements OnInit {
 
   projectDetail: any;
 
+  types: any[] = [
+    {
+      name: '常规任务',
+      value: 1
+    },
+    {
+      name: '测试任务',
+      value: 2
+    },
+    {
+      name: '缺陷任务',
+      value: 3
+    },
+    {
+      name: '需求任务',
+      value: 4
+    },
+  ];
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -39,7 +58,8 @@ export class TaskAddComponent implements OnInit {
       content: ['', [Validators.required]],
       startTime: ['', [Validators.required]],
       endTime: ['', [Validators.required]],
-      tag: [[], Validators.required]
+      tag: [[], Validators.required],
+      type: [null, Validators.required],
     });
     this.store
       .pipe(
@@ -65,18 +85,6 @@ export class TaskAddComponent implements OnInit {
     });
   }
 
-  // addTag() {
-  //   this.visible = false;
-  //   const data = {
-  //     name: this.tagName,
-  //     color: this.randomHexColor()
-  //   };
-  //   this.taskTag.push(data);
-  //   this.tagName = '';
-  // }
-  // deleteTag(i) {
-  //   this.taskTag.splice(i, 1);
-  // }
   randomHexColor() {
     let hex = Math.floor(Math.random() * 16777216).toString(16);
     while (hex.length < 6) {
@@ -88,6 +96,5 @@ export class TaskAddComponent implements OnInit {
   cancel() {
     this.modal.destroy();
   }
-
 
 }

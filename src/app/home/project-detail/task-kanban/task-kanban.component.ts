@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd';
 import { Store } from '@ngrx/store';
-import { Appstate, ChangeTaskStatus, DeleteTask, ChangeTaskStatusCuccess, } from '../../../store';
+import { Appstate, ChangeTaskStatusCuccess} from '../../../store';
 import { map, finalize } from 'rxjs/operators';
 import { TaskAddComponent } from '../task-add/task-add.component';
 import { TaskDetailComponent } from '../task-detail/task-detail.component';
 import { moveItemInArray, transferArrayItem, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { TaskService } from '../../../service/task.service';
 
 @Component({
   selector: 'app-task-kanban',
@@ -62,12 +63,13 @@ export class TaskKanbanComponent implements OnInit {
 
   constructor(
     private modalService: NzModalService,
-    private store: Store<Appstate>
+    private store: Store<Appstate>,
+    private taskService: TaskService
   ) { }
 
   ngOnInit() {
     this.selectViewName = this.taskView[0].name;
-    const task$ = this.store
+    this.store
       .pipe(
         map(data => data.currentProject),
       )
@@ -79,13 +81,9 @@ export class TaskKanbanComponent implements OnInit {
         });
       });
 
-    const userInfo$ = this.store
-      .pipe(
-        map(data => data.userInfo)
-      )
-      .subscribe(res => {
-        this.userInfo = res;
-      });
+    this.store.pipe(map(data => data.userInfo)).subscribe(res => {
+      this.userInfo = res;
+    });
   }
 
   selectView(data) {
@@ -112,7 +110,6 @@ export class TaskKanbanComponent implements OnInit {
       nzFooter: null,
       nzWidth: 540,
     });
-
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
     modal.afterClose.subscribe(res => {
       if (res && res.result) {
@@ -132,7 +129,7 @@ export class TaskKanbanComponent implements OnInit {
         padding: 0,
       },
       nzFooter: null,
-      nzWidth: '65%',
+      nzWidth: '60%',
     });
 
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
@@ -142,6 +139,8 @@ export class TaskKanbanComponent implements OnInit {
       }
     });
   }
+
+  // 更改任务状态
   drop(event: CdkDragDrop<string[]>, status: number) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -151,21 +150,11 @@ export class TaskKanbanComponent implements OnInit {
         _id: event.container.data[event.currentIndex]['_id'],
         status
       };
-      this.store.dispatch(new ChangeTaskStatusCuccess(data));
-      this.store.dispatch(new ChangeTaskStatus(data));
+      this.taskService.changeTaskStatus(data).subscribe(res => {
+        if (res.code === 200) {
+          this.store.dispatch(new ChangeTaskStatusCuccess(data));
+        }
+      });
     }
-  }
-  // 更改任务状态
-  changeStatus(id: any, status: number) {
-    const data = {
-      _id: id,
-      status
-    };
-    this.store.dispatch(new ChangeTaskStatus(data));
-  }
-
-  // 删除
-  delete(id: any) {
-    this.store.dispatch(new DeleteTask(id));
   }
 }

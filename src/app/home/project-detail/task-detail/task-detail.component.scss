@@ -7,27 +7,25 @@
 
   .detail-left {
     width: 65%;
-    height: 400px;
+    height: 650px;
     margin: 10px;
     background-color: white;
     padding: 10px 15px;
     overflow: auto;
-
-    h2 {
-      margin: 10px 0;
-    }
 
     .detail-part {
       display: flex;
       align-items: center;
       justify-content: flex-start;
       margin: 15px 0;
-      height: 35px;
+      min-height: 35px;
+      height: auto;
 
       label {
         color: #333333;
         font-size: 13px;
         margin-right: 10px;
+        width: 75px;
       }
 
       p {
@@ -38,7 +36,7 @@
 
   .detail-right {
     flex: 1;
-    height: 400px;
+    height: 650px;
     margin: 10px 10px 10px 0;
     background-color: white;
     padding: 10px 15px;

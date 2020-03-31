@@ -26,7 +26,7 @@
         </td>
         <td style="text-align: center;" width="15%">
           <button nz-button nzType="primary" (click)="setRole(item)">配置角色</button>
-          <button nz-button nzType="default" (click)="resetPassword(item._id)">重置密码</button>
+          <button nz-button nzType="danger" (click)="deleteMember(item._id, item.nickname, $event)">删除</button>
         </td>
       </tr>
     </tbody>

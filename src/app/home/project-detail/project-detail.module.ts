@@ -38,6 +38,9 @@ import { TrashComponent } from './trash/trash.component';
         ProjectMemberComponent,
         ProjectTagComponent,
         TrashComponent
+    ],
+    exports: [
+        TaskDetailComponent
     ]
 })
 export class ProjectDetailModule { }

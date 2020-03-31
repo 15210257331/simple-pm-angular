@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Appstate, LoadMemberList } from '../../../store';
-import { NzModalService } from 'ng-zorro-antd';
+import { Appstate, LoadMemberList, DeleteMemberSuccess } from '../../../store';
+import { NzModalService, NzNotificationService } from 'ng-zorro-antd';
 import { map } from 'rxjs/operators';
 import { SetRoleComponent } from './set-role/set-role.component';
 import { AddMemberComponent } from './add-member/add-member.component';
+import { UserService } from '../../../service/user.service';
 
 @Component({
   selector: 'app-member-setting',
@@ -20,6 +21,8 @@ export class MemberSettingComponent implements OnInit {
   constructor(
     private store: Store<Appstate>,
     private modalService: NzModalService,
+    private userService: UserService,
+    private notification: NzNotificationService,
   ) { }
 
   ngOnInit() {
@@ -51,19 +54,22 @@ export class MemberSettingComponent implements OnInit {
     });
   }
 
-  resetPassword(id) {
-    const modal = this.modalService.create({
-      nzTitle: '重置密码',
-      nzContent: SetRoleComponent,
-      nzComponentParams: {
-        title: '重置密码',
+  deleteMember(id, name, event) {
+    event.stopPropagation();
+    this.modalService.confirm({
+      nzTitle: '警告',
+      nzContent: `确定删除${name}吗？`,
+      nzOkText: '确定',
+      nzOkType: 'danger',
+      nzOnOk: () => {
+        this.userService.deleteMember(id).subscribe(res => {
+          if (res.code === 200) {
+            this.notification.create('success', 'sucess', res.msg);
+            this.store.dispatch(new DeleteMemberSuccess(res));
+          }
+        });
       },
-      nzFooter: null,
-      nzWidth: 540,
-    });
-    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
-    modal.afterClose.subscribe(res => {
-      if (res && res.result) { }
+      nzCancelText: '取消',
     });
   }
 
