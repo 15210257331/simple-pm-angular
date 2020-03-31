@@ -1,10 +1,11 @@
+import { CurrentProject } from './../../store/reducers/currentProject.reducer';
 import { Component, OnInit, ComponentRef, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory } from '@angular/core';
 import { TaskKanbanComponent } from './task-kanban/task-kanban.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { ProjectOverviewComponent } from './project-overview/project-overview.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Appstate, LoadProjectDetail, LoadMemberList } from '../../store';
+import { Appstate, LoadCurrentProject } from '../../store';
 import { map } from 'rxjs/operators';
 import { NzDrawerService, NzModalService } from 'ng-zorro-antd';
 import { ProjectMemberComponent } from './project-member/project-member.component';
@@ -21,7 +22,7 @@ export class ProjectDetailComponent implements OnInit {
 
   selectTab = 1;
 
-  projectDetail: any;
+  currentProject: any;
 
   memberList: any[] = [];
 
@@ -65,14 +66,14 @@ export class ProjectDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(data => {
       if (data.id) {
         const projectId = data.id;
-        this.store.dispatch(new LoadProjectDetail(projectId));
+        this.store.dispatch(new LoadCurrentProject(projectId));
       }
     });
     this.store
       .pipe(
-        map(data => data.projectState.projectDetail)
+        map(data => data.currentProject)
       ).subscribe(res => {
-        this.projectDetail = res;
+        this.currentProject = res;
       });
     this.tabChange(this.selectTab);
   }
@@ -96,8 +97,8 @@ export class ProjectDetailComponent implements OnInit {
       nzMaskClosable: false,
       nzWidth: 360,
       nzContentParams: {
-        data: this.projectDetail.member,
-        projectId: this.projectDetail._id
+        data: this.currentProject.member,
+        projectId: this.currentProject._id
       }
     });
     drawerRef.afterOpen.subscribe(() => {
@@ -118,8 +119,8 @@ export class ProjectDetailComponent implements OnInit {
       nzMaskClosable: false,
       nzWidth: 360,
       nzContentParams: {
-        data: this.projectDetail.tag,
-        projectId: this.projectDetail._id
+        data: this.currentProject.tag,
+        projectId: this.currentProject._id
       }
     });
 
@@ -141,7 +142,7 @@ export class ProjectDetailComponent implements OnInit {
       nzContent: TaskAddComponent,
       nzComponentParams: {
         status,
-        projectId: this.projectDetail._id
+        projectId: this.currentProject._id
       },
       nzFooter: null,
       nzWidth: 540,

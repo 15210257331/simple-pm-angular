@@ -19,8 +19,8 @@ export class MessageItemComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.pipe(map(data => data.userState)).subscribe(res => {
-      this.userInfo = res.userInfo;
+    this.store.pipe(map(data => data.userInfo)).subscribe(res => {
+      this.userInfo = res;
     });
   }
 

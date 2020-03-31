@@ -95,7 +95,7 @@ export class ProjectOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.pipe(map(data => data.projectState.projectDetail)).subscribe(res => {
+    this.store.pipe(map(data => data.currentProject)).subscribe(res => {
       this.projectDetail = res;
       this.taskList = res.task || [];
       this.notStartNum = this.taskList.filter(item => item.status === 1).length;

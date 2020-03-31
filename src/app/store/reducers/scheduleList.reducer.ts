@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { ScheduleActionTypes } from '../actions';
+import { ScheduleListActionTypes } from '../actions';
 
 export interface UserAction extends Action {
     type: string;
@@ -18,21 +18,21 @@ export interface Schedule {
 
 export const initialState: Array<Schedule> = [];
 
-export function scheduleReducer(state: Array<Schedule> = initialState, action: UserAction) {
+export function scheduleListReducer(state: Array<Schedule> = initialState, action: UserAction) {
     switch (action.type) {
-        case ScheduleActionTypes.LoadScheduleSuccess:
+        case ScheduleListActionTypes.LoadScheduleSuccess:
             state = action.payload.data;
             return state;
-        case ScheduleActionTypes.LoadScheduleError:
+        case ScheduleListActionTypes.LoadScheduleError:
             return state;
 
-        case ScheduleActionTypes.AddScheduleSuccess:
+        case ScheduleListActionTypes.AddScheduleSuccess:
             state.push(action.payload.data);
             return state;
-        case ScheduleActionTypes.AddScheduleError:
+        case ScheduleListActionTypes.AddScheduleError:
             return state;
 
-        case ScheduleActionTypes.DeleteScheduleSuccess:
+        case ScheduleListActionTypes.DeleteScheduleSuccess:
             let deleteIndex;
             state.map((item, i) => {
                 if (item._id === action.payload.data) {
@@ -41,10 +41,10 @@ export function scheduleReducer(state: Array<Schedule> = initialState, action: U
             });
             state.splice(deleteIndex, 1);
             return state;
-        case ScheduleActionTypes.DeleteScheduleError:
+        case ScheduleListActionTypes.DeleteScheduleError:
             return state;
 
-        case ScheduleActionTypes.ResetSchedule:
+        case ScheduleListActionTypes.ResetSchedule:
             state = [];
             return state;
 

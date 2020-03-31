@@ -1,7 +1,7 @@
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Component, OnInit, ViewChild, ComponentRef, ViewContainerRef, ComponentFactoryResolver, ComponentFactory } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Appstate, LoadProjectDetail, LoadProjectList, DeleteProject } from '../../store';
+import { Appstate, LoadProjectList, DeleteProject } from '../../store';
 import { map, filter } from 'rxjs/operators';
 import { NzModalService } from 'ng-zorro-antd';
 import { ProjectAddComponent } from './project-add/project-add.component';
@@ -27,7 +27,7 @@ export class ProjectComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.pipe(map(data => data.projectState.projectList)).subscribe(res => {
+    this.store.pipe(map(data => data.projectList)).subscribe(res => {
       this.projectList = res || [];
     });
   }

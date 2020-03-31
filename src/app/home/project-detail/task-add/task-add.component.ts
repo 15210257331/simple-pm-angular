@@ -41,12 +41,12 @@ export class TaskAddComponent implements OnInit {
       endTime: ['', [Validators.required]],
       tag: [[], Validators.required]
     });
-    const projectDetail$ = this.store
+    this.store
       .pipe(
-        map(data => data.projectState)
+        map(data => data.currentProject)
       )
       .subscribe(res => {
-        this.projectDetail = res.projectDetail;
+        this.projectDetail = res;
       });
   }
 

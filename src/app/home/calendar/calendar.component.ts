@@ -30,7 +30,7 @@ export class CalendarComponent implements OnInit {
     this.store.dispatch(new LoadScheduleList());
     this.store
       .pipe(
-        map(data => data.scheduleState)
+        map(data => data.scheduleList)
       )
       .subscribe(res => {
         this.schedulekList = res.map(item => {

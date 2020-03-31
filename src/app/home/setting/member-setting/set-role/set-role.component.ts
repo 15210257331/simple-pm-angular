@@ -30,7 +30,7 @@ export class SetRoleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.pipe(map(data => data.userState.roleList)).subscribe(res => {
+    this.store.pipe(map(data => data.roleList)).subscribe(res => {
       const arr = res || [];
       let settedRoleNames = [];
       if (this.data.role.length > 0) {

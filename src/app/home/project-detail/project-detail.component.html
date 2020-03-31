@@ -2,7 +2,7 @@
   <div class="view-header">
     <div class="left">
       <i nz-icon nzType="folder-open" nzTheme="twotone"></i>
-      <span>{{projectDetail.name}}</span>
+      <span>{{currentProject.name}}</span>
     </div>
     <div class="center">
       <li [class.select]="item.value === selectTab" *ngFor="let item of viewList;" (click)="tabChange(item.value)">
@@ -14,11 +14,11 @@
       </div>
       <div (click)="openMember()">
         <i class="iconfont iconusers-alt"></i>
-        <span>{{projectDetail.member.length}}</span>
+        <span>{{currentProject.member?.length}}</span>
       </div>
       <div (click)="openTag()">
         <i class="iconfont icontag"></i>
-        <span>{{projectDetail.tag.length}}</span>
+        <span>{{currentProject.tag?.length}}</span>
       </div>
     </div>
   </div>

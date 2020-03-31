@@ -25,7 +25,7 @@ export class TrashComponent implements OnInit {
   ngOnInit() {
     const task$ = this.store
       .pipe(
-        map(data => data.projectState.projectDetail)
+        map(data => data.currentProject)
       )
       .subscribe(res => {
         this.taskList = res.task || [];

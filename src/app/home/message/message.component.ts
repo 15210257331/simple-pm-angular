@@ -37,7 +37,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
   ) { }
 
   ngOnInit() {
-    this.store.pipe(map(data => data.userState)).subscribe(res => {
+    this.store.pipe(map(data => data)).subscribe(res => {
       this.userInfo = res.userInfo;
       this.memberList = res.memberList.filter(item => item._id !== this.userInfo._id);
       this.localMessages = JSON.parse(localStorage.getItem('localMessages' + this.userInfo._id)) || [];

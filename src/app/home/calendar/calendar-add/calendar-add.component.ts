@@ -36,14 +36,12 @@ export class CalendarAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const memberList$ = this.store
-      .pipe(
-        map(data => data.userState)
-      )
-      .subscribe(res => {
-        this.memberList = res.memberList;
-        this.userId = res.userInfo._id;
-      });
+    this.store.pipe(map(data => data.userInfo)).subscribe(res => {
+      this.userId = res._id;
+    });
+    this.store.pipe(map(data => data.memberList)).subscribe(res => {
+      this.memberList = res || [];
+    });
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       content: ['', [Validators.required]],

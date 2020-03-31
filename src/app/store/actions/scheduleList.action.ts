@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-export enum ScheduleActionTypes {
+export enum ScheduleListActionTypes {
     LoadScheduleList = 'LoadScheduleList',
     LoadScheduleSuccess = 'LoadScheduleSuccess',
     LoadScheduleError = 'LoadScheduleError',
@@ -17,51 +17,51 @@ export enum ScheduleActionTypes {
 }
 
 export class LoadScheduleList implements Action {
-    readonly type = ScheduleActionTypes.LoadScheduleList;
+    readonly type = ScheduleListActionTypes.LoadScheduleList;
 }
 
 export class LoadScheduleSuccess implements Action {
-    readonly type = ScheduleActionTypes.LoadScheduleSuccess;
+    readonly type = ScheduleListActionTypes.LoadScheduleSuccess;
     constructor(public payload: any) {}
 }
 
 export class LoadScheduleError implements Action {
-    readonly type = ScheduleActionTypes.LoadScheduleError;
+    readonly type = ScheduleListActionTypes.LoadScheduleError;
     constructor(public payload: any) {}
 }
 
 export class AddScheduleList implements Action {
-    readonly type = ScheduleActionTypes.AddScheduleList;
+    readonly type = ScheduleListActionTypes.AddScheduleList;
     constructor(public payload: any) {}
 }
 
 export class AddScheduleSuccess implements Action {
-    readonly type = ScheduleActionTypes.AddScheduleSuccess;
+    readonly type = ScheduleListActionTypes.AddScheduleSuccess;
     constructor(public payload: any) {}
 }
 
 export class AddScheduleError implements Action {
-    readonly type = ScheduleActionTypes.AddScheduleError;
+    readonly type = ScheduleListActionTypes.AddScheduleError;
     constructor(public payload: any) {}
 }
 
 export class DeleteScheduleList implements Action {
-    readonly type = ScheduleActionTypes.DeleteScheduleList;
+    readonly type = ScheduleListActionTypes.DeleteScheduleList;
     constructor(public payload: any) {}
 }
 
 export class DeleteScheduleSuccess implements Action {
-    readonly type = ScheduleActionTypes.DeleteScheduleSuccess;
+    readonly type = ScheduleListActionTypes.DeleteScheduleSuccess;
     constructor(public payload: any) {}
 }
 
 export class DeleteScheduleError implements Action {
-    readonly type = ScheduleActionTypes.DeleteScheduleError;
+    readonly type = ScheduleListActionTypes.DeleteScheduleError;
     constructor(public payload: any) {}
 }
 
 export class ResetSchedule implements Action {
-    readonly type = ScheduleActionTypes.ResetSchedule;
+    readonly type = ScheduleListActionTypes.ResetSchedule;
     constructor(public payload: any) {}
 }
 

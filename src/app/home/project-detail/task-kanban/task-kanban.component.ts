@@ -69,7 +69,7 @@ export class TaskKanbanComponent implements OnInit {
     this.selectViewName = this.taskView[0].name;
     const task$ = this.store
       .pipe(
-        map(data => data.projectState.projectDetail),
+        map(data => data.currentProject),
       )
       .subscribe(res => {
         this.projectId = res._id;
@@ -81,7 +81,7 @@ export class TaskKanbanComponent implements OnInit {
 
     const userInfo$ = this.store
       .pipe(
-        map(data => data.userState.userInfo)
+        map(data => data.userInfo)
       )
       .subscribe(res => {
         this.userInfo = res;

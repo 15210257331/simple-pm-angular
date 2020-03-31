@@ -82,7 +82,7 @@ export class NavComponent implements OnInit {
     this.store.dispatch(new LoadRoleList(''));
     this.store.dispatch(new LoadScheduleList());
     this.store.dispatch(new LoadProjectList(''));
-    this.store.pipe(map(data => data.userState.userInfo)).subscribe(res => {
+    this.store.pipe(map(data => data.userInfo)).subscribe(res => {
       this.userInfo = res;
       this.newUser();
     });

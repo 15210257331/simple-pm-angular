@@ -1,15 +1,14 @@
-import { ScheduleService } from './../../service/schedule.service';
+import { ScheduleService } from '../../service/schedule.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { of, forkJoin } from 'rxjs';
-import { UserActionTypes, LoadUserInfoSuccess, LoadUserInfoError, LoadMemberListSuccess, LoadMemberListError, } from '../actions';
 import { NzMessageService } from 'ng-zorro-antd';
 import { UserService } from '../../service/user.service';
-import { ScheduleActionTypes, LoadScheduleSuccess, LoadScheduleError, DeleteScheduleError, DeleteScheduleSuccess } from '../actions/schedule.action';
+import { ScheduleListActionTypes, LoadScheduleSuccess, LoadScheduleError, DeleteScheduleError, DeleteScheduleSuccess } from '../actions/scheduleList.action';
 
 @Injectable()
-export class ScheduleEffects {
+export class ScheduleListEffects {
 
     constructor(
         private actions$: Actions,
@@ -17,10 +16,10 @@ export class ScheduleEffects {
         private message: NzMessageService
     ) { }
 
-
+    // 加载日程
     @Effect()
     scheduleInfo$ = this.actions$.pipe(
-        ofType(ScheduleActionTypes.LoadScheduleList),
+        ofType(ScheduleListActionTypes.LoadScheduleList),
         map((data: any) => data.payload),
         mergeMap((payload) =>
             this.scheduleService.getScheduleList()
@@ -42,7 +41,7 @@ export class ScheduleEffects {
     // 删除日程
     @Effect()
     deleteScheduleInfo$ = this.actions$.pipe(
-        ofType(ScheduleActionTypes.DeleteScheduleList),
+        ofType(ScheduleListActionTypes.DeleteScheduleList),
         map((data: any) => data.payload),
         mergeMap((id) =>
             this.scheduleService.deleteSchedule(id)

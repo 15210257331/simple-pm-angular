@@ -32,15 +32,11 @@ export class ProjectAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store
-      .pipe(
-        map(data => data.userState)
-      )
-      .subscribe(res => {
-        this.memberList = res.memberList;
-        const userId = res.userInfo._id;
-        this.memberList = this.memberList.filter(item => item._id !== userId);
-      });
+    this.store.pipe(map(data => data)).subscribe(res => {
+      this.memberList = res.memberList;
+      const userId = res.userInfo._id;
+      this.memberList = this.memberList.filter(item => item._id !== userId);
+    });
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       content: ['', [Validators.required]],

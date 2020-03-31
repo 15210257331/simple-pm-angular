@@ -28,10 +28,10 @@ export class MyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.pipe(map(data => data.userState.userInfo)).subscribe(res => {
+    this.store.pipe(map(data => data.userInfo)).subscribe(res => {
       this.userInfo = res;
     });
-    this.store.pipe(map(data => data.scheduleState)).subscribe(res => {
+    this.store.pipe(map(data => data.scheduleList)).subscribe(res => {
       this.myScheduleList = res.filter(item => item.startTime > Number(moment().format('x'))).map(item => {
         return Object.assign({}, item, {
           startTime: moment(item.startTime).format('MM-DD HH:mm:ss')

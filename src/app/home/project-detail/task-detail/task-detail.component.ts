@@ -30,10 +30,10 @@ export class TaskDetailComponent implements OnInit {
     this.store.dispatch(new GetTaskComment(this.id));
     const taskDetail$ = this.store
       .pipe(
-        map(data => data.projectState.projectDetail.task),
+        map(data => data.currentProject),
       )
       .subscribe(res => {
-        this.taskDetail = res.filter(item => item._id === this.id)[0];
+        this.taskDetail = res.task.filter(item => item._id === this.id)[0];
         if (this.taskDetail && this.taskDetail.comment.length > 0) {
           this.taskDetail.comment.map(item => {
             item.commentTime = new Date(item.commentTime).toLocaleString();

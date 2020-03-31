@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { of, forkJoin } from 'rxjs';
-import { UserActionTypes, LoadUserInfoSuccess, LoadUserInfoError, LoadMemberListSuccess, LoadMemberListError, DeleteMemberSuccess, DeleteMemberError } from '../actions';
+import { UserInfoActionTypes, LoadUserInfoSuccess, LoadUserInfoError } from '../actions';
 import { NzMessageService } from 'ng-zorro-antd';
 import { UserService } from '../../service/user.service';
 import { SocketService } from '../../service/socket.service';
 
 @Injectable()
-export class UserEffects {
+export class UserInfoEffects {
 
     constructor(
         private actions$: Actions,
@@ -20,7 +20,7 @@ export class UserEffects {
     // 获取用户信息
     @Effect()
     userInfo$ = this.actions$.pipe(
-        ofType(UserActionTypes.LoadUserInfo),
+        ofType(UserInfoActionTypes.LoadUserInfo),
         map((data: any) => data.payload),
         mergeMap((payload) =>
             this.userService.getUserInfo()
