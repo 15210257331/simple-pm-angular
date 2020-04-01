@@ -4,11 +4,5 @@
     <span style="font-size: 38px; margin-right: 5px" class="iconfont iconxinzeng"></span>
     <span>邀请新成员</span>
   </li>
-  <li *ngFor="let item of data;">
-    <div [ngStyle]="{'background-image': 'url(' + item.avatar + ')'}" class="avatar"></div>
-    <div>
-      <p>{{item.nickname}}</p>
-      <span>{{item.username}}({{item.password}})</span>
-    </div>
-  </li>
+  <app-member-item *ngFor="let item of data;" [hover]="true" [data]="item"></app-member-item>
 </ul>

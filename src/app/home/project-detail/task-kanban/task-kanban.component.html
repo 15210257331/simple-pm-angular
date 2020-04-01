@@ -19,7 +19,7 @@
       </nz-progress>
       <ul class="task-sort-content" cdkDropList [cdkDropListData]="item.taskList"
         (cdkDropListDropped)="drop($event, item.status)">
-        <li class="task-item" cdkDrag *ngFor="let sonItem of item.taskList;" (click)="taskDetail(sonItem._id)">
+        <li class="task-item" cdkDrag *ngFor="let sonItem of item.taskList;" (click)="taskDetail(sonItem)">
           <div class="task-item-header">
             <span>{{sonItem.number}}</span>
             <img [src]="sonItem.principal.avatar" alt="">

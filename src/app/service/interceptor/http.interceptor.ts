@@ -42,7 +42,7 @@ export class LogInterceptor implements HttpInterceptor {
                             this.notification.create('info', '请求错误', res.body.msg);
                             this.router.navigate(['/login']);
                         } else if (res.body.code !== 200 && res.body.code !== 301 && res.body.code !== 302) {
-                            this.notification.create('error', '请求错误', res.body.msg);
+                            this.notification.create('error', '请求错误', res.body.msg.message);
                         }
                     }
                     return res;

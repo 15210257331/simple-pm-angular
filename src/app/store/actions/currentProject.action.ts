@@ -15,13 +15,6 @@ export enum CurrentProjectActionTypes {
     DeleteTaskCuccess = 'DeleteTaskCuccess',
     DeleteTaskError = 'DeleteTaskError',
 
-    GetTaskComment = 'GetTaskComment',
-    GetTaskCommentSuccess = 'GetTaskCommentSuccess',
-    GetTaskCommentError = 'GetTaskCommentError',
-
-    AddTaskCommentSuccess = 'AddTaskCommentSuccess',
-    AddTaskCommentError = 'AddTaskCommentError',
-
     AddProjectTagSuccess = 'AddProjectTagSuccess',
     AddProjectTagError = 'AddProjectTagError',
 
@@ -72,30 +65,6 @@ export class DeleteTaskCuccess implements Action {
 
 export class DeleteTaskError implements Action {
     readonly type = CurrentProjectActionTypes.DeleteTaskError;
-    constructor(public payload: any) { }
-}
-
-export class GetTaskComment implements Action {
-    readonly type = CurrentProjectActionTypes.GetTaskComment;
-    constructor(public payload: any) { }
-}
-
-export class GetTaskCommentSuccess implements Action {
-    readonly type = CurrentProjectActionTypes.GetTaskCommentSuccess;
-    constructor(public payload: any) { }
-}
-
-export class GetTaskCommentError implements Action {
-    readonly type = CurrentProjectActionTypes.GetTaskCommentError;
-    constructor(public payload: any) { }
-}
-
-export class AddTaskCommentSuccess implements Action {
-    readonly type = CurrentProjectActionTypes.AddTaskCommentSuccess;
-    constructor(public payload: any) { }
-}
-export class AddTaskCommentError implements Action {
-    readonly type = CurrentProjectActionTypes.AddTaskCommentError;
     constructor(public payload: any) { }
 }
 

@@ -25,11 +25,14 @@ export class MyTaskComponent implements OnInit {
 
   }
 
-  taskDetail(id: any) {
+  taskDetail(data: any) {
+    // 会出错 因为无法确定当前项目是哪个
     const modal = this.modalService.create({
       nzTitle: '任务详情',
       nzContent: TaskDetailComponent,
-      nzComponentParams: { id },
+      nzComponentParams: {
+        taskDetail: data
+      },
       nzBodyStyle: {
         padding: 0,
       },

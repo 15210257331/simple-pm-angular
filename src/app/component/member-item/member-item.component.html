@@ -1,4 +1,4 @@
-<div class="member-item">
+<div class="member-item" [ngClass]="{'hover-state': hover}">
   <div [ngStyle]="{'background-image': 'url(' + data.avatar + ')'}" class="avatar"></div>
   <div>
     <p>{{data.nickname}}</p>

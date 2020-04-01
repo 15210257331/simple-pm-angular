@@ -1,7 +1,7 @@
 import { TaskService } from '../../../service/task.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Appstate, GetTaskComment, AddTaskCommentSuccess } from '../../../store';
+import { Appstate } from '../../../store';
 import { map, filter } from 'rxjs/operators';
 import { NzModalRef } from 'ng-zorro-antd';
 
@@ -12,13 +12,15 @@ import { NzModalRef } from 'ng-zorro-antd';
 })
 export class TaskDetailComponent implements OnInit {
 
-  @Input() id: any;
-
-  taskDetail: any;
+  @Input() taskDetail: any;
 
   time: any = new Date();
 
+  comments: any[] = [];
+
   comment: '';
+
+  visible: boolean = false;
 
   types: any[] = [
     {
@@ -46,21 +48,30 @@ export class TaskDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new GetTaskComment(this.id));
-    this.store
-      .pipe(
-        map(data => data.currentProject),
-      )
-      .subscribe(res => {
-        this.taskDetail = res.task.filter(item => item._id === this.id)[0];
-        if (this.taskDetail.comment) {
-          if (this.taskDetail.comment.length > 0) {
-            this.taskDetail.comment.map(item => {
-              item.commentTime = new Date(item.commentTime).toLocaleString();
-            });
-          }
-        }
-      });
+    this.getComments(this.taskDetail._id);
+    // this.store.pipe(map(data => data.currentProject)).subscribe(res => {
+    //   if (this.taskDetail.comment) {
+    //     console.log(this.taskDetail);
+    //     if (this.taskDetail.comment.length > 0) {
+    //       this.taskDetail.comment.map(item => {
+    //         item.commentTime = new Date(item.commentTime).toLocaleString();
+    //       });
+    //     }
+    //   }
+    // });
+  }
+
+  getComments(id: string) {
+    this.taskService.getTaskComment(id).subscribe(res => {
+      if (res.code === 200) {
+        this.comments = res.data || [];
+      }
+    });
+  }
+
+  selectStatus(status: number) {
+    this.visible = !this.visible;
+    this.taskDetail.status = status;
   }
 
   timeChange(event) {
@@ -78,7 +89,7 @@ export class TaskDetailComponent implements OnInit {
     };
     this.taskService.addTaskComment(data).subscribe(res => {
       if (res.code === 200) {
-        this.store.dispatch(new AddTaskCommentSuccess(data));
+        this.getComments(this.taskDetail._id);
         this.comment = '';
       }
     });
@@ -87,5 +98,4 @@ export class TaskDetailComponent implements OnInit {
   cancel() {
     this.modal.destroy();
   }
-
 }

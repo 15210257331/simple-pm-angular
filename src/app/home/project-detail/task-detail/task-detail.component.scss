@@ -64,3 +64,19 @@
 :host ::ng-deep .ant-modal-body {
   padding: 0 !important;
 }
+
+.status-switch {
+  margin: -4px -13px;
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  align-items: flex-start;
+
+  &>p {
+    width: 100%;
+    margin: 2px 0;
+  }
+  &>p:hover {
+    background-color: #eee;
+  }
+}

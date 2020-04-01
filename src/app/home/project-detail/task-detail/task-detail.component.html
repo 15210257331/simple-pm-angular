@@ -4,29 +4,48 @@
     <nz-divider></nz-divider>
     <div class="detail-part">
       <label>任务状态:</label>
-      <ng-container [ngSwitch]="taskDetail?.status">
-        <nz-tag *ngSwitchCase="1" [nzColor]="'#2db7f5'">未开始</nz-tag>
-        <nz-tag *ngSwitchCase="2" [nzColor]="'#22d7bb'">进行中</nz-tag>
-        <nz-tag *ngSwitchCase="3" [nzColor]="'#87d068'">已完成</nz-tag>
-        <nz-tag *ngSwitchCase="4" [nzColor]="'#f50'">已作废</nz-tag>
-      </ng-container>
+      <span nz-popover [(nzVisible)]="visible" [nzPopoverContent]="contentTemplate" [nzPopoverTrigger]="'click'"
+        [nzPopoverPlacement]="'bottom'">
+        <span [ngSwitch]="taskDetail.status">
+          <nz-tag *ngSwitchCase="1" [nzColor]="'#2db7f5'">未开始</nz-tag>
+          <nz-tag *ngSwitchCase="2" [nzColor]="'#22d7bb'">进行中</nz-tag>
+          <nz-tag *ngSwitchCase="3" [nzColor]="'#87d068'">已完成</nz-tag>
+          <nz-tag *ngSwitchCase="4" [nzColor]="'#f50'">已作废</nz-tag>
+        </span>
+      </span>
+      <ng-template #contentTemplate>
+        <div class="status-switch">
+          <p (click)="selectStatus(1)">
+            <nz-tag [nzColor]="'#2db7f5'">未开始</nz-tag>
+          </p>
+          <p (click)="selectStatus(2)">
+            <nz-tag [nzColor]="'#22d7bb'">进行中</nz-tag>
+          </p>
+          <p (click)="selectStatus(3)">
+            <nz-tag [nzColor]="'#87d068'">已完成</nz-tag>
+          </p>
+          <p (click)="selectStatus(4)">
+            <nz-tag [nzColor]="'#f50'">已作废</nz-tag>
+          </p>
+        </div>
+      </ng-template>
     </div>
     <div class="detail-part">
       <label>负责人:</label>
-      <app-member-item [data]="taskDetail?.principal"></app-member-item>
+      <app-member-item [hover]="false" [data]="taskDetail?.principal"></app-member-item>
     </div>
     <div class="detail-part">
       <label>开始时间:</label>
-      <nz-date-picker [nzSize]="'small'" [(ngModel)]="taskDetail.startTime" (ngModelChange)="timeChange($event)">
+      <nz-date-picker [(ngModel)]="taskDetail.startTime" (ngModelChange)="timeChange($event)">
       </nz-date-picker>
       <label style="margin-left: 20px; margin-right: 5px;">结束时间:</label>
-      <nz-date-picker [nzSize]="'small'" [(ngModel)]="taskDetail.endTime" (ngModelChange)="timeChange($event)">
+      <nz-date-picker [(ngModel)]="taskDetail.endTime" (ngModelChange)="timeChange($event)">
       </nz-date-picker>
     </div>
 
     <div class="detail-part">
       <label>任务类型:</label>
-      <nz-select style="width: 150px;" [(ngModel)]="taskDetail.type" nzPlaceHolder="任务类型">
+      <nz-select style="width: 200px;" [(ngModel)]="taskDetail.type" nzPlaceHolder="任务类型">
         <nz-option *ngFor="let item of types" [nzValue]="item.value" [nzLabel]="item.name"></nz-option>
       </nz-select>
     </div>
@@ -44,23 +63,13 @@
   <div class="detail-right">
     <div>
       <label>任务评论:</label>
-      <nz-comment *ngFor="let item of taskDetail.comment;" [nzAuthor]="item.commentAuthor.nickname"
-        [nzDatetime]="item.commentTime">
-        <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.commentAuthor.avatar">
+      <nz-comment *ngFor="let item of comments;" [nzAuthor]="item.author.nickname"
+        [nzDatetime]="item.time | date: 'yyyy-MM-dd HH:mm:ss'">
+        <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.author.avatar">
         </nz-avatar>
-        <nz-comment-content>
-          <span>{{item.content}}</span>
-        </nz-comment-content>
-        <nz-comment-action>
-          <i nz-tooltip nzTitle="Like" nz-icon nzType="like"></i>
-          <span class="count like">{{ 0 }}</span>
-        </nz-comment-action>
-        <nz-comment-action>
-          <i nz-tooltip nzTitle="Dislike" nz-icon nzType="dislike"></i>
-          <span class="count dislike">{{ 1 }}</span>
-        </nz-comment-action>
+        <nz-comment-content><span>{{item.content}}</span></nz-comment-content>
       </nz-comment>
-      <nz-empty style="margin-top: 170px;" *ngIf="taskDetail?.comment"></nz-empty>
+      <nz-empty style="margin-top: 170px;" *ngIf="comments.length === 0"></nz-empty>
     </div>
     <nz-divider></nz-divider>
     <div style="width: 100%; margin-bottom: 10px;">
@@ -70,5 +79,4 @@
       <ng-template #prefixTemplate><i nz-icon nzType="user"></i></ng-template>
     </div>
   </div>
-
 </div>

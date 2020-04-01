@@ -6,7 +6,7 @@ import { of, forkJoin } from 'rxjs';
 import { ProjectService } from '../../service/project.service';
 import { TaskService } from '../../service/task.service';
 import { NzNotificationService } from 'ng-zorro-antd';
-import { CurrentProjectActionTypes, LoadCurrentProjectSuccess, LoadCurrentProjectError, GetTaskCommentSuccess, GetTaskCommentError } from '../actions';
+import { CurrentProjectActionTypes, LoadCurrentProjectSuccess, LoadCurrentProjectError } from '../actions';
 
 
 // effects 就是一个service  过滤出特定的action 进行相应的异步操作 得到结果后再dispatch相应的成功的action
@@ -37,26 +37,6 @@ export class CurrentProjectEffects {
                         }
                     }),
                     catchError(err => of(new LoadCurrentProjectError(err)))
-                )
-        )
-    );
-
-    // 获取任务评论
-    @Effect()
-    getTaskComment$ = this.actions$.pipe(
-        ofType(CurrentProjectActionTypes.GetTaskComment),
-        map((data: any) => data.payload),
-        mergeMap(taskId =>
-            this.taskService.getTaskComment(taskId)
-                .pipe(
-                    map(res => {
-                        if (res.code === 200) {
-                            return new GetTaskCommentSuccess({ res, taskId });
-                        } else {
-                            return of(new GetTaskCommentError(res.msg));
-                        }
-                    }),
-                    catchError(err => of(new GetTaskCommentError(err)))
                 )
         )
     );

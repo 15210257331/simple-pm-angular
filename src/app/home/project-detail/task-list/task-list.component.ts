@@ -55,12 +55,12 @@ export class TaskListComponent implements OnInit {
     });
   }
 
-  taskDetail(id: any) {
+  taskDetail(data: any) {
     const modal = this.modalService.create({
       nzTitle: '任务详情',
       nzContent: TaskDetailComponent,
       nzComponentParams: {
-        id
+        taskDetail: data
       },
       nzFooter: null,
       nzWidth: 800,
