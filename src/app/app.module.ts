@@ -23,7 +23,6 @@ import { ScheduleService } from './service/schedule.service';
 import { SocketService } from './service/socket.service';
 import { ShareModule } from './share.module';
 import { NavModule } from './home/nav/nav.module';
-import { TagService } from './service/tag.service';
 import { MessageService } from './service/message.service';
 import { UtilsService } from './service/utils.service';
 
@@ -63,7 +62,6 @@ enableProdMode(); // 解决父组件检查完后 子组件有改变了父组件�
     TaskService,
     ScheduleService,
     SocketService,
-    TagService,
     MessageService,
     UtilsService,
     { provide: NZ_I18N, useValue: zh_CN },

@@ -3,7 +3,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Appstate, AddProjectTagSuccess } from '../../../store';
 import { NzMessageService } from 'ng-zorro-antd';
-import { TagService } from '../../../service/tag.service';
 
 @Component({
   selector: 'app-project-tag',
@@ -24,7 +23,6 @@ export class ProjectTagComponent implements OnInit {
   constructor(
     private store: Store<Appstate>,
     private message: NzMessageService,
-    private tagService: TagService,
     private projectService: ProjectService
   ) { }
 

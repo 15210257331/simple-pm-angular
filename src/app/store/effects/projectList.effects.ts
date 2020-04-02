@@ -1,4 +1,3 @@
-import { TagService } from '../../service/tag.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, mergeMap, catchError } from 'rxjs/operators';
@@ -18,7 +17,6 @@ export class ProjectListEffects {
         private notification: NzNotificationService,
         private projectService: ProjectService,
         private taskService: TaskService,
-        private tagService: TagService
     ) { }
 
     // 项目列表

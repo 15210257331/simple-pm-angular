@@ -5,7 +5,6 @@ import { TaskService } from '../../../service/task.service';
 import { NzModalRef, NzNotificationService } from 'ng-zorro-antd';
 import { Store } from '@ngrx/store';
 import { Appstate, AddTaskSuccess } from '../../../store';
-import { TagService } from '../../../service/tag.service';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -49,7 +48,6 @@ export class TaskAddComponent implements OnInit {
     private notification: NzNotificationService,
     private modal: NzModalRef,
     private store: Store<Appstate>,
-    private tagService: TagService
   ) { }
 
   ngOnInit() {
