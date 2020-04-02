@@ -15,7 +15,7 @@ export class ProjectService {
      * 获取project 列表
      */
     getProjectList(name: any): Observable<any> {
-        return this.http.post(`${API}/project/list`, {name});
+        return this.http.post(`${API}/project/list`, { name });
     }
 
     /**
@@ -45,5 +45,14 @@ export class ProjectService {
     deleteProject(id: any): Observable<any> {
         return this.http.get(`${API}/project/delete?id=${id}`);
     }
+
+    /**
+     * 添加项目标签
+     */
+    addProjectTag(data: any): Observable<any> {
+        return this.http.post(`${API}/project/tag/add`, data);
+    }
+
+
 }
 

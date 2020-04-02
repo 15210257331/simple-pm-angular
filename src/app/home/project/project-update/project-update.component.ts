@@ -30,7 +30,6 @@ export class ProjectUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.model = this.data;
-    console.log(this.model);
   }
 
   updateProject() {

@@ -9,7 +9,7 @@
   </div>
   <div class="form-item">
     <label for="">项目成员:</label>
-    <nz-select nzMode="multiple" nzPlaceHolder="选择成员" formControlName="member">
+    <nz-select nzMode="multiple" nzPlaceHolder="选择成员" formControlName="participant">
       <nz-option *ngFor="let item of memberList" [nzLabel]="item.nickname" [nzValue]="item._id"></nz-option>
     </nz-select>
   </div>

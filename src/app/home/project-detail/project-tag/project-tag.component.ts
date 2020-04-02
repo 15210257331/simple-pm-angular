@@ -1,3 +1,4 @@
+import { ProjectService } from './../../../service/project.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Appstate, AddProjectTagSuccess } from '../../../store';
@@ -23,21 +24,22 @@ export class ProjectTagComponent implements OnInit {
   constructor(
     private store: Store<Appstate>,
     private message: NzMessageService,
-    private tagService: TagService
+    private tagService: TagService,
+    private projectService: ProjectService
   ) { }
 
   ngOnInit() {
   }
 
   addTag() {
-    if (!this.tagModel.name || this.tagModel.color) {
+    if (!this.tagModel.name || !this.tagModel.color) {
       this.message.create('warning', '请填写标签名称');
       return;
     }
     const data = Object.assign({}, this.tagModel, {
       projectId: this.projectId
     });
-    this.tagService.addTag(data).subscribe(res => {
+    this.projectService.addProjectTag(data).subscribe(res => {
       if (res.code === 200) {
         this.store.dispatch(new AddProjectTagSuccess(res.data));
       }
