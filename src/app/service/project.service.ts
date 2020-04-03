@@ -53,6 +53,13 @@ export class ProjectService {
         return this.http.post(`${API}/project/tag/add`, data);
     }
 
+    /**
+     * 添加项目标签
+     */
+    addProjectMmeber(data: any): Observable<any> {
+        return this.http.post(`${API}/project/member/add`, data);
+    }
+
 
 }
 

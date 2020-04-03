@@ -1,42 +1,39 @@
 .member {
   margin: -15px;
+}
 
-  li {
-    margin: 0 -9px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 50px;
-    cursor: pointer;
+.invite {
+  padding-left: 5px;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
 
-    .avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      margin: 0 10px 0 16px;
-      background-color: #eee;
-      display: inline-block;
-      background-size: cover !important;
-      background-repeat: no-repeat !important;
-      background-position: 50% !important;
-    }
+  span {
+    margin-right: 10px
+  }
+}
 
-    div {
-      height: 40px;
-      text-align: left;
+.invite:hover {
+  background-color: #f0f0f0;
+}
 
-      p {
-        margin-bottom: 0;
-        color: #262626;
-      }
+.invite-content {
+  width: 280px;
+  overflow: auto;
+  height: 300px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-      span {
-        color: #8c8c8c
-      }
-    }
+  &>div {
+    margin-top: 10px;
+    width: 100%;
+    flex: 1;
+    overflow: auto;
   }
 
-  li:hover {
-    background-color: #f0f0f0;
+  nz-select {
+    width: 100%;
   }
 }

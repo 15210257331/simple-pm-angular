@@ -4,14 +4,16 @@
   </li>
 </ul>
 <nz-divider></nz-divider>
-<div class="form-item">
-  <label for="">标签名称:</label>
-  <input nz-input [(ngModel)]="tagModel.name" name="projectName" />
-</div>
-<div class="form-item">
-  <label for="">颜色:</label>
-  <app-color-list (select)="tagModel.color = $event"></app-color-list>
-</div>
-<div style="padding-left: 85px; margin-top: 60px;" class="form-item">
-  <button nz-button nzType="primary" (click)="addTag()">确定</button>
+<div class="common-form">
+  <div class="form-item">
+    <label for="">标签名称:</label>
+    <input nz-input [(ngModel)]="tagModel.name" name="projectName" />
+  </div>
+  <div class="form-item">
+    <label for="">颜色:</label>
+    <app-color-list style="flex: 1;" (select)="tagModel.color = $event"></app-color-list>
+  </div>
+  <div class="footer">
+    <button nz-button nzType="primary" (click)="addTag()">确定</button>
+  </div>
 </div>

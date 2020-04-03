@@ -11,32 +11,43 @@
     <ul>
       <ng-container *ngFor="let item of schedulekList;">
         <li *ngIf="item.showStartTime === date.toLocaleDateString()" nz-popover [nzTitle]="'日程详情'"
-          [nzContent]="scheduleContent" nzTrigger="hover">
+          [nzContent]="scheduleContent" nzTrigger="click">
           <nz-badge nzStatus="error"></nz-badge>
           <span>{{item.name}}</span>
           <ng-template #scheduleContent>
-            <div class="schedule">
-              <div class="option">
+            <div class="schedule-detail">
+              <div class="header">
                 <p>{{item.name}}</p>
                 <div>
-                  <button nz-button nzSize="small" nzType="primary">参加</button>
-                  <button nz-button nzSize="small" nzType="danger">拒绝</button>
-                  <button nz-button nzSize="small" (click)="deleteSchedule(item._id)" nzType="danger"
-                    nzGhost>删除</button>
+                  <button nz-button nzSize="small" (click)="participate(item._id)" nzType="primary">参加</button>
+                  <button nz-button nzSize="small" (click)="refuse(item._id)" nzType="danger">拒绝</button>
+                  <!-- <button nz-button nzSize="small" (click)="deleteSchedule(item._id)" nzType="danger">删除</button> -->
                 </div>
               </div>
-              <p><span>详情:</span><span>{{item.content}}</span></p>
-              <p><span>开始时间:</span><span>{{item.startTime}}</span></p>
-              <p><span>结束时间:</span><span>{{item.endTime}}</span></p>
-              <p>
-                <span>发起人:</span>
-                <img class="avatar" [src]="item.creator.avatar">
-              </p>
-              <p>
-                <span>参与人:</span>
-                <img class="avatar" *ngFor="let sonItem of item.participant" nz-tooltip
-                  [nzTooltipTitle]="sonItem.nickname" [src]="sonItem.avatar">
-              </p>
+              <div class="item">
+                <label style="align-self: flex-start;">描述:</label>
+                <p style="align-self: flex-start;">{{item.content}}</p>
+              </div>
+              <div class="item">
+                <label>开始时间:</label>
+                <span>{{item.startTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+              </div>
+              <div class="item">
+                <label>结束时间:</label>
+                <span>{{item.endTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+              </div>
+              <div class="item">
+                <label>创建人:</label>
+                <app-member-item style="flex: 1;" [hover]="false" [data]="item.creator"></app-member-item>
+              </div>
+              <div class="item">
+                <label>受邀人:</label>
+                <div style="flex: 1;">
+                  <img class="avatar" *ngFor="let sonItem of item.participant" nz-tooltip
+                    [nzTooltipTitle]="sonItem.nickname" [src]="sonItem.avatar">
+                </div>
+              </div>
+
             </div>
           </ng-template>
         </li>
@@ -44,7 +55,3 @@
     </ul>
   </div>
 </ng-template>
-
-
-
-

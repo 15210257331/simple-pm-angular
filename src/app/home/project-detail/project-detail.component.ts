@@ -94,10 +94,10 @@ export class ProjectDetailComponent implements OnInit {
     const drawerRef = this.drawerService.create({
       nzTitle: '项目成员',
       nzContent: ProjectMemberComponent,
-      nzMaskClosable: false,
+      nzMaskClosable: true,
       nzWidth: 360,
       nzContentParams: {
-        data: this.currentProject.member,
+        data: this.currentProject.participant,
         projectId: this.currentProject._id
       }
     });
@@ -116,7 +116,7 @@ export class ProjectDetailComponent implements OnInit {
     const drawerRef = this.drawerService.create({
       nzTitle: '项目标签',
       nzContent: ProjectTagComponent,
-      nzMaskClosable: false,
+      nzMaskClosable: true,
       nzWidth: 360,
       nzContentParams: {
         data: this.currentProject.tag,

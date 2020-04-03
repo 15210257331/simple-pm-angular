@@ -10,11 +10,12 @@
     </div>
     <div class="right">
       <div (click)="addTask(1)">
-        <span style="font-size: 22px;" class="iconfont iconxinzeng"></span>
+        <i style="font-size: 22px;" class="iconfont iconxinzeng"></i>
+        <span>新建</span>
       </div>
       <div (click)="openMember()">
         <i class="iconfont iconusers-alt"></i>
-        <span>{{currentProject.member?.length}}</span>
+        <span>{{currentProject.participant?.length}}</span>
       </div>
       <div (click)="openTag()">
         <i class="iconfont icontag"></i>

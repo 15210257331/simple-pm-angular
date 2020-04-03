@@ -1,7 +1,9 @@
+import { ProjectService } from './../../../service/project.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { Appstate, } from '../../../store';
+import { Appstate, AddProjectMemberSuccess, } from '../../../store';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-project-member',
@@ -14,27 +16,54 @@ export class ProjectMemberComponent implements OnInit {
 
   @Input() projectId;
 
-  name;
+  projectMembers: any[] = [];
+
+  allMembers: any[] = [];
+
+  membersShow: any[] = [];
+
+  name1: string;
+
+  name2: string;
+
+  visible = false;
 
   constructor(
-    private store: Store<Appstate>
+    private store: Store<Appstate>,
+    private projectService: ProjectService,
+    private notification: NzNotificationService,
   ) { }
 
   ngOnInit() {
+    this.projectMembers = this.data || [];
+    this.store
+      .pipe(
+        map(data => data.memberList)
+      ).subscribe(res => {
+        this.allMembers = res || [];
+        this.membersShow = this.allMembers;
+      });
+  }
 
+  filterProjectMember() {
+    this.projectMembers = this.data.filter(item => item.nickname.includes(this.name1));
+  }
+
+  filterMembersShow() {
+    this.membersShow = this.allMembers.filter(item => item.nickname.includes(this.name2));
   }
 
   addMember(item) {
-    // if (this.projectDetail.member.indexOf(item._id) > -1) {
-    //   this.message.error('该成员已在项目中！');
-    //   return;
-    // }
-    const member = this.data.map(ite => ite._id);
-    member.push(item._id);
-    const data = Object.assign({}, {
+    const data = {
       projectId: this.projectId,
-      member: Array.from(new Set(member))
+      memberId: item._id
+    };
+    this.projectService.addProjectMmeber(data).subscribe(res => {
+      if (res.code === 200) {
+        this.visible = false;
+        this.store.dispatch(new AddProjectMemberSuccess(res));
+        this.notification.create('success', 'sucess', res.msg);
+      }
     });
-    // this.store.dispatch(new UpdateProject(data));
   }
 }

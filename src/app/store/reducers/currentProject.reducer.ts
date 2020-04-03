@@ -49,6 +49,14 @@ export function currentProjectReducer(state: CurrentProject = initialState, acti
             state = initialState;
             return state;
 
+        case CurrentProjectActionTypes.AddProjectMemberSuccess:
+            state.participant.push(action.payload.data);
+            return state;
+
+        case CurrentProjectActionTypes.AddProjectMemberError:
+            state = initialState;
+            return state;
+
         default:
             return state;
     }

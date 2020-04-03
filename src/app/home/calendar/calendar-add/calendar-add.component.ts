@@ -69,6 +69,4 @@ export class CalendarAddComponent implements OnInit {
   cancel() {
     this.modal.destroy();
   }
-
-
 }

@@ -1,8 +1,18 @@
 <ul class="member">
-  <input nz-input [(ngModel)]="name" placeholder="搜索成员" />
-  <li style="padding-left: 15px; margin-top: 15px;">
-    <span style="font-size: 38px; margin-right: 5px" class="iconfont iconxinzeng"></span>
+  <input nz-input [(ngModel)]="name1" (keyup.enter)="filterProjectMember()" placeholder="搜索成员" />
+  <li class="invite" [(nzVisible)]="visible" nz-popover [nzPopoverContent]="contentTemplate" nzPopoverTrigger="click"
+    nzPopoverPlacement="bottom">
+    <span style="font-size: 38px;" class="iconfont iconxinzeng"></span>
     <span>邀请新成员</span>
   </li>
-  <app-member-item *ngFor="let item of data;" [hover]="true" [data]="item"></app-member-item>
+  <app-member-item *ngFor="let item of projectMembers;" [hover]="true" [data]="item"></app-member-item>
 </ul>
+
+<ng-template #contentTemplate>
+  <div class="invite-content">
+    <input nz-input [(ngModel)]="name2" (keyup)="filterMembersShow()" placeholder="搜索成员" />
+    <div>
+      <app-member-item *ngFor="let item of membersShow;" (click)="addMember(item)" [hover]="true" [data]="item"></app-member-item>
+    </div>
+  </div>
+</ng-template>

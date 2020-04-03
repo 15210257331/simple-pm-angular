@@ -4,12 +4,14 @@
     <div class="opertion">
       <div>
         <input type="text" nz-input placeholder="搜索项目(按enter搜索)" [(ngModel)]="name" (keyup.enter)="searchProject()" />
-        <span style="font-size: 26px; margin-left: 13px; vertical-align: sub;" (click)="searchProject()" class="iconfont iconsearch"></span>
+        <span style="font-size: 26px; margin-left: 13px; vertical-align: sub;" (click)="searchProject()"
+          class="iconfont iconsearch"></span>
       </div>
       <span>共<b>{{projectList.length}}</b>个项目</span>
     </div>
     <div class="project-list">
-      <div class="project-item" [ngStyle]="{'backgroundImage': 'url(' + item.cover + ')'}" *ngFor="let item of projectList;" (click)="projectDetail(item._id)">
+      <div class="project-item" [ngStyle]="{'backgroundImage': 'url(' + item.cover + ')'}"
+        *ngFor="let item of projectList;" (click)="projectDetail(item._id)">
         <span class="star iconfont iconstar"></span>
         <div class="title">
           <span>{{item?.name}}</span>
@@ -18,7 +20,7 @@
           <span>{{item?.content}}</span>
         </div>
         <div class="author">
-          <span>{{item?.creater?.nickname}}· {{item?.createDate |formatDate}}</span>
+          <span>{{item?.creator?.nickname}}· {{item?.createTime |date: 'yyyy-MM-dd'}}</span>
         </div>
         <div class="option">
           <span (click)="updateProject(item, $event)" class="iconfont iconsetting"></span>

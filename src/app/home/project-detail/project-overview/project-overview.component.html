@@ -8,9 +8,9 @@
         <label for="">项目名称:</label>
         <span>{{projectDetail.name}}</span>
         <label style="margin-left: 100px;" for="">创建人:</label>
-        <img [src]="projectDetail.creater.avatar" nz-tooltip [nzTooltipTitle]="projectDetail.creater.nickname">
+        <img [src]="projectDetail.creator.avatar" nz-tooltip [nzTooltipTitle]="projectDetail.creator.nickname">
         <label style="margin-left: 100px;" for="">创建时间:</label>
-        <span>{{projectDetail.createDate | formatDate}}</span>
+        <span>{{projectDetail.createTime | formatDate}}</span>
         <label style="margin-left: 100px;" for="">项目状态:</label>
         <span>正常</span>
       </p>
@@ -20,7 +20,7 @@
       </p>
       <p>
         <label for="">项目成员:</label>
-        <img *ngFor="let item of projectDetail.member" [src]="item?.avatar" nz-tooltip [nzTooltipTitle]="item.nickname">
+        <img *ngFor="let item of projectDetail.participant" [src]="item?.avatar" nz-tooltip [nzTooltipTitle]="item.nickname">
       </p>
     </div>
   </div>

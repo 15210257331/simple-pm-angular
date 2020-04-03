@@ -67,10 +67,10 @@
   background-color: white;
 }
 
-.schedule {
+.schedule-detail {
   width: 370px;
 
-  .option {
+  .header {
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
@@ -84,8 +84,28 @@
       margin-bottom: 0;
     }
 
-    button {
-      margin: 0 5px;
+    &>div {
+      align-self: flex-start;
+
+      button {
+        margin: 0 5px;
+      }
+    }
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    min-height: 30px;
+    margin: 10px 0;
+
+    label {
+      width: 70px;
+    }
+
+    p,
+    span {
+      flex: 1;
     }
   }
 }

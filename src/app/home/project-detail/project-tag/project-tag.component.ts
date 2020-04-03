@@ -2,7 +2,7 @@ import { ProjectService } from './../../../service/project.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Appstate, AddProjectTagSuccess } from '../../../store';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-project-tag',
@@ -23,13 +23,15 @@ export class ProjectTagComponent implements OnInit {
   constructor(
     private store: Store<Appstate>,
     private message: NzMessageService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private notification: NzNotificationService,
   ) { }
 
   ngOnInit() {
   }
 
   addTag() {
+    console.log(123);
     if (!this.tagModel.name || !this.tagModel.color) {
       this.message.create('warning', '请填写标签名称');
       return;
@@ -39,7 +41,8 @@ export class ProjectTagComponent implements OnInit {
     });
     this.projectService.addProjectTag(data).subscribe(res => {
       if (res.code === 200) {
-        this.store.dispatch(new AddProjectTagSuccess(res.data));
+        this.store.dispatch(new AddProjectTagSuccess(res));
+        this.notification.create('success', 'sucess', res.msg);
       }
     });
     this.tagModel = {

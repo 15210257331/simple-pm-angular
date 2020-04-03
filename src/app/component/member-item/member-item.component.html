@@ -1,7 +1,7 @@
 <div class="member-item" [ngClass]="{'hover-state': hover}">
-  <div [ngStyle]="{'background-image': 'url(' + data.avatar + ')'}" class="avatar"></div>
+  <div [ngStyle]="{'background-image': 'url(' + data?.avatar + ')'}" class="avatar"></div>
   <div>
-    <p>{{data.nickname}}</p>
-    <span>{{data.username}}</span>
+    <p>{{data?.nickname}}</p>
+    <span>{{data?.username}}</span>
   </div>
 </div>

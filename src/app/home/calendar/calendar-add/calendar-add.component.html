@@ -1,26 +1,26 @@
-<form nz-form [formGroup]="form">
-  <nz-form-item>
-    <nz-form-label nzRequired nzFor="name">日程名称:</nz-form-label>
-    <input nz-input formControlName="name" id="name" />
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label nzRequired nzFor="content">日程详情:</nz-form-label>
-    <textarea formControlName="content" nz-input rows="2"></textarea>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label nzRequired nzFor="startTime">开始时间:</nz-form-label>
+<form class="common-form" [formGroup]="form">
+  <div class="form-item">
+    <label for="">日程名称:</label>
+    <input nz-input formControlName="name" />
+  </div>
+  <div class="form-item">
+    <label for="">日程详情:</label>
+    <input nz-input formControlName="content" />
+  </div>
+  <div class="form-item">
+    <label for="">开始时间:</label>
     <nz-date-picker nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" formControlName="startTime"></nz-date-picker>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label nzRequired nzFor="endTime">结束时间:</nz-form-label>
+  </div>
+  <div class="form-item">
+    <label for="">结束时间:</label>
     <nz-date-picker nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" formControlName="endTime"></nz-date-picker>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label nzRequired nzFor="participant">参加人员:</nz-form-label>
+  </div>
+  <div class="form-item">
+    <label for="">参加人员:</label>
     <nz-select nzMode="multiple" nzPlaceHolder="选择成员" formControlName="participant">
       <nz-option *ngFor="let item of memberList" [nzLabel]="item.nickname" [nzValue]="item._id"></nz-option>
     </nz-select>
-  </nz-form-item>
+  </div>
   <div class="footer">
     <button nz-button class="login-form-button" nzType="primary" [disabled]="!form.valid"
       (click)="submitForm()">提交</button>

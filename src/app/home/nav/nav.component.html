@@ -10,7 +10,7 @@
 </div>
 
 <ng-template #headerTemplate>
-  <p class="title">北京俱乐部（{{userInfo?.nickname}}）</p>
+  <p class="title">{{userInfo?.nickname}}<span>（@{{userInfo?.username}}）</span></p>
 </ng-template>
 
 <ng-template #contentTemplate>

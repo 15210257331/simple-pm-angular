@@ -15,7 +15,7 @@ export class SettingComponent implements OnInit {
 
   viewList: any[] = [
     {
-      title: '成员管理',
+      title: '用户管理',
       value: 1,
       component: MemberSettingComponent
     },

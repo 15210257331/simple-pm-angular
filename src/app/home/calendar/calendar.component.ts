@@ -35,14 +35,7 @@ export class CalendarComponent implements OnInit {
       .subscribe(res => {
         this.schedulekList = res.map(item => {
           return Object.assign({}, item, {
-            startTime: moment(item.startTime).format('YYYY-MM-DD HH:mm:ss'),
-            endTime: moment(item.endTime).format('YYYY-MM-DD HH:mm:ss'),
             showStartTime: new Date(item.startTime).toLocaleDateString(),
-          });
-        });
-        this.mySchedule = res.filter(item => item.startTime > Number(moment().format('x'))).map(item => {
-          return Object.assign({}, item, {
-            startTime: moment(item.startTime).format('MM-DD HH:mm:ss')
           });
         });
       });
@@ -69,6 +62,14 @@ export class CalendarComponent implements OnInit {
 
   deleteSchedule(id: string) {
     this.store.dispatch(new DeleteScheduleList(id));
+  }
+
+  participate() {
+
+  }
+
+  refuse() {
+
   }
 
   panelChange(event) {

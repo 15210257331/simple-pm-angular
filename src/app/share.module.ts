@@ -10,7 +10,6 @@ import { DebounceDirective } from './directive';
 import { ClockComponent } from './component/clock/clock.component';
 import { FlipComponent } from './component/clock/flip/flip.component';
 import { ColorListComponent } from './component/color-list/color-list.component';
-import { TaskCardComponent } from './component/task-card/task-card.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MemberItemComponent } from './component/member-item/member-item.component';
 @NgModule({
@@ -19,7 +18,6 @@ import { MemberItemComponent } from './component/member-item/member-item.compone
     ClockComponent,
     FlipComponent,
     ColorListComponent,
-    TaskCardComponent,
     MemberItemComponent,
     // 管道
     FormatDatePipe,
@@ -50,7 +48,6 @@ import { MemberItemComponent } from './component/member-item/member-item.compone
     ClockComponent,
     FlipComponent,
     ColorListComponent,
-    TaskCardComponent,
     MemberItemComponent,
     // 管道
     FormatDatePipe,
