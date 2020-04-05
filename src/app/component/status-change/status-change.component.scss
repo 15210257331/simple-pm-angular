@@ -1,0 +1,55 @@
+.status {
+  position: relative;
+
+  .selected-status {
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    color: white;
+    padding: 0 7px;
+    margin: 0 8px 8px 0;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+
+  .status-list {
+    position: absolute;
+    left: -64px;
+    top: 30px;
+    background-color: white;
+    border: 0 solid transparent;
+    z-index: 999;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    list-style: none;
+    overflow: auto;
+    margin: 0;
+    max-height: 400px;
+    min-width: 200px;
+
+    li {
+      padding: 6px 16px;
+      min-height: 35px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      cursor: pointer;
+
+      span {
+        display: inline-block;
+        height: 23px;
+        line-height: 23px;
+        color: white;
+        padding: 0 7px;
+        cursor: pointer;
+        border-radius: 3px;
+      }
+    }
+
+    li:hover {
+      background-color: #f7f7f7;
+    }
+
+  }
+}

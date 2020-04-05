@@ -1,0 +1,39 @@
+.type {
+  margin: -15px;
+
+  .type-add {
+    display: flex;
+    justify-content: flex-start;
+
+    input {
+      flex: 1;
+      margin-right: 15px;
+    }
+  }
+
+  .type-list {
+    margin-top: 20px;
+
+    .type-item {
+      height: 40px;
+      padding: 0 10px;
+      margin: 5px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+
+      i {
+        display: none;
+      }
+    }
+
+    .type-item:hover {
+      background-color: #f0f0f0;
+
+      i {
+        display: inline;
+      }
+    }
+  }
+}

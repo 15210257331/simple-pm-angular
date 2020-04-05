@@ -5,7 +5,7 @@
     <span style="font-size: 38px;" class="iconfont iconxinzeng"></span>
     <span>邀请新成员</span>
   </li>
-  <app-member-item *ngFor="let item of projectMembers;" [hover]="true" [data]="item"></app-member-item>
+  <app-member-item *ngFor="let item of projectMembers;" [showDelete]="true" [hover]="true" [data]="item"></app-member-item>
 </ul>
 
 <ng-template #contentTemplate>

@@ -1,7 +1,8 @@
-<div class="member-item" [ngClass]="{'hover-state': hover}">
+<div class="member-item" [ngClass]="{'hover-state': hover, 'show-delete': showDelete}">
   <div [ngStyle]="{'background-image': 'url(' + data?.avatar + ')'}" class="avatar"></div>
   <div>
     <p>{{data?.nickname}}</p>
     <span>{{data?.username}}</span>
   </div>
+  <i class="iconfont icondelete"></i>
 </div>

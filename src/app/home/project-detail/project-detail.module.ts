@@ -11,6 +11,7 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { ProjectMemberComponent } from './project-member/project-member.component';
 import { ProjectTagComponent } from './project-tag/project-tag.component';
 import { TrashComponent } from './trash/trash.component';
+import { ProjectTypeComponent } from './project-type/project-type.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { TrashComponent } from './trash/trash.component';
         TaskListComponent,
         ProjectMemberComponent,
         ProjectTagComponent,
-        TrashComponent
+        TrashComponent,
+        ProjectTypeComponent
     ],
     imports: [
         CommonModule,
@@ -37,7 +39,8 @@ import { TrashComponent } from './trash/trash.component';
         TaskListComponent,
         ProjectMemberComponent,
         ProjectTagComponent,
-        TrashComponent
+        TrashComponent,
+        ProjectTypeComponent
     ],
     exports: [
         TaskDetailComponent

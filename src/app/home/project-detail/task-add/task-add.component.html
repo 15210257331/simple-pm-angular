@@ -18,7 +18,8 @@
   <div class="form-item">
     <label for="">项目类型:</label>
     <nz-select nzPlaceHolder="项目类型" formControlName="type">
-      <nz-option *ngFor="let item of types;" [nzLabel]="item.name" [nzValue]="item.value">
+      <nz-option *ngFor="let item of projectDetail.type;" nzPlaceHolder="选择人物类型" [nzLabel]="item.name"
+        [nzValue]="item._id">
       </nz-option>
     </nz-select>
   </div>

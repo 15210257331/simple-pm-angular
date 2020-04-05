@@ -13,13 +13,17 @@
         <i style="font-size: 22px;" class="iconfont iconxinzeng"></i>
         <span>新建</span>
       </div>
+      <div (click)="openType()">
+        <i class="iconfont icontask1"></i>
+        <span>{{currentProject.type?.length}}</span>
+      </div>
+      <div (click)="openTag()">
+        <i class="iconfont iconmark"></i>
+        <span>{{currentProject.tag?.length}}</span>
+      </div>
       <div (click)="openMember()">
         <i class="iconfont iconusers-alt"></i>
         <span>{{currentProject.participant?.length}}</span>
-      </div>
-      <div (click)="openTag()">
-        <i class="iconfont icontag"></i>
-        <span>{{currentProject.tag?.length}}</span>
       </div>
     </div>
   </div>

@@ -6,6 +6,48 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "478801",
+      "name": "选中",
+      "font_class": "xuanzhong",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "968656",
+      "name": "选中",
+      "font_class": "check1",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "1307736",
+      "name": "选中",
+      "font_class": "xuanzhong1",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "1415521",
+      "name": "选中",
+      "font_class": "xuanzhong2",
+      "unicode": "e83b",
+      "unicode_decimal": 59451
+    },
+    {
+      "icon_id": "13521426",
+      "name": "选中",
+      "font_class": "xuanzhong3",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "1379971",
+      "name": "选中",
+      "font_class": "icon-test",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
       "icon_id": "3702619",
       "name": "角色管理",
       "font_class": "navicon-jsgl",

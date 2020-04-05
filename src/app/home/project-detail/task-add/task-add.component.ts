@@ -22,25 +22,6 @@ export class TaskAddComponent implements OnInit {
 
   projectDetail: any;
 
-  types: any[] = [
-    {
-      name: '常规任务',
-      value: 1
-    },
-    {
-      name: '测试任务',
-      value: 2
-    },
-    {
-      name: '缺陷任务',
-      value: 3
-    },
-    {
-      name: '需求任务',
-      value: 4
-    },
-  ];
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -57,7 +38,7 @@ export class TaskAddComponent implements OnInit {
       startTime: ['', [Validators.required]],
       endTime: ['', [Validators.required]],
       tag: [[], Validators.required],
-      type: [null, Validators.required],
+      type: [[], Validators.required],
     });
     this.store
       .pipe(

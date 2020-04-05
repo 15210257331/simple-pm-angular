@@ -9,7 +9,9 @@ export class MemberItemComponent implements OnInit {
 
   @Input() data: any;
 
-  @Input() hover: boolean = false;
+  @Input() showDelete = false;
+
+  @Input() hover = false;
 
   constructor() { }
 

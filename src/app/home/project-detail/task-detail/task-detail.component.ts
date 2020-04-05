@@ -1,16 +1,16 @@
 import { TaskService } from '../../../service/task.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Appstate } from '../../../store';
-import { map, filter } from 'rxjs/operators';
-import { NzModalRef } from 'ng-zorro-antd';
+import { map, filter, debounceTime } from 'rxjs/operators';
+import { NzModalRef, NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-task-detail',
   templateUrl: './task-detail.component.html',
   styleUrls: ['./task-detail.component.scss']
 })
-export class TaskDetailComponent implements OnInit {
+export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   @Input() taskDetail: any;
 
@@ -18,47 +18,48 @@ export class TaskDetailComponent implements OnInit {
 
   comments: any[] = [];
 
-  comment: '';
+  comment = '';
 
-  visible: boolean = false;
+  name = '';
 
-  types: any[] = [
-    {
-      name: '常规任务',
-      value: 1
-    },
-    {
-      name: '测试任务',
-      value: 2
-    },
-    {
-      name: '缺陷任务',
-      value: 3
-    },
-    {
-      name: '需求任务',
-      value: 4
-    },
-  ];
+  visible = false;
+
+  visible1 = false;
+
+  projectDetail: any;
+
+  taskDetailModel: any = {};
+
+  @ViewChild('myForm', { static: false }) form;
 
   constructor(
     private store: Store<Appstate>,
     private modal: NzModalRef,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private notification: NzNotificationService,
   ) { }
 
   ngOnInit() {
+    this.store
+      .pipe(
+        map(data => data.currentProject)
+      )
+      .subscribe(res => {
+        this.projectDetail = res;
+      });
+    this.taskDetailModel = this.taskDetail;
     this.getComments(this.taskDetail._id);
-    // this.store.pipe(map(data => data.currentProject)).subscribe(res => {
-    //   if (this.taskDetail.comment) {
-    //     console.log(this.taskDetail);
-    //     if (this.taskDetail.comment.length > 0) {
-    //       this.taskDetail.comment.map(item => {
-    //         item.commentTime = new Date(item.commentTime).toLocaleString();
-    //       });
-    //     }
-    //   }
-    // });
+  }
+
+  ngAfterViewInit() {
+    this.form.control.valueChanges
+      .pipe(
+        debounceTime(500)
+      )
+      .subscribe(res => {
+        console.log(res);
+        // this.submit(res);
+      });
   }
 
   getComments(id: string) {
@@ -69,17 +70,41 @@ export class TaskDetailComponent implements OnInit {
     });
   }
 
-  selectStatus(status: number) {
+  changePrincipal(item: any) {
+    this.taskDetailModel.principal = item;
     this.visible = !this.visible;
-    this.taskDetail.status = status;
+    const data = {
+      principal: this.taskDetailModel.principal._id,
+    };
+    // this.submit(data);
   }
 
-  timeChange(event) {
-    console.log(event);
+  deleteTag(index) {
+    this.taskDetailModel.tag.splice(index, 1);
+    const data = {
+      tag: this.taskDetailModel.tag.map(item => item._id)
+    };
+    // this.submit(data);
   }
 
-  submitForm() {
+  addTag(item) {
+    this.taskDetailModel.tag.push(item);
+    this.visible1 = !this.visible1;
+    const data = {
+      tag: this.taskDetailModel.tag.map(it => it._id)
+    };
+    // this.submit(data);
+  }
 
+  submit(data) {
+    this.taskService.updateTask(data).subscribe(res => {
+      if (res.code === 200) {
+        this.modal.destroy();
+      } else {
+        this.notification.create('error', 'sucess', res.msg);
+        this.modal.destroy();
+      }
+    });
   }
 
   addComment() {
@@ -96,6 +121,6 @@ export class TaskDetailComponent implements OnInit {
   }
 
   cancel() {
-    this.modal.destroy();
+
   }
 }

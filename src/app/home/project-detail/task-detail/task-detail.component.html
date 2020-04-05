@@ -1,64 +1,61 @@
 <div class="task-detail">
   <div class="detail-left">
-    <h2 style="margin-bottom: 0;">{{taskDetail?.name}}</h2>
-    <nz-divider></nz-divider>
-    <div class="detail-part">
-      <label>任务状态:</label>
-      <span nz-popover [(nzVisible)]="visible" [nzPopoverContent]="contentTemplate" [nzPopoverTrigger]="'click'"
-        [nzPopoverPlacement]="'bottom'">
-        <span [ngSwitch]="taskDetail.status">
-          <nz-tag *ngSwitchCase="1" [nzColor]="'#2db7f5'">未开始</nz-tag>
-          <nz-tag *ngSwitchCase="2" [nzColor]="'#22d7bb'">进行中</nz-tag>
-          <nz-tag *ngSwitchCase="3" [nzColor]="'#87d068'">已完成</nz-tag>
-          <nz-tag *ngSwitchCase="4" [nzColor]="'#f50'">已作废</nz-tag>
-        </span>
-      </span>
-      <ng-template #contentTemplate>
-        <div class="status-switch">
-          <p (click)="selectStatus(1)">
-            <nz-tag [nzColor]="'#2db7f5'">未开始</nz-tag>
-          </p>
-          <p (click)="selectStatus(2)">
-            <nz-tag [nzColor]="'#22d7bb'">进行中</nz-tag>
-          </p>
-          <p (click)="selectStatus(3)">
-            <nz-tag [nzColor]="'#87d068'">已完成</nz-tag>
-          </p>
-          <p (click)="selectStatus(4)">
-            <nz-tag [nzColor]="'#f50'">已作废</nz-tag>
-          </p>
-        </div>
-      </ng-template>
-    </div>
-    <div class="detail-part">
-      <label>负责人:</label>
-      <app-member-item [hover]="false" [data]="taskDetail?.principal"></app-member-item>
-    </div>
-    <div class="detail-part">
-      <label>开始时间:</label>
-      <nz-date-picker [(ngModel)]="taskDetail.startTime" (ngModelChange)="timeChange($event)">
-      </nz-date-picker>
-      <label style="margin-left: 20px; margin-right: 5px;">结束时间:</label>
-      <nz-date-picker [(ngModel)]="taskDetail.endTime" (ngModelChange)="timeChange($event)">
-      </nz-date-picker>
-    </div>
+    <form #myForm="ngForm">
+      <h2 style="margin-bottom: 0;">{{taskDetailModel?.name}}</h2>
+      <nz-divider></nz-divider>
+      <div class="detail-part">
+        <label>任务状态:</label>
+        <app-status-change name="status" [(ngModel)]="taskDetailModel.status"></app-status-change>
+      </div>
+      <div class="detail-part" style="position: relative;">
+        <label>负责人:</label>
+        <app-member-item [(nzVisible)]="visible" nz-popover [nzPopoverContent]="contentTemplate"
+          nzPopoverTrigger="click" nzPopoverPlacement="bottom" [hover]="false" [data]="taskDetailModel?.principal">
+        </app-member-item>
+        <ng-template #contentTemplate>
+          <div class="invite-content">
+            <app-member-item *ngFor="let item of projectDetail?.participant;" (click)="changePrincipal(item)"
+              [hover]="true" [data]="item">
+            </app-member-item>
+          </div>
+        </ng-template>
+      </div>
+      <div class="detail-part">
+        <label>开始时间:</label>
+        <nz-date-picker name="startTime" [(ngModel)]="taskDetailModel.startTime">
+        </nz-date-picker>
+        <label style="margin-left: 20px; margin-right: 5px;">结束时间:</label>
+        <nz-date-picker name="endTime" [(ngModel)]="taskDetailModel.endTime">
+        </nz-date-picker>
+      </div>
 
-    <div class="detail-part">
-      <label>任务类型:</label>
-      <nz-select style="width: 200px;" [(ngModel)]="taskDetail.type" nzPlaceHolder="任务类型">
-        <nz-option *ngFor="let item of types" [nzValue]="item.value" [nzLabel]="item.name"></nz-option>
-      </nz-select>
-    </div>
-    <div class="detail-part">
-      <label for="">标签:</label>
-      <p>
-        <nz-tag *ngFor="let item of taskDetail.tag" [nzColor]="item.color">{{item.name}}</nz-tag>
-      </p>
-    </div>
-    <div class="detail-part">
-      <label style=" align-self: flex-start;" for="">任务描述:</label>
-      <textarea rows="10" nz-input [(ngModel)]="taskDetail.content"></textarea>
-    </div>
+      <div class="detail-part">
+        <label>任务类型:</label>
+        <nz-select name="type" [(ngModel)]="taskDetailModel.type" nzPlaceHolder="任务类型">
+          <nz-option *ngFor="let item of projectDetail.type" [nzValue]="item._id" [nzLabel]="item.name"></nz-option>
+        </nz-select>
+      </div>
+      <div class="detail-part">
+        <label for="">标签:</label>
+        <div>
+          <nz-tag *ngFor="let item of taskDetailModel.tag; let i = index;" [nzMode]="'closeable'"
+            (nzOnClose)="deleteTag(i)" [nzColor]="item.color">{{item.name}}</nz-tag>
+          <i class="iconfont iconxinzeng" [(nzVisible)]="visible1" nz-popover [nzPopoverContent]="tagTemplate"
+            nzPopoverTrigger="click" nzPopoverPlacement="bottom" (click)="visible1 = !visible1"></i>
+          <ng-template #tagTemplate>
+            <ul class="tag-list">
+              <li *ngFor="let item of projectDetail?.tag;" (click)="addTag(item)">
+                <nz-tag [nzColor]="item.color">{{item.name}}</nz-tag>
+              </li>
+            </ul>
+          </ng-template>
+        </div>
+      </div>
+      <div class="detail-part">
+        <label style=" align-self: flex-start;">任务描述:</label>
+        <textarea rows="10" name="content" nz-input [(ngModel)]="taskDetailModel.content"></textarea>
+      </div>
+    </form>
   </div>
   <div class="detail-right">
     <div>

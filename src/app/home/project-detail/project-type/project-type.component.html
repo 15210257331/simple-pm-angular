@@ -1,0 +1,12 @@
+<div class="type">
+  <div class="type-add">
+    <input nz-input [(ngModel)]="name" placeholder="类型名称" />
+    <button nz-button nzType="primary" (click)="addType()">添加</button>
+  </div>
+  <ul class="type-list">
+    <li class="type-item" *ngFor="let item of data;">
+      <span>{{item.name}}</span>
+      <i class="iconfont icondelete"></i>
+    </li>
+  </ul>
+</div>

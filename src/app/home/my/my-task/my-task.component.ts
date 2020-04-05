@@ -37,7 +37,7 @@ export class MyTaskComponent implements OnInit {
         padding: 0,
       },
       nzFooter: null,
-      nzWidth: '60%',
+      nzWidth: '75%',
     });
 
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));

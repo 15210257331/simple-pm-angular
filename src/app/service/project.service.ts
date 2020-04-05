@@ -60,6 +60,13 @@ export class ProjectService {
         return this.http.post(`${API}/project/member/add`, data);
     }
 
+    /**
+     * 添加项目类型
+     */
+    addProjectType(data: any): Observable<any> {
+        return this.http.post(`${API}/project/type/add`, data);
+    }
+
 
 }
 

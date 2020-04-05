@@ -12,6 +12,7 @@ import { FlipComponent } from './component/clock/flip/flip.component';
 import { ColorListComponent } from './component/color-list/color-list.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MemberItemComponent } from './component/member-item/member-item.component';
+import { StatusChangeComponent } from './component/status-change/status-change.component';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -23,6 +24,7 @@ import { MemberItemComponent } from './component/member-item/member-item.compone
     FormatDatePipe,
     // 指令
     DebounceDirective,
+    StatusChangeComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +51,7 @@ import { MemberItemComponent } from './component/member-item/member-item.compone
     FlipComponent,
     ColorListComponent,
     MemberItemComponent,
+    StatusChangeComponent,
     // 管道
     FormatDatePipe,
     // 指令

@@ -12,6 +12,7 @@ import { ProjectMemberComponent } from './project-member/project-member.componen
 import { ProjectTagComponent } from './project-tag/project-tag.component';
 import { TaskAddComponent } from './task-add/task-add.component';
 import { TrashComponent } from './trash/trash.component';
+import { ProjectTypeComponent } from './project-type/project-type.component';
 
 @Component({
   selector: 'app-project-detail',
@@ -120,6 +121,30 @@ export class ProjectDetailComponent implements OnInit {
       nzWidth: 360,
       nzContentParams: {
         data: this.currentProject.tag,
+        projectId: this.currentProject._id
+      }
+    });
+
+    drawerRef.afterOpen.subscribe(() => {
+      console.log('Drawer(Component) open');
+    });
+
+    drawerRef.afterClose.subscribe(data => {
+      console.log(data);
+      if (typeof data === 'string') {
+
+      }
+    });
+  }
+
+  openType(): void {
+    const drawerRef = this.drawerService.create({
+      nzTitle: '项目类型',
+      nzContent: ProjectTypeComponent,
+      nzMaskClosable: true,
+      nzWidth: 360,
+      nzContentParams: {
+        data: this.currentProject.type,
         projectId: this.currentProject._id
       }
     });

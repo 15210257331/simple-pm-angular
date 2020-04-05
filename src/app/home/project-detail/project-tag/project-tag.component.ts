@@ -32,8 +32,12 @@ export class ProjectTagComponent implements OnInit {
 
   addTag() {
     console.log(123);
-    if (!this.tagModel.name || !this.tagModel.color) {
+    if (!this.tagModel.name) {
       this.message.create('warning', '请填写标签名称');
+      return;
+    }
+    if (!this.tagModel.color) {
+      this.message.create('warning', '请选择一个颜色');
       return;
     }
     const data = Object.assign({}, this.tagModel, {

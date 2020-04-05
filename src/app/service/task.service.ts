@@ -16,9 +16,9 @@ export class TaskService {
         return this.http.post(`${API}/task/status`, data);
     }
 
-    // 删除task
-    getTaskDetail(id: any): Observable<any> {
-        return this.http.get(`${API}/task/detail?id=${id}`);
+    // 更新任务
+    updateTask(data: any): Observable<any> {
+        return this.http.post(`${API}/task/update`, data);
     }
 
     // 删除task

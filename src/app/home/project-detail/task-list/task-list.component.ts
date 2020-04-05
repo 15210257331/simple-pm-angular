@@ -63,7 +63,7 @@ export class TaskListComponent implements OnInit {
         taskDetail: data
       },
       nzFooter: null,
-      nzWidth: 800,
+      nzWidth: '75%',
     });
 
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));

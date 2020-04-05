@@ -18,6 +18,9 @@ export enum CurrentProjectActionTypes {
     AddProjectTagSuccess = 'AddProjectTagSuccess',
     AddProjectTagError = 'AddProjectTagError',
 
+    AddProjectTypeSuccess = 'AddProjectTypeSuccess',
+    AddProjectTypeError = 'AddProjectTypeError',
+
     AddProjectMemberSuccess = 'AddProjectMemberSuccess',
     AddProjectMemberError = 'AddProjectMemberError',
 
@@ -78,6 +81,16 @@ export class AddProjectTagSuccess implements Action {
 
 export class AddProjectTagError implements Action {
     readonly type = CurrentProjectActionTypes.AddProjectTagError;
+    constructor(public payload: any) { }
+}
+
+export class AddProjectTypeSuccess implements Action {
+    readonly type = CurrentProjectActionTypes.AddProjectTypeSuccess;
+    constructor(public payload: any) { }
+}
+
+export class AddProjectTypeError implements Action {
+    readonly type = CurrentProjectActionTypes.AddProjectTypeError;
     constructor(public payload: any) { }
 }
 

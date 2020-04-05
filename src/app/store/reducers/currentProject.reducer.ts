@@ -45,8 +45,14 @@ export function currentProjectReducer(state: CurrentProject = initialState, acti
             state.tag.push(action.payload.data);
             return state;
 
-        case CurrentProjectActionTypes.ResetCurrentProject:
-            state = initialState;
+        case CurrentProjectActionTypes.AddProjectTagError:
+            return state;
+
+        case CurrentProjectActionTypes.AddProjectTypeSuccess:
+            state.type.push(action.payload.data);
+            return state;
+
+        case CurrentProjectActionTypes.AddProjectTypeError:
             return state;
 
         case CurrentProjectActionTypes.AddProjectMemberSuccess:
@@ -54,6 +60,9 @@ export function currentProjectReducer(state: CurrentProject = initialState, acti
             return state;
 
         case CurrentProjectActionTypes.AddProjectMemberError:
+            return state;
+
+        case CurrentProjectActionTypes.ResetCurrentProject:
             state = initialState;
             return state;
 

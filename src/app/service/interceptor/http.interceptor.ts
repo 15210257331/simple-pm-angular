@@ -39,10 +39,10 @@ export class LogInterceptor implements HttpInterceptor {
                     if (res instanceof HttpResponse) {
                         // token不存在或者token过期的情况重新登录
                         if (res.body.code === 301 || res.body.code === 302) {
-                            this.notification.create('info', '请求错误', res.body.msg);
+                            this.notification.create('info', '请求错误', '登录信息过期,请重新登录！');
                             this.router.navigate(['/login']);
                         } else if (res.body.code !== 200 && res.body.code !== 301 && res.body.code !== 302) {
-                            this.notification.create('error', '请求错误', res.body.msg.message);
+                            this.notification.create('info', '请求错误', res.body.msg || res.body.msg.errmsg);
                         }
                     }
                     return res;

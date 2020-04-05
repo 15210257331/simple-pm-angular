@@ -1,0 +1,10 @@
+<div class="status">
+  <span class="selected-status" [ngStyle]="{'backgroundColor': selectedStatus?.color}"
+    (click)="changeShow()">{{selectedStatus?.name}}</span>
+  <ul class="status-list" *ngIf="showStatusList">
+    <li *ngFor="let item of data;" (click)="select(item)">
+      <span [ngStyle]="{'backgroundColor': item?.color}">{{item.name}}</span>
+      <i *ngIf="selectedStatus.value === item.value" class="iconfont iconxuanzhong2"></i>
+    </li>
+  </ul>
+</div>

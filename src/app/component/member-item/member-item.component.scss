@@ -5,6 +5,7 @@
   align-items: center;
   height: 50px;
   cursor: pointer;
+  position: relative;
 
   .avatar {
     width: 38px;
@@ -31,8 +32,21 @@
       color: #8c8c8c
     }
   }
+
+  i {
+    position: absolute;
+    right: 15px;
+    top: 13px;
+    display: none;
+  }
 }
 
 .hover-state:hover {
   background-color: #f0f0f0;
+}
+
+.show-delete:hover {
+  i {
+    display: inline;
+  }
 }
