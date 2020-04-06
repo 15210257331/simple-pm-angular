@@ -1,12 +1,15 @@
+import { UtilsService } from './../../service/utils.service';
+import { UserService } from './../../service/user.service';
 import { MessageService } from './../../service/message.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Appstate } from '../../store';
-import { map, last, first } from 'rxjs/operators';
+import { map, last, first, skipWhile } from 'rxjs/operators';
 import { SocketService } from '../../service/socket.service';
 import { NzNotificationService } from 'ng-zorro-antd';
 import { SelectedMemberData, LocalMessageData } from './message.interface';
 import * as moment from 'moment';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-message',
@@ -34,17 +37,19 @@ export class MessageComponent implements OnInit, AfterViewChecked {
     private socketService: SocketService,
     private notification: NzNotificationService,
     private messageService: MessageService,
+    private userService: UserService,
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit() {
-    this.store.pipe(map(data => data)).subscribe(res => {
-      this.userInfo = res.userInfo;
-      this.memberList = res.memberList.filter(item => item._id !== this.userInfo._id);
-      this.localMessages = JSON.parse(localStorage.getItem('localMessages' + this.userInfo._id)) || [];
-      if (this.localMessages.length > 0) {
-        this.selectMember(this.localMessages[0]);
-      }
-      this.getPrivateMessage();
+    forkJoin(
+      this.userService.getUserInfo(),
+      this.userService.getMemberList('')
+    ).subscribe(res => {
+      this.userInfo = res[0].data;
+      this.memberList = res[1].data.filter(item => item._id !== this.userInfo._id);
+      this.localMessages = this.utilsService.getLocalData('localMessages' + this.userInfo._id);
+      this.getPrivateMessage(this.userInfo._id);
     });
   }
 
@@ -68,21 +73,22 @@ export class MessageComponent implements OnInit, AfterViewChecked {
         });
         if (ids.indexOf(event._id) < 0) {
           const localMessage = Object.assign({}, event, {
-            selected: false,
+            selected: true,
             count: 0,
             latestMessageDate: res.data.length > 0 ? moment(res.data[res.data.length - 1].msgDate).format('YYYY-MM-DD') : '',
             latestMessage: res.data.length > 0 ? res.data[res.data.length - 1].msg : '',
           });
           this.localMessages.push(localMessage);
-          localStorage.setItem('localMessages' + this.userInfo._id, JSON.stringify(this.localMessages));
+          this.utilsService.setLocalData('localMessages' + this.userInfo._id, this.localMessages);
         }
       }
     });
   }
 
   // 接收好友发来的消息
-  getPrivateMessage() {
-    this.socketService.getMessage(`to${this.userInfo._id}`).subscribe(res => {
+  getPrivateMessage(id) {
+    this.socketService.getMessage(`to${id}`).subscribe(res => {
+      console.log(res);
       const ids = this.localMessages.map(item => item._id);
       if (ids.indexOf(res.from) > -1) {
         const data = this.localMessages.filter(item => item._id === res.from)[0];
@@ -107,7 +113,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
           }
         });
       }
-      localStorage.setItem('localMessages' + this.userInfo._id, JSON.stringify(this.localMessages));
+      this.utilsService.setLocalData('localMessages' + this.userInfo._id, this.localMessages);
     });
   }
 
@@ -128,7 +134,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
         item.latestMessage = data.msg;
       }
     });
-    localStorage.setItem('localMessages' + this.userInfo._id, JSON.stringify(this.localMessages));
+    this.utilsService.setLocalData('localMessages' + this.userInfo._id, this.localMessages);
   }
 
   ngAfterViewChecked() {

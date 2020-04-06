@@ -17,5 +17,11 @@ export class MessageService {
     getMessages(id: any): Observable<any> { // id 是选中好友的ID
         return this.http.get(`${API}/message/list?id=${id}`);
     }
+    /**
+     * 更改消息读取状态
+     */
+    messageStatus(id: any): Observable<any> {
+        return this.http.get(`${API}/message/status?id=${id}`);
+    }
 }
 

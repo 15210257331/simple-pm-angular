@@ -24,4 +24,12 @@ export class UtilsService {
         }
         return out;
     }
+
+    getLocalData(name: string) {
+        return JSON.parse(localStorage.getItem(name));
+    }
+
+    setLocalData(name, content) {
+        localStorage.setItem(name, JSON.stringify(content));
+    }
 }
