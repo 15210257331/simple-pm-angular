@@ -1,10 +1,10 @@
 <ng-container>
   <li class="other" *ngIf="data?.from !== userInfo._id">
-    <img class="avatar" [src]="data?.fromAvatar" alt="">
-    <p>{{data?.msg}}</p>
+    <img class="avatar" [src]="data?.to.avatar" alt="">
+    <p>{{data?.content}}</p>
   </li>
   <li class="my" *ngIf="data?.from === userInfo._id">
-    <p>{{data?.msg}}</p>
-    <img class="avatar" [src]="data?.fromAvatar" alt="">
+    <p>{{data?.content}}</p>
+    <img class="avatar" [src]="data?.from.avatar" alt="">
   </li>
 </ng-container>

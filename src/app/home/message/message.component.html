@@ -2,21 +2,20 @@
   <div class="message-left">
     <div class="header">
       <nz-select nzShowSearch nzAllowClear [nzShowArrow]="false" nzPlaceHolder="搜索好友" [(ngModel)]="selectedValue"
-        (ngModelChange)="selectMember($event)">
+        (ngModelChange)="addChat(userInfo._id,$event._id)">
         <nz-option *ngFor="let item of memberList" [nzLabel]="item.nickname" [nzValue]="item"></nz-option>
       </nz-select>
       <span class="iconfont iconxinzeng"></span>
     </div>
     <nz-divider></nz-divider>
-    <ul class="friend-list">
-      <li *ngFor="let item of localMessages; let last = last" [class.selected]="item.selected"
-        (click)="selectMember(item)">
-        <div [ngStyle]="{'background-image': 'url(' + item.avatar + ')'}" class="avatar"></div>
+    <ul class="chat-list">
+      <li *ngFor="let item of chatList; let last = last" [class.selected]="item.selected" (click)="selectOneChat(item)">
+        <div [ngStyle]="{'background-image': 'url(' + item.other?.avatar + ')'}" class="avatar"></div>
         <div>
-          <p>{{item.nickname}} <span>{{item.latestMessageDate | formatDate}}</span></p>
-          <span>{{item.latestMessage}}</span>
+          <p>{{item.other?.nickname}} <span>{{item.lastMessage?.msgTime | formatDate}}</span></p>
+          <span>{{item.lastMessage?.content}}</span>
         </div>
-        <nz-badge style="position: absolute; right: 15px; bottom:7px;" [nzCount]="item.count"></nz-badge>
+        <nz-badge style="position: absolute; right: 15px; bottom:7px;" [nzCount]="item.unreadCount"></nz-badge>
       </li>
     </ul>
   </div>
@@ -30,7 +29,7 @@
     </div>
     <div class="message-content">
       <div class="content-box" #contentContainer>
-        <app-message-item [data]="item" *ngFor="let item of selectedMember?.message"></app-message-item>
+        <app-message-item [data]="item" *ngFor="let item of message"></app-message-item>
       </div>
       <app-send-box (sendMessage)="sendMessage($event)"></app-send-box>
     </div>

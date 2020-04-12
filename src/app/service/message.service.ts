@@ -23,5 +23,17 @@ export class MessageService {
     messageStatus(id: any): Observable<any> {
         return this.http.get(`${API}/message/status?id=${id}`);
     }
+    /**
+     * 获取好友chats 关系
+     */
+    getChatList(): Observable<any> {
+        return this.http.get(`${API}/message/get/chat`);
+    }
+    /**
+     * 更改消息读取状态
+     */
+    addChat(data: any): Observable<any> {
+        return this.http.post(`${API}/message/add/chat`, data);
+    }
 }
 

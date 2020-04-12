@@ -22,7 +22,13 @@ export class MessageComponent implements OnInit, AfterViewChecked {
 
   memberList: any[] = [];
 
+  chatList: any[] = [];
+
+  selectChat: any;
+
   userInfo: any;
+
+  message: any[] = [];
 
   selectedMember: SelectedMemberData = {
     message: []
@@ -42,99 +48,89 @@ export class MessageComponent implements OnInit, AfterViewChecked {
   ) { }
 
   ngOnInit() {
+    this.getChatList();
     forkJoin(
       this.userService.getUserInfo(),
-      this.userService.getMemberList('')
+      this.userService.getMemberList(''),
     ).subscribe(res => {
       this.userInfo = res[0].data;
       this.memberList = res[1].data.filter(item => item._id !== this.userInfo._id);
-      this.localMessages = this.utilsService.getLocalData('localMessages' + this.userInfo._id);
       this.getPrivateMessage(this.userInfo._id);
     });
   }
 
-  // 选中一个好友
-  selectMember(event) {
-    if (!event) {
-      return;
-    }
-    const ids = this.localMessages.map(item => {
-      item.selected = false;
-      if (item._id === event._id) {
-        item.selected = true;
-        item.count = 0;
-      }
-      return item._id;
-    });
-    this.messageService.getMessages(event._id).subscribe(res => {
+  getChatList() {
+    this.messageService.getChatList().subscribe(res => {
       if (res.code === 200) {
-        this.selectedMember = Object.assign({}, event, {
-          message: res.data || [],
-        });
-        if (ids.indexOf(event._id) < 0) {
-          const localMessage = Object.assign({}, event, {
-            selected: true,
-            count: 0,
-            latestMessageDate: res.data.length > 0 ? moment(res.data[res.data.length - 1].msgDate).format('YYYY-MM-DD') : '',
-            latestMessage: res.data.length > 0 ? res.data[res.data.length - 1].msg : '',
+        this.chatList = res.data || [];
+        this.chatList = this.chatList.map(item => {
+          return Object.assign({}, item, {
+            selected: false,
           });
-          this.localMessages.push(localMessage);
-          this.utilsService.setLocalData('localMessages' + this.userInfo._id, this.localMessages);
-        }
+        });
       }
     });
   }
 
-  // 接收好友发来的消息
-  getPrivateMessage(id) {
-    this.socketService.getMessage(`to${id}`).subscribe(res => {
-      console.log(res);
-      const ids = this.localMessages.map(item => item._id);
-      if (ids.indexOf(res.from) > -1) {
-        const data = this.localMessages.filter(item => item._id === res.from)[0];
-        data.latestMessageDate = moment(res.msgDate).format('YYYY-MM-DD');
-        data.latestMessage = res.msg;
-        if (this.selectedMember._id === res.from) {
-          this.selectedMember.message.push(res);
-          data.count = 0;
-        } else {
-          data.count += 1;
-        }
-      } else {
-        this.memberList.map(item => {
-          if (item._id === res.from) {
-            const localMessage = Object.assign({}, item, {
-              selected: false,
-              count: 1,
-              date: new Date().getTime(),
-              latestMessage: res.msg
-            });
-            this.localMessages.push(localMessage);
-          }
-        });
+  addChat(owner: string, other: string) {
+    const data = { owner, other };
+    this.messageService.addChat(data).subscribe(res => {
+      if (res.code === 200) {
+        this.getChatList();
       }
-      this.utilsService.setLocalData('localMessages' + this.userInfo._id, this.localMessages);
     });
+  }
+
+  selectOneChat(data) {
+    this.selectChat = data;
+    this.chatList.map(item => {
+      item.selected = false;
+    });
+    data.selected = true;
+    const id = data.other._id;
+    this.messageService.getMessages(id).subscribe(res => {
+      if (res.code === 200) {
+        this.message = res.data || [];
+      }
+    });
+  }
+
+  updateChat(data: any) {
+
   }
 
   // 给好友发送消息
   sendMessage(event) {
     const data = {
       from: this.userInfo._id,
-      fromAvatar: this.userInfo.avatar,
-      to: this.selectedMember._id,
-      toAvatar: this.selectedMember.avatar,
+      to: this.selectChat.other._id,
       msgType: 1,
-      msg: event
+      content: event
     };
     this.socketService.sendMessage('private message', data);
-    this.selectedMember.message.push(data);
-    this.localMessages.map(item => {
-      if (item._id === data.to) {
-        item.latestMessage = data.msg;
+    const showData = Object.assign({}, data, {
+      fromAvatar: this.userInfo.avatar,
+      toAvatar: this.selectChat.other.avatar
+    });
+    this.message.push(showData);
+  }
+
+  // 接收好友发来的消息
+  getPrivateMessage(id) {
+    this.socketService.getMessage(`to${id}`).subscribe(res => {
+      console.log(res);
+      const ids = this.chatList.map(item => item.other._id);
+      if (ids.indexOf(res.from) > -1) {
+        this.chatList[ids.indexOf(res.from)].unreadCount += 1;
+        this.chatList[ids.indexOf(res.from)].lastMessage.content = res.content;
+      } else {
+        this.memberList.map(item => {
+          if (item._id === res.from) {
+            this.addChat(this.userInfo._id, res.from);
+          }
+        });
       }
     });
-    this.utilsService.setLocalData('localMessages' + this.userInfo._id, this.localMessages);
   }
 
   ngAfterViewChecked() {
