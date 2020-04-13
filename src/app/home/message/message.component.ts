@@ -72,10 +72,8 @@ export class MessageComponent implements OnInit, AfterViewChecked {
     });
   }
 
-  addChat(id1: string, id2: string) {
-    const data = {
-      members: [id1, id2]
-    };
+  addChat(from: string, to: string) {
+    const data = { from, to };
     this.messageService.addChat(data).subscribe(res => {
       if (res.code === 200) {
         this.getChatList();
@@ -89,7 +87,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
       item.selected = false;
     });
     data.selected = true;
-    const id = data.members.filter(item => item._id !== this.userInfo._id)._id;
+    const id = data.to._id;
     this.messageService.getMessages(id).subscribe(res => {
       if (res.code === 200) {
         this.message = res.data || [];
@@ -101,7 +99,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
   sendMessage(event) {
     const data = {
       from: this.userInfo._id,
-      to: this.selectChat.other._id,
+      to: this.selectChat.to._id,
       msgType: 1,
       content: event
     };
@@ -112,8 +110,8 @@ export class MessageComponent implements OnInit, AfterViewChecked {
         avatar: this.userInfo.avatar
       },
       to: {
-        _id: this.selectChat.other._id,
-        avatar: this.selectChat.other.avatar
+        _id: this.selectChat.to._id,
+        avatar: this.selectChat.to.avatar
       },
       content: data.content
     };
@@ -123,12 +121,10 @@ export class MessageComponent implements OnInit, AfterViewChecked {
   // 接收好友发来的消息
   getPrivateMessage(id) {
     this.socketService.getMessage(`to${id}`).subscribe(res => {
-      const arr = this.chatList.map(item => item.members);
       let index = null;
-      arr.map(item => {
-        const ids = item.map(sonItem => sonItem._id);
-        if (ids.indexOf(res.from) > -1) {
-          index = ids.indexOf(res.from);
+      this.chatList.map((item, i) => {
+        if (item.to === res.from) {
+          index = i;
         }
       });
       if (index !== null) {
@@ -136,8 +132,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
         this.chatList[index].lastMessage.content = res.content;
         const data = {
           id: this.chatList[index]._id,
-          from: res.from,
-          to: res.to
+          messageId: res.messageId
         };
         this.messageService.updateChat(data).subscribe(res => {
           if (res.code === 200) { }
