@@ -1,9 +1,9 @@
 <ng-container>
-  <li class="other" *ngIf="data?.from !== userInfo._id">
+  <li class="other" *ngIf="data?.from._id !== userInfo._id">
     <img class="avatar" [src]="data?.to.avatar" alt="">
     <p>{{data?.content}}</p>
   </li>
-  <li class="my" *ngIf="data?.from === userInfo._id">
+  <li class="my" *ngIf="data?.from._id === userInfo._id">
     <p>{{data?.content}}</p>
     <img class="avatar" [src]="data?.from.avatar" alt="">
   </li>

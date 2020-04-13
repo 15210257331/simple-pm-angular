@@ -72,8 +72,10 @@ export class MessageComponent implements OnInit, AfterViewChecked {
     });
   }
 
-  addChat(owner: string, other: string) {
-    const data = { owner, other };
+  addChat(id1: string, id2: string) {
+    const data = {
+      members: [id1, id2]
+    };
     this.messageService.addChat(data).subscribe(res => {
       if (res.code === 200) {
         this.getChatList();
@@ -87,16 +89,12 @@ export class MessageComponent implements OnInit, AfterViewChecked {
       item.selected = false;
     });
     data.selected = true;
-    const id = data.other._id;
+    const id = data.members.filter(item => item._id !== this.userInfo._id)._id;
     this.messageService.getMessages(id).subscribe(res => {
       if (res.code === 200) {
         this.message = res.data || [];
       }
     });
-  }
-
-  updateChat(data: any) {
-
   }
 
   // 给好友发送消息
@@ -108,21 +106,42 @@ export class MessageComponent implements OnInit, AfterViewChecked {
       content: event
     };
     this.socketService.sendMessage('private message', data);
-    const showData = Object.assign({}, data, {
-      fromAvatar: this.userInfo.avatar,
-      toAvatar: this.selectChat.other.avatar
-    });
+    const showData = {
+      from: {
+        _id: this.userInfo._id,
+        avatar: this.userInfo.avatar
+      },
+      to: {
+        _id: this.selectChat.other._id,
+        avatar: this.selectChat.other.avatar
+      },
+      content: data.content
+    };
     this.message.push(showData);
   }
 
   // 接收好友发来的消息
   getPrivateMessage(id) {
     this.socketService.getMessage(`to${id}`).subscribe(res => {
-      console.log(res);
-      const ids = this.chatList.map(item => item.other._id);
-      if (ids.indexOf(res.from) > -1) {
-        this.chatList[ids.indexOf(res.from)].unreadCount += 1;
-        this.chatList[ids.indexOf(res.from)].lastMessage.content = res.content;
+      const arr = this.chatList.map(item => item.members);
+      let index = null;
+      arr.map(item => {
+        const ids = item.map(sonItem => sonItem._id);
+        if (ids.indexOf(res.from) > -1) {
+          index = ids.indexOf(res.from);
+        }
+      });
+      if (index !== null) {
+        this.chatList[index].unreadCount += 1;
+        this.chatList[index].lastMessage.content = res.content;
+        const data = {
+          id: this.chatList[index]._id,
+          from: res.from,
+          to: res.to
+        };
+        this.messageService.updateChat(data).subscribe(res => {
+          if (res.code === 200) { }
+        });
       } else {
         this.memberList.map(item => {
           if (item._id === res.from) {

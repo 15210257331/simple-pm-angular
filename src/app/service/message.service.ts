@@ -35,5 +35,12 @@ export class MessageService {
     addChat(data: any): Observable<any> {
         return this.http.post(`${API}/message/add/chat`, data);
     }
+
+    /**
+     * 更改消息读取状态
+     */
+    updateChat(data: any): Observable<any> {
+        return this.http.post(`${API}/message/update/chat`, data);
+    }
 }
 
