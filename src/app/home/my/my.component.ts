@@ -39,7 +39,7 @@ export class MyComponent implements OnInit {
 
   getMyTask() {
     this.taskService.getMyTasks().subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.myTaskList = res.data || [];
       }
     });

@@ -44,7 +44,7 @@ export class ProjectTagComponent implements OnInit {
       projectId: this.projectId
     });
     this.projectService.addProjectTag(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.store.dispatch(new AddProjectTagSuccess(res));
         this.notification.create('success', 'sucess', res.msg);
       }

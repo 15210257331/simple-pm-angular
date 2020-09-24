@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
     }
     const data = this.validateForm.value;
     this.userService.register(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.router.navigate(['/login']);
       }
     });
@@ -53,10 +53,10 @@ export class RegisterComponent implements OnInit {
     this.validateForm = this.fb.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
+      repassword: [null, [Validators.required, this.confirmationValidator]],
       nickname: [null, [Validators.required]],
       phoneNumberPrefix: ['+86'],
-      phoneNumber: [null, [Validators.required]],
+      phone: [null, [Validators.required]],
       email: [null, [Validators.email, Validators.required]],
       introduction: [null, [Validators.required]],
     });

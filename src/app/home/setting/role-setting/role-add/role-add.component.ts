@@ -52,7 +52,7 @@ export class RoleAddComponent implements OnInit {
         id: this.data._id
       });
       this.userService.updateRole(data).subscribe(res => {
-        if (res.code === 200) {
+        if (res.code === 10000) {
           this.modal.destroy({ result: true });
           this.store.dispatch(new UpdateRoleSuccess(res));
           this.notification.create('success', '修改成功', res.msg);
@@ -67,7 +67,7 @@ export class RoleAddComponent implements OnInit {
         valid: true,
       });
       this.userService.addRole(data).subscribe(res => {
-        if (res.code === 200) {
+        if (res.code === 10000) {
           this.modal.destroy({ result: true });
           this.store.dispatch(new AddRoleSuccess(res));
           this.notification.create('success', '添加成功', res.msg);

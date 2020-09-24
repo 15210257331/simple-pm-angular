@@ -117,7 +117,7 @@ export class SetAuthorityComponent implements OnInit {
       authority: arr
     };
     this.userService.setAuthority(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.modal.destroy({ result: true });
         this.store.dispatch(new UpdateRoleSuccess(res));
         this.notification.create('success', '修改成功', res.msg);

@@ -64,7 +64,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   getComments(id: string) {
     this.taskService.getTaskComment(id).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.comments = res.data || [];
       }
     });
@@ -98,7 +98,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
 
   submit(data) {
     this.taskService.updateTask(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.modal.destroy();
       } else {
         this.notification.create('error', 'sucess', res.msg);
@@ -113,7 +113,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit {
       content: this.comment
     };
     this.taskService.addTaskComment(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.getComments(this.taskDetail._id);
         this.comment = '';
       }

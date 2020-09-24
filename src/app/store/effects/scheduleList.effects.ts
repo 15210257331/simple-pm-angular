@@ -25,7 +25,7 @@ export class ScheduleListEffects {
             this.scheduleService.getScheduleList()
                 .pipe(
                     map(res => {
-                        if (res.code === 200) {
+                        if (res.code === 10000) {
                             return new LoadScheduleSuccess(res);
                         } else {
                             return of(new LoadScheduleError(res.msg));
@@ -47,7 +47,7 @@ export class ScheduleListEffects {
             this.scheduleService.deleteSchedule(id)
                 .pipe(
                     map(res => {
-                        if (res.code === 200) {
+                        if (res.code === 10000) {
                             return new DeleteScheduleSuccess(res);
                         } else {
                             return of(new DeleteScheduleError(res.msg));

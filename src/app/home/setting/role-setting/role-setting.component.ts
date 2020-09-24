@@ -63,7 +63,7 @@ export class RoleSettingComponent implements OnInit {
       nzOkType: 'danger',
       nzOnOk: () => {
         this.userService.deleteRole(id).subscribe(res => {
-          if (res.code === 200) {
+          if (res.code === 10000) {
             this.notification.create('success', 'sucess', res.msg);
             this.store.dispatch(new DeleteRoleSuccess(res));
           }

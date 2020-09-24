@@ -28,7 +28,7 @@ export class ProjectListEffects {
             this.projectService.getProjectList(name)
                 .pipe(
                     map(res => {
-                        if (res.code === 200) {
+                        if (res.code === 10000) {
                             return new LoadProjectListSuccess(res);
                         } else {
                             return new LoadProjectListError(res.msg);

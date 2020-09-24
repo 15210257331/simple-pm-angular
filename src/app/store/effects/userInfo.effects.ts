@@ -26,7 +26,7 @@ export class UserInfoEffects {
             this.userService.getUserInfo()
                 .pipe(
                     map(res => {
-                        if (res.code === 200) {
+                        if (res.code === 10000) {
                             this.socketService.sendMessage('setRemind', res.data._id);
                             return new LoadUserInfoSuccess(res);
                         } else {

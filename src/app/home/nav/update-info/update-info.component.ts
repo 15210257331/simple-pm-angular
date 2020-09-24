@@ -51,7 +51,7 @@ export class UpdateInfoComponent implements OnInit {
       avatar: this.avatarUrl
     });
     this.userService.updateUserInfo(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.modal.destroy({ result: true });
         this.store.dispatch(new UpdateUserInfoSuccess(res));
         this.notification.create('success', 'sucess', res.msg);
@@ -64,7 +64,7 @@ export class UpdateInfoComponent implements OnInit {
   //   const avatar = file.target.files[0];
   //   formData.append('avatar', avatar);
   //   this.userService.uploadImg(formData).subscribe(res => {
-  //     if (res.code === 200) {
+  //     if (res.code === 10000) {
   //       this.avatarUrl = res.data;
   //       console.log(this.avatarUrl);
   //     }

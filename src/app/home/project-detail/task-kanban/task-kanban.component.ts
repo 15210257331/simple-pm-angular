@@ -151,7 +151,7 @@ export class TaskKanbanComponent implements OnInit {
         status
       };
       this.taskService.changeTaskStatus(data).subscribe(res => {
-        if (res.code === 200) {
+        if (res.code === 10000) {
           this.store.dispatch(new ChangeTaskStatusCuccess(data));
         }
       });

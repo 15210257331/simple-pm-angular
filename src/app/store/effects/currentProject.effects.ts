@@ -28,7 +28,7 @@ export class CurrentProjectEffects {
             this.projectService.getProjectDetail(projectId)
                 .pipe(
                     map(res => {
-                        if (res.code === 200) {
+                        if (res.code === 10000) {
                             return new LoadCurrentProjectSuccess(res);
                         } else {
                             return of(new LoadCurrentProjectError(res.msg));

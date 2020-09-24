@@ -61,7 +61,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
 
   getChatList() {
     this.messageService.getChatList().subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.chatList = res.data || [];
         this.chatList = this.chatList.map(item => {
           return Object.assign({}, item, {
@@ -75,7 +75,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
   addChat(from: string, to: string) {
     const data = { from, to };
     this.messageService.addChat(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.getChatList();
       }
     });
@@ -89,7 +89,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
     data.selected = true;
     const id = data.to._id;
     this.messageService.getMessages(id).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.message = res.data || [];
       }
     });
@@ -135,7 +135,7 @@ export class MessageComponent implements OnInit, AfterViewChecked {
           messageId: res.messageId
         };
         this.messageService.updateChat(data).subscribe(res => {
-          if (res.code === 200) { }
+          if (res.code === 10000) { }
         });
       } else {
         this.memberList.map(item => {

@@ -17,7 +17,7 @@ export class ProjectUpdateComponent implements OnInit {
 
   @Input() data: any;
 
-  uploadUrl = `${API}/project/uploadImg`;
+  uploadUrl = `${API}/file/upload`;
 
   model: any;
 
@@ -40,7 +40,7 @@ export class ProjectUpdateComponent implements OnInit {
       cover: this.model.cover
     };
     this.projectService.updateProject(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.store.dispatch(new UpdateProjectSuccess(data));
         this.modal.destroy({ result: true });
         this.notification.create('success', 'sucess', res.msg);

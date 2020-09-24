@@ -37,7 +37,7 @@ export class AddMemberComponent implements OnInit {
   submitForm() {
     const data = Object.assign({}, this.validateForm.value, {});
     this.userService.register(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.modal.destroy({ result: true });
         this.notification.create('success', 'sucess', res.msg);
       }

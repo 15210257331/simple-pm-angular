@@ -59,7 +59,7 @@ export class ProjectMemberComponent implements OnInit {
       memberId: item._id
     };
     this.projectService.addProjectMmeber(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.visible = false;
         this.store.dispatch(new AddProjectMemberSuccess(res));
         this.notification.create('success', 'sucess', res.msg);

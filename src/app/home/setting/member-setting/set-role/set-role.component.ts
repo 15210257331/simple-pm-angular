@@ -88,7 +88,7 @@ export class SetRoleComponent implements OnInit {
       roleIds: this.roleList.filter(item => item.checked === true).map(item => item.value)
     };
     this.userService.setMemberRole(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.modal.destroy({ result: true });
         this.notification.create('success', '修改成功', res.msg);
       }

@@ -85,7 +85,7 @@ export class ProjectComponent implements OnInit {
       nzOkType: 'danger',
       nzOnOk: () => {
         this.projectService.deleteProject(id).subscribe(res => {
-          if (res.code === 200) {
+          if (res.code === 10000) {
             this.notification.create('success', 'sucess', res.msg);
             this.store.dispatch(new DeleteProjectSuccess(res));
           }

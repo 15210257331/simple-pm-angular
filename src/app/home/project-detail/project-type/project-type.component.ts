@@ -36,7 +36,7 @@ export class ProjectTypeComponent implements OnInit {
       projectId: this.projectId
     };
     this.projectService.addProjectType(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.store.dispatch(new AddProjectTypeSuccess(res));
         this.notification.create('success', 'sucess', res.msg);
       }

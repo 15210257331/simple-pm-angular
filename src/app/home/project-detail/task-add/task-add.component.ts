@@ -56,7 +56,7 @@ export class TaskAddComponent implements OnInit {
       comment: [],
     });
     this.taskService.addTask(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.modal.destroy({ result: true });
         this.store.dispatch(new AddTaskSuccess(res));
         this.notification.create('success', 'sucess', res.msg);

@@ -57,7 +57,7 @@ export class CalendarAddComponent implements OnInit {
       endTime: moment(this.form.value.endTime).format('x')
     });
     this.scheduleService.addSchedule(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.modal.destroy({ result: true });
         this.store.dispatch(new AddScheduleSuccess(res));
         this.socketService.sendMessage('setRemind', this.userId);

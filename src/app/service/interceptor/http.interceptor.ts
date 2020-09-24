@@ -22,7 +22,7 @@ export class LogInterceptor implements HttpInterceptor {
         if (req.url.split('/').pop() !== 'login') {
             secureReq = req.clone({
                 setHeaders: {
-                    'authorization': token,
+                    'authorization': `Bearer ${token}`,
                 }
             });
         } else {
@@ -41,7 +41,7 @@ export class LogInterceptor implements HttpInterceptor {
                         if (res.body.code === 301 || res.body.code === 302) {
                             this.notification.create('info', '请求错误', '登录信息过期,请重新登录！');
                             this.router.navigate(['/login']);
-                        } else if (res.body.code !== 200 && res.body.code !== 301 && res.body.code !== 302) {
+                        } else if (res.body.code !== 10000 && res.body.code !== 301 && res.body.code !== 302) {
                             this.notification.create('info', '请求错误', res.body.msg || res.body.msg.errmsg);
                         }
                     }

@@ -15,14 +15,14 @@
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>确认密码</nz-form-label>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="repassword" nzRequired>确认密码</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24">
-        <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
-        <nz-form-explain *ngIf="validateForm.get('checkPassword')?.dirty && validateForm.get('checkPassword')?.errors">
-          <ng-container *ngIf="validateForm.get('checkPassword')?.hasError('required')">
+        <input nz-input type="password" formControlName="repassword" id="repassword" />
+        <nz-form-explain *ngIf="validateForm.get('repassword')?.dirty && validateForm.get('repassword')?.errors">
+          <ng-container *ngIf="validateForm.get('repassword')?.hasError('required')">
             Please confirm your password!
           </ng-container>
-          <ng-container *ngIf="validateForm.get('checkPassword')?.hasError('confirm')">
+          <ng-container *ngIf="validateForm.get('repassword')?.hasError('confirm')">
             Two passwords that you enter is inconsistent!
           </ng-container>
         </nz-form-explain>
@@ -35,8 +35,8 @@
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls['phoneNumber']">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone" nzRequired>Phone</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls['phone']">
         <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
           <ng-template #addOnBeforeTemplate>
             <nz-select formControlName="phoneNumberPrefix" style="width: 70px;">
@@ -44,9 +44,9 @@
               <nz-option nzLabel="+87" nzValue="+87"></nz-option>
             </nz-select>
           </ng-template>
-          <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+          <input type="number" formControlName="phone" id="'phone'" nz-input />
         </nz-input-group>
-        <nz-form-explain *ngIf="validateForm.get('phoneNumber')?.dirty && validateForm.get('phoneNumber')?.errors">
+        <nz-form-explain *ngIf="validateForm.get('phone')?.dirty && validateForm.get('phone')?.errors">
           Please
           input your phone number!</nz-form-explain>
       </nz-form-control>

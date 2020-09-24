@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   submitForm(): void {
     this.userService.login(this.validateForm.value).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         localStorage.setItem('token', res.token);
         this.router.navigate(['/home']);
       }

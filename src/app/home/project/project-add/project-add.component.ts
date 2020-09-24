@@ -34,20 +34,20 @@ export class ProjectAddComponent implements OnInit {
   ngOnInit() {
     this.store.pipe(map(data => data)).subscribe(res => {
       this.memberList = res.memberList;
-      const userId = res.userInfo._id;
-      this.memberList = this.memberList.filter(item => item._id !== userId);
+      const userId = res.userInfo.id;
+      this.memberList = this.memberList.filter(item => item.id !== userId);
     });
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       content: ['', [Validators.required]],
-      participant: [[], [Validators.required]]
+      member: [[], [Validators.required]]
     });
   }
 
   submitForm() {
     const data = Object.assign({}, this.form.value);
     this.projectService.addProject(data).subscribe(res => {
-      if (res.code === 200) {
+      if (res.code === 10000) {
         this.modal.destroy({ result: true });
         this.store.dispatch(new AddProjectSuccess(res));
         this.notification.create('success', 'sucess', res.msg);

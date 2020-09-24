@@ -63,7 +63,7 @@ export class MemberSettingComponent implements OnInit {
       nzOkType: 'danger',
       nzOnOk: () => {
         this.userService.deleteMember(id).subscribe(res => {
-          if (res.code === 200) {
+          if (res.code === 10000) {
             this.notification.create('success', 'sucess', res.msg);
             this.store.dispatch(new DeleteMemberSuccess(res));
           }

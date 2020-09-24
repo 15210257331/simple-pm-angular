@@ -24,7 +24,7 @@ export class RoleListEffects {
             this.userService.getRoleList(payload)
                 .pipe(
                     map(res => {
-                        if (res.code === 200) {
+                        if (res.code === 10000) {
                             return new LoadRoleListSuccess(res);
                         } else {
                             return of(new LoadRoleListError(res.msg));
